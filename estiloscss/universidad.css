@@ -605,7 +605,7 @@ input[type="submit"]{
         align-items: center;
     }
     .imagenboton{
-        background-size: 16vh;
+        background-size: 14vh;
     }
     .footer{
         grid-area: FOO;
