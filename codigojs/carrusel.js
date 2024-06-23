@@ -18,6 +18,7 @@ circulos2.forEach((circulo) => {
 const circulos = document.querySelectorAll('.circulo');
 const imagenes = document.querySelectorAll('.imagen');
 let currentIndex = 0;
+let intervalId;
 
 function changeImage(index) {
     const imagenActiva = document.querySelector('.imagen.activo');
@@ -37,14 +38,20 @@ function changeImage(index) {
     nuevaImagen.classList.add('activo');
 }
 
+function resetInterval() {
+    clearInterval(intervalId);
+    intervalId = setInterval(() => {
+        currentIndex = (currentIndex + 1) % imagenes.length; 
+        changeImage(currentIndex);
+    }, 5000);
+}
+
 circulos.forEach((circulo, index) => {
     circulo.addEventListener('click', () => {
         currentIndex = index; 
         changeImage(index);
+        resetInterval();
     });
 });
 
-setInterval(() => {
-    currentIndex = (currentIndex + 1) % imagenes.length; 
-    changeImage(currentIndex);
-}, 5000); 
+resetInterval();
