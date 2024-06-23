@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estiloscss/universidad.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <main class="carrusel">
+            <div class="imagenes">
+                <div class="imagen activo" style="background-image: url('imagenes/117.jpg');"></div>
+                <div class="imagen" style="background-image: url('imagenes/199.jpg');"></div>
+                <div class="imagen" style="background-image: url('imagenes/217.jpg');"></div>
+               
+            </div>
+
+            <div class="filtro">
+                
+                <div class="contenidotexto">
+                    <h1 class="texto1">NOMBRE</h1>
+                    
+                </div>
+                <div class="contenidotexto">
+                    <h1 class="texto2">DIRECCIÓN</h1>
+                </div>
+                <div class="circulos">
+                    <span class="circulo activo"></span>
+                    <span class="circulo"></span>
+                    <span class="circulo"></span>
+                   
+                </div>
+            </div>
+            <div class="logo_pba_vertical"></div>
+        </main>
+        <header class="header">
+            <a href="" class="logo_pba_horizontal"></a>
+            <a href="formulario.html" class="boton_nose_que_estudiar">No sé que estudiar</a>
+        </header>
+        
+        <main class="main">
+            <div class="informacion lista">
+                <div class="universidad"> 
+                    <iframe  class="imageninfo" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13150.23923620172!2d-58.542955899999995!3d-34.51404235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb08d0e03c427%3A0xb9671110c4893ecd!2sEasy!5e0!3m2!1ses-419!2sar!4v1719099532427!5m2!1ses-419!2sar" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="barrauni"></div>
+                    <h1 class="nombreuni">UBICACIÓN</h1>
+                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
+                    <button class="botonuni" popovertarget="googlemaps">ABRIR MAPA</button>
+                </div>
+                <div class="universidad"> 
+                    <div class="imageninfo" style="background-image: url(imagenes/informacion.png);"></div>
+                    <div class="barrauni"></div>
+                    <h1 class="nombreuni">INFORMACIÓN</h1>
+                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
+                </div>
+                <div class="universidad"> 
+                    <div class="imageninfo"style="background-image: url(imagenes/correo.png);"></div>
+                    <div class="barrauni"></div>
+                    <h1 class="nombreuni">CONTACTO</h1>
+                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
+                    <a class="botonuni " href="mailto:inscripcion@tecnica1vl.org">ENVIAR CORREO</a>
+                </div> 
+                <div class="universidad"> 
+                    <div class="imageninfo"style="background-image: url(imagenes/papeles.png);"></div>
+                    <div class="barrauni"></div>
+                    <h1 class="nombreuni">FORMULARIO DE INSCRIPCIÓN</h1>
+                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
+                    <button class="botonuni " popovertarget="inscribirme">INSCRIBIRME</button>
+                </div>   
+                
+            </div>
+            <div class="botones" id="botones">
+                <button class="boton" onclick="window.location.href='./index.html'">
+                    <div class="imagenboton" style="background-image: url(imagenes/lupa_2020.png); background-size: 13vh;"></div>
+                    <h1>Buscar otra universidad.</h1>
+                </button>
+                <button class="boton">
+                    <div class="imagenboton" style=" background-image: url(imagenes/gorro.png);"></div>
+                    <h1>Ver carreras e ingenierías</h1>
+                </button>
+                <button class="boton">
+                    <div class="imagenboton" style=" background-image: url(imagenes/diploma.png);"></div>
+                    <h1>Ver tecnicaturas y terciarios</h1>
+                </button>
+                <button class="boton">
+                    <div class="imagenboton" style=" background-image: url(imagenes/letra_a.png);"></div>
+                    <h1>Buscar por nombre o categoria.</h1>
+                </button>
+            </div>
+            <form class="barradebusqueda">
+                <img src="imagenes/lupa_2020.png" class="imglupa" alt="">
+                <input type="text" name="" placeholder="Nombre de la carrera o categoria">
+                <input type="submit" name="" value="Buscar">
+            </form>
+            <form class="barradebusqueda" style="display: none;">
+                <img src="imagenes/lupa_2020.png" alt="">
+                <select name="" id="">
+                    <option value="Tigre">Nombre del distrito.</option>
+                    <option value="Tigre">Tigre</option>
+                </select>
+                <input type="submit" name="" value="Buscar">
+            </form>
+            
+            <div class="universidades lista">
+                <div class="universidad"> 
+                    <div class="imagenesuni"></div>
+                    <div class="barrauni"></div>
+                    <h1 class="nombreuni">NOMBRE DE LA CARRERA</h1>
+                    <p class="descripcionuni">Descripción: Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
+                    <button class="botonuni">SABER MAS..</button>
+                </div>
+                <div class="universidad"> 
+                    <div class="imagenesuni"></div>
+                    <div class="barrauni"></div>
+                    <h1 class="nombreuni">NOMBRE DE LA CARRERA</h1>
+                    <p class="descripcionuni">Descripción: Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
+                    <button class="botonuni">SABER MAS..</button>
+                </div>
+            </div>
+            <div class="informacioncarrera lista">
+                <div class="barraseparadora"></div>
+                <div class="universidad"> 
+                    <div class="imagenesuni" ></div>
+                    <div class="barrauni"></div>
+                    <h1 class="nombreuni">NOMBRE DE LA CARRERA</h1>
+                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
+                </div>
+                <div class="universidad"> 
+                    <div class="imageninfo" style="background-image: url(imagenes/diploma.png);"></div>
+                    <div class="barrauni"></div>
+                    <h1 class="nombreuni">TITULO FINAL</h1>
+                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
+                </div>
+                <div class="universidad"> 
+                    <div class="imageninfo"style="background-image: url(imagenes/gorro.png);"></div>
+                    <div class="barrauni"></div>
+                    <h1 class="nombreuni">ÁREA DE INSERCIÓN</h1>
+                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
+                </div> 
+                <div class="universidad"> 
+                    <div class="imageninfo"style="background-image: url(imagenes/mapa.png);"></div>
+                    <div class="barrauni"></div>
+                    <h1 class="nombreuni">MODALIDAD DE CURSADA</h1>
+                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
+                    <button class="botonuni" popovertarget="pdf-container">VER RECURSO</button>
+                </div> 
+                
+                <div class="universidad"> 
+                    <div class="imageninfo"style="background-image: url(imagenes/papeles.png);"></div>
+                    <div class="barrauni"></div>
+                    <h1 class="nombreuni">FORMULARIO DE INSCRIPCIÓN</h1>
+                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
+                    <a class="botonuni" href='./inscripcion.html'>INSCRIBIRME</a>
+                </div>   
+                
+            </div>
+            <div class="barradebusqueda volverarriba">
+                <img src="imagenes/flecha.png" alt="">
+                <button onclick="redirigir('botones')" >Volver arriba</button>
+            </div>
+        </main>
+       
+        <footer class="footer">
+            <div class="imagenfooter"></div>
+            <div class="logo_pba_vertical2"></div>
+
+            <div class="textofooter">
+                <p>&copy; 2024 . Todos los derechos reservados.</p>
+            </div>
+            <div class="redesociales"></div>
+        </footer>
+        
+    </div>
+    <div id="pdf-container" popover>
+        <h1>HAGA CLIC FUERA DEL CUADRO PARA SALIR</h1>
+        <embed class="pdf-viewer" src="pdf/diseño pdf.pdf" type="application/pdf" />
+    </div>
+    <div id="googlemaps" popover>
+        <h1>HAGA CLIC FUERA DEL CUADRO PARA SALIR</h1>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13150.23923620172!2d-58.542955899999995!3d-34.51404235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb08d0e03c427%3A0xb9671110c4893ecd!2sEasy!5e0!3m2!1ses-419!2sar!4v1719099532427!5m2!1ses-419!2sar" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div id="inscribirme" popover>
+        <h1>HAGA CLIC FUERA DEL CUADRO PARA SALIR</h1>
+        <iframe src="inscripcion.html" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</body>
+</html>
+
+<script src="codigojs/carrusel.js"></script>
+<script src="codigojs/redirigir.js"></script>

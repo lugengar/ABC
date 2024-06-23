@@ -1,0 +1,689 @@
+/*IMPORTAR FUENTES DE TEXTO*/
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+/*ESTILOS GLOBALES*/
+*{
+    font-size: 2vh;
+}
+input[type="submit"], a, button{
+    transition: transform 0.5s;
+}
+input[type="submit"]:hover, a:hover, button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+h1, button, .botonuni{
+    font-family: "Encode Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2vh;
+}
+p, a{
+    font-family: "Roboto", sans-serif;
+font-weight: 400;
+font-style: normal;
+}
+
+input,select,option{
+    font-family: "Roboto", sans-serif;
+font-weight: 400;
+font-style: normal;
+}
+input[type="submit"]{
+    font-family: "Encode Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.container{
+    left: 0;
+    top: 0;
+    position: absolute;
+    height: max-content ;
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+    "IMG IMG IMG"
+    "HEA HEA HEA"
+    "MAI MAI MAI"
+    "FOO FOO FOO";
+    grid-template-rows: 100vh 7vh auto 80vh;
+    grid-template-columns: auto auto auto;
+}
+[popover]{
+    transition: visibility 1s;
+    border: none;
+    border-radius: 0.5vh;
+   /* background-color: #00adc1;*/
+   background: linear-gradient(90deg, rgba(232,31,118,1) 0%, rgba(0,174,192,1) 100%);
+}
+
+[popover]::backdrop{
+    backdrop-filter: blur(1vh);
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+[popover] h1{
+    width: 80vw;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+}
+
+[popover] :nth-child(2) {
+    width: 80vw;
+    height: 86vh;
+  }
+/*ESTILOS DE LA BARRA DE BUSQUEDA Y PARA VOLVER HACIA ARRIBA*/
+.barradebusqueda{
+    position: sticky;
+    z-index: 1000;
+    top: 7vh;
+
+    background-color: #00aec3;
+    grid-area: BAR;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vh;
+    flex-wrap: wrap;
+    box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+
+}
+.volverarriba{
+    grid-area: VOL;
+    position: block;
+    z-index: auto;
+    top: 0;
+}
+.barradebusqueda img{
+   height: 5vh;
+}
+.barradebusqueda input, .barradebusquedaselect{
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.2);
+}
+.barradebusqueda input[type="text"], .barradebusqueda select{
+   border: none;
+   border-radius: 1.5vh;
+   height: 5vh;
+   color: gray;
+   width: 30vh;
+   padding-left: 1vh;
+}
+
+.barradebusqueda input[type="submit"], .barradebusqueda button{
+   border: none;
+   border-radius: 1.5vh;
+   height: 5vh;
+   background-color: #e81f76;
+   color: white;
+   padding-left: 2vh;
+   padding-right: 2vh;
+}
+/*ESTILOS DE LA BARRA DE NAVEGACION*/
+.header{
+    grid-area: HEA;
+    position: sticky;
+    top: 0;
+    background-color: white; 
+    z-index: 1000;
+    padding: 0.5vh;
+    box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-areas: 
+    "LOG . BTN"
+    ;
+    grid-template-rows: auto;
+    grid-template-columns: 40vh auto 15vh;
+    padding-right: 1vh;
+}
+.boton_nose_que_estudiar{
+    background-image: url(../imagenes/signopregunta.png);
+    background-size:  5vh;
+    background-repeat: no-repeat;
+    background-position: right;
+    display: block;
+    grid-area: BTN;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color:  #00aec3;
+    text-decoration: none;
+    font-size: 2vh;
+    text-align: left;
+    padding-top: 0.4vh;
+}
+.logo_pba_horizontal{
+    grid-area: LOG;
+    background-image: url(https://abc.gob.ar/core/themes/abc/logo-pba.svg);
+    background-size:  contain;
+    background-repeat: no-repeat;
+    background-position: left;
+}
+/*ESTILOS DEL CARRUCEL DE IMAGENES INICIAL*/
+.carrusel{
+    border-top: white solid 1vh;
+    background-image: url(../imagenes/199.jpg);
+    background-size:  cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    grid-area: IMG;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    background-color: black;
+}
+
+.circulos {
+    align-items: center;
+    grid-area: CIR;
+    display: flex;
+    justify-content: center;
+    gap: 2vh;
+}
+
+.circulo {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+ 
+    cursor: pointer;
+}
+.imagen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.imagen.activo{
+    opacity: 100;
+
+}
+
+.circulo.activo {
+    background-color: #00adc1; /* Color del circulo activo */
+}
+.texto1{
+    pointer-events: none;
+
+    font-size: 5vh;
+    background-color: #e81f76; 
+    color: black; 
+    display: inline; 
+    padding: 0.2vh 1vh; 
+    color: white;
+}
+.texto2{
+    pointer-events: none;
+
+    font-size: 5vh;
+    background-color: #00aec3; 
+    color: black; 
+    display: inline; 
+    padding: 0.2vh 1vh; 
+    color: white;
+    max-width: 4vh;
+}
+.filtro{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(to top, black, transparent);
+    display: grid;
+    grid-template-areas: 
+    ". . ."
+    ". TEXT1 ."
+    ". TEXT2 ."
+    "CIR CIR CIR"
+    ;
+    gap: 1vh;
+    grid-template-rows: 1fr max-content max-content 10vh;
+    grid-template-columns: 5vh 50% 1fr;
+}
+.filtro :nth-child(1){
+    grid-area: TEXT1;
+}
+.filtro :nth-child(2){
+    grid-area: TEXT2;
+}
+
+.logo_pba_vertical{
+    pointer-events: none;
+
+    width: 16vh;
+    height: 37vh;
+    background-color: white;
+    background-image: url(../imagenes/logo-pba-desktop.png);
+    background-size:  14vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    right: 5vh;
+    bottom: 0;
+    border-radius: 3vh 3vh 0vh 0vh;
+    box-shadow: -2vh 2vh 2vh rgba(0, 0, 0, 0.2);
+}
+/*ESTILOS DEL CONTENIDO DEBAJO DEL CARRUCEL*/
+
+
+.main{
+    grid-area: MAI;
+    background-color: white;
+    display: grid;
+    gap: 10vh;
+    padding-top: 5vh;
+    grid-template: 
+    "INF INF INF"
+    "BOT BOT BOT"
+    "BAR BAR BAR"
+    "UNI UNI UNI"
+    "INFC INFC INFC"
+    "VOL VOL VOL"
+    ". . .";
+    grid-template-rows: max-content max-content 10vh auto max-content  10vh;
+    grid-template-columns: auto auto auto;
+}
+/*ESTILOS DE LAS UNIVERSIDADES*/
+.barraseparadora{
+    border-top: #00adc1 solid 0.25vh;
+    height: 0.01vh;
+    width: 80%;
+
+}
+.lista{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5vh;
+    flex-wrap: wrap; 
+}
+.informacion{
+    grid-area: INF;
+}
+.informacioncarrera{
+    grid-area: INFC;
+}
+.universidades{
+    grid-area: UNI;
+}
+.universidad{
+    width: 45vh;
+    height: max-content;
+    background-color: white;
+    border-radius: 2vh;
+    box-shadow: 0 0.5vh 2vh 0.5vh rgba(0, 0, 0, 0.2);
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    align-items: top;
+    flex-wrap: wrap; 
+    overflow: hidden;
+    position: relative;
+}
+.universidad .botonuni{
+    font-size: 2vh;
+    border: none;
+    border-radius: 1.5vh;
+    height: 5vh;
+    width: 18vh;
+    background-color: #e81f76;
+    color: white;
+    transform: translateY(-2.5vh);
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+}
+.universidad .botonuni:hover{
+    transform: translateY(-2.5vh) scale(1.1);
+}
+.universidad .imagenesuni{
+    width: 100%;
+    height: 20vh;
+    background-image: url(../imagenes/gente.jpg);
+    background-size:  cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.universidad .imageninfo{
+    width: 100%;
+    height: 20vh;
+    background-color: #00adc1;
+    background-size:  15vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background-size 0.5s;
+}
+.universidad .imageninfo:hover{
+
+    background-size:  20vh;
+  
+}
+.universidad .nombreuni{
+    padding-top: 1vh;
+    font-size: 3vh;
+    width: 100%;
+    height: max-content;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    color: #00adc1;
+}
+.universidad .barrauni{
+
+    border-top: #00adc1 solid 0.25vh;
+    height: 0.01vh;
+    width: 40vh;
+    transform: translateY(2vh);
+
+}
+.universidad .descripcionuni{
+    width: 100%;
+    height: max-content;
+    overflow-y: auto;
+    padding-right: 2vh;
+    padding-left: 2vh;
+    text-align: start;
+    transform: translateY(-3vh);
+}
+
+
+/*ESTILOS DE LOS BOTONES DE COLORES*/
+.boton {
+    margin-top: 8vh;
+    width: 25vh;
+    height: 30vh;
+    border: none;
+    background-color: transparent;
+    border-radius: 50vh;
+    display: grid;
+    grid-template-areas: 
+        ". BIMG ."
+        "TEXTB TEXTB TEXTB";
+    grid-template-rows: 22vh auto;
+    grid-template-columns: auto 22vh auto;
+    transition: transform 0.5s;
+    justify-items: center; 
+    align-items: center;
+}
+
+.boton h1{
+    font-size: 2.5vh;
+    text-align: center;   
+    grid-area: TEXTB;
+}
+
+.boton .imagenboton{
+    background-color: #00adc1; 
+    width: 100%;
+    height: 100%;
+    grid-area: BIMG;
+    background-size: 16vh; 
+    border-radius: 50vh;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.botones{
+    grid-area: BOT;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8%;
+    flex-wrap: wrap;
+}
+.botones :nth-child(1) :nth-child(2){
+    color: #e81f76;
+}
+.botones :nth-child(2) :nth-child(2){
+    color: #78568e;
+}
+.botones :nth-child(3) :nth-child(2){
+    color: #37799f;
+}
+.botones :nth-child(4) :nth-child(2){
+    color: #00adc1;
+}
+
+
+.botones :nth-child(1) :nth-child(1){
+    background-color: #e81f76;
+}
+.botones :nth-child(2) :nth-child(1){
+    background-color: #78568e;
+}
+.botones :nth-child(3) :nth-child(1){
+    background-color: #37799f;
+}
+.botones :nth-child(4) :nth-child(1){
+    background-color: #00adc1;
+}
+
+
+/*ESTILOS EL FOOTER*/
+.footer{
+    grid-area: FOO;
+    background: linear-gradient(to top, #eaeaea 65%, transparent);
+        display: grid;
+        grid-template: 
+        ". ."
+        "LOG ."
+        "LOG TEXT"
+        "LOG REDE"
+        ". .";
+        grid-template-rows: 18vh auto auto 5vh 8vh;
+        grid-template-columns: 20% auto;
+        position: relative;
+}
+.footer .imagenfooter{
+    background-image: url(../imagenes/imagen_footer2.png);
+    background-repeat: repeat-x;
+    background-size: 200vh;
+    background-position: top;
+    height: 40vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    animation: footer 30s linear infinite;
+}
+
+.footer .logo_pba_vertical2{
+    grid-area: LOG;
+    background-image: url(../imagenes/logo-pba-desktop.png);
+    background-size:  contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10;
+
+}
+.footer .textofooter{
+    grid-area: TEXT;
+    display: flex;
+    gap: 8%;
+    flex-wrap: wrap;
+    z-index: 10;
+}
+.textofooter ul, .textofooter p{
+    width: 60vh;
+}
+.footer .redesociales{
+    grid-area: REDE;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    gap: 8%;
+    flex-wrap: wrap;
+}
+.redesociales .redsocial{
+    width: 5vh;
+    height: 5vh;
+    border-radius: 25vh;
+    overflow: hidden;
+    background-size:  cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.2);
+
+}
+/*ESTILOS PARA LA VERSION DE MOBILES*/
+@media (max-width: 768px) {
+    .barradebusqueda .imglupa{
+        display: none;
+    }
+    .footer .imagenfooter{
+        animation: footer 180s linear infinite;
+    }
+    .filtro{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: linear-gradient(to top, black, transparent);
+        display: grid;
+        grid-template-areas: 
+        ". . ."
+        ". TEXT1 ."
+        ". TEXT2 ."
+        "CIR CIR CIR"
+        ;
+        gap: 1vh;
+        grid-template-rows: 1fr max-content max-content 20vh;
+        grid-template-columns: 2vh auto 2vh;
+    }
+    .filtro .texto1,.texto2{
+        font-size: 3vh;
+        text-align: center;
+    }
+    .logo_pba_vertical{
+        height: 12vh;
+        width: 100%;
+        background-color: white;
+        background-image: url(../imagenes/logo-pba-mobile.png);
+        background-size:  contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: absolute;
+        border-radius: 0%;
+        bottom: 0vh;
+        top: 5vh;
+        left: 0;
+        box-shadow: -2vh 2vh 2vh rgba(0, 0, 0, 0.2);
+    }
+    .universidad{
+        width: 100%;
+        height: max-content;
+        background-color: white;
+        border-radius: 0;
+        box-shadow: 0 0.5vh 2vh 0.5vh rgba(0, 0, 0, 0.2);
+    }
+    .circulo{
+        width: 2vh;
+        height: 2vh;
+    }
+    .boton {
+        margin-top: 10vh;
+        width: 20vh;
+        height: 30vh;
+        border: none;
+        background-color: transparent;
+        border-radius: 50vh;
+        display: grid;
+        grid-template-areas: 
+            ". BIMG ."
+            "TEXTB TEXTB TEXTB";
+        grid-template-rows: 20vh auto;
+        grid-template-columns: auto 20vh auto;
+        justify-items: center; /* Centra los elementos horizontalmente */
+        align-items: center;
+    }
+    .imagenboton{
+        background-size: 16vh;
+    }
+    .footer{
+        grid-area: FOO;
+        background: linear-gradient(to top, #eaeaea 65%, transparent);
+            display: grid;
+            grid-template: 
+            ". ."
+            "LOG ."
+            "LOG TEXT"
+            "REDE REDE"
+            ". .";
+            grid-template-rows: 25vh auto auto 5vh 8vh;
+            grid-template-columns: 30% auto;
+            position: relative;
+            gap: 2vh;
+    }
+    .textofooter ul, .textofooter p{
+        width: 20vh;
+    }
+    .header{
+        grid-area: HEA;
+        position: sticky;
+        top: 0;
+        background-color: white; 
+        z-index: 1000;
+        padding: 0.5vh;
+        box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+        display: grid;
+        grid-template-areas: 
+        "LOG . BTN"
+        ;
+        grid-template-rows: auto;
+        grid-template-columns: 30vh auto 15vh;
+        padding-right: 1vh;
+    }
+    [popover] :nth-child(2) {
+        width: 80vw;
+        height: 80vh;
+      }
+}
+
+/*CONFETTI*/
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  
+  .confetti {
+    width: 10px;
+    height: 20px;
+    background-color: red;
+    position: absolute;
+    opacity: 0;
+    animation: confettiFall linear infinite;
+
+  }
+  
+  @keyframes confettiFall {
+    0% {
+      opacity: 100%;
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      opacity: 0%;
+      transform: translateY(100vh) rotate(360deg);
+    }
+  }
+  @keyframes footer {
+    0%{
+        background-position-x: -100%;
+    }
+    100%{
+        background-position-x: 380%;
+    }
+}
