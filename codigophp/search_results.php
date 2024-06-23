@@ -1,5 +1,4 @@
 <?php
-// Conectar a la base de datos
 $host = 'localhost';
 $db = 'test';
 $user = 'root';

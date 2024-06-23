@@ -1,5 +1,4 @@
 <?php
-// Conectar a la base de datos
 $host = 'localhost';
 $db = 'test';
 $user = 'root';
@@ -17,7 +16,6 @@ if ($id) {
     if ($result) {
         echo '<h1>' . htmlspecialchars($result['nombre']) . '</h1>';
         echo '<p>' . htmlspecialchars($result['descripcion']) . '</p>';
-        // Otros detalles...
     } else {
         echo 'No se encontraron detalles para este ID.';
     }
