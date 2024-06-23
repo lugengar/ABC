@@ -643,7 +643,7 @@ input[type="submit"]{
     }
     [popover] :nth-child(2) {
         width: 80vw;
-        height: 80vh;
+        height: 60vh;
       }
 }
 
