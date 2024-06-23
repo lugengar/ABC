@@ -53,19 +53,24 @@ input[type="submit"]{
     transition: visibility 1s;
     border: none;
     border-radius: 0.5vh;
-   /* background-color: #00adc1;*/
-   background: linear-gradient(90deg, rgba(232,31,118,1) 0%, rgba(0,174,192,1) 100%);
+    background-color: white;/*
+    background: linear-gradient(90deg, rgba(232,31,118,1) 0%, rgba(0,174,192,1) 100%);
+ */
 }
 
 [popover]::backdrop{
     backdrop-filter: blur(1vh);
     background-color: rgba(0, 0, 0, 0.8);
+    background-image: url(../imagenes/logo-pba-desktop.png);
+    background-position: left;
+    background-size: 9%;
+    background-repeat: no-repeat;
 }
 
 [popover] h1{
     width: 80vw;
     text-align: center;
-    color: white;
+    color: #00adc1;
     font-weight: 700;
 }
 
@@ -652,6 +657,15 @@ input[type="submit"]{
         width: 80vw;
         height: 60vh;
       }
+      [popover]::backdrop{
+        backdrop-filter: blur(1vh);
+        background-color: rgba(0, 0, 0, 0.8);
+        background-image: url(../imagenes/logo-pba-mobile.png);
+        background-position: top;
+        background-size: 50vh;
+        background-repeat: no-repeat;
+    }
+      
 }
 
 /*CONFETTI*/
