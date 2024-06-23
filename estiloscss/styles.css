@@ -68,6 +68,7 @@ input[type="submit"]{
     background-position: left;
     background-size: 9%;
     background-repeat: no-repeat;
+    pointer-events: all;
 }
 
 [popover] h1{
@@ -85,16 +86,21 @@ input[type="submit"]{
     position: sticky;
     z-index: 1000;
     top: 7vh;
-
+    opacity: 0;
     background-color: #00aec3;
     grid-area: BAR;
     display: flex;
+    pointer-events: none;
     justify-content: center;
     align-items: center;
     gap: 1vh;
     flex-wrap: wrap;
     box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
-
+    transition: opacity 0.5s;
+}
+.barradebusqueda.activo{
+    pointer-events: all;
+    opacity: 1;
 }
 .volverarriba{
     grid-area: VOL;

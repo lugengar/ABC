@@ -73,35 +73,36 @@
             <div class="botones" id="botones">
                 <button class="boton" onclick="window.location.href='./index.html'">
                     <div class="imagenboton" style="background-image: url(imagenes/lupa_2020.png); background-size: 13vh;"></div>
-                    <h1>Buscar otra universidad.</h1>
+                    <h1>Buscar otra universidad</h1>
                 </button>
-                <button class="boton">
+                <button class="boton" onclick="barradebusqueda('carrera')">
                     <div class="imagenboton" style=" background-image: url(imagenes/gorro.png);"></div>
                     <h1>Ver carreras e ingenierías</h1>
                 </button>
-                <button class="boton">
+                <button class="boton" onclick="barradebusqueda('tecnicatura')">
                     <div class="imagenboton" style=" background-image: url(imagenes/diploma.png);"></div>
                     <h1>Ver tecnicaturas y terciarios</h1>
                 </button>
-                <button class="boton">
+                <button class="boton" onclick="barradebusqueda('nombre')">
                     <div class="imagenboton" style=" background-image: url(imagenes/letra_a.png);"></div>
-                    <h1>Buscar por nombre o categoria.</h1>
+                    <h1>Buscar por nombre o categoria</h1>
                 </button>
             </div>
-            <form class="barradebusqueda">
+            <form class="barradebusqueda activo" id="nombre">
                 <img src="imagenes/lupa_2020.png" class="imglupa" alt="">
-                <input type="text" name="" placeholder="Nombre de la carrera o categoria">
+                <input type="text" name="" placeholder="Nombre o categoria" required>
                 <input type="submit" name="" value="Buscar">
             </form>
-            <form class="barradebusqueda" style="display: none;">
-                <img src="imagenes/lupa_2020.png" alt="">
-                <select name="" id="">
-                    <option value="Tigre">Nombre del distrito.</option>
-                    <option value="Tigre">Tigre</option>
-                </select>
+            <form class="barradebusqueda" id="tecnicatura">
+                <img src="imagenes/lupa_2020.png" class="imglupa" alt="">
+                <input type="text" name="" placeholder="Nombre de la tecnicatura" required>
                 <input type="submit" name="" value="Buscar">
             </form>
-            
+            <form class="barradebusqueda" id="carrera">
+                <img src="imagenes/lupa_2020.png" class="imglupa" alt="">
+                <input type="text" name="" placeholder="Nombre de la carrera" required>
+                <input type="submit" name="" value="Buscar">
+            </form>
             <div class="universidades lista">
                 <div class="universidad"> 
                     <div class="imagenesuni"></div>
@@ -188,4 +189,5 @@
 </html>
 
 <script src="codigojs/carrusel.js"></script>
+<script src="codigojs/botonesbarra.js"></script>
 <script src="codigojs/redirigir.js"></script>

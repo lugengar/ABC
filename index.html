@@ -40,28 +40,60 @@
         <main class="main">
            
             <div class="botones" id="botones">
-                <button class="boton">
+                <button class="boton " onclick="barradebusqueda('distrito')">
                     <div class="imagenboton" style="background-image: url(imagenes/mapa.png);"></div>
-                    <h1>Buscar por distrito.</h1>
+                    <h1>Buscar por distrito</h1>
                 </button>
-                <button class="boton"><div class="imagenboton" style=" background-image: url(imagenes/gorro.png);"></div><h1>Buscar por carrera o ingenieria.</h1></button>
-                <button class="boton"><div class="imagenboton" style=" background-image: url(imagenes/diploma.png);"></div><h1>Buscar por terciario o tecnicatura</h1></button>
-                <button class="boton"><div class="imagenboton" style=" background-image: url(imagenes/letra_a.png);"></div><h1>Buscar por nombre del establecimiento.</h1></button>
+                <button class="boton" onclick="barradebusqueda('carrera')">
+                    <div class="imagenboton" style=" background-image: url(imagenes/gorro.png);"></div>
+                    <h1>Buscar por carrera o ingenieria</h1>
+                </button>
+                <button class="boton" onclick="barradebusqueda('tecnicatura')"><div class="imagenboton" style=" background-image: url(imagenes/diploma.png);"></div>
+                    <h1>Buscar por terciario o tecnicatura</h1>
+                </button>
+                <button class="boton" onclick="barradebusqueda('nombre')">
+                    <div class="imagenboton" style=" background-image: url(imagenes/letra_a.png);"></div>
+                    <h1>Buscar por nombre del establecimiento</h1>
+                </button>
             </div>
-            <form class="barradebusqueda">
+            <form class="barradebusqueda activo" id="nombre">
                 <img src="imagenes/lupa_2020.png" class="imglupa" alt="">
-                <input type="text" name="" placeholder="Nombre del establecimiento.">
+                <input type="text" name="" placeholder="Nombre del establecimiento" required>
                 <input type="submit" name="" value="Buscar">
             </form>
-            <form class="barradebusqueda" style="display: none;">
+            <form class="barradebusqueda" id="distrito" >
                 <img src="imagenes/lupa_2020.png" alt="">
-                <select name="" id="">
-                    <option value="Tigre">Nombre del distrito.</option>
+                <select name="" id="" required>
+                    <option value="">Elija un distrito</option >
                     <option value="Tigre">Tigre</option>
                 </select>
                 <input type="submit" name="" value="Buscar">
             </form>
-            
+            <form class="barradebusqueda" id="carrera" >
+                <img src="imagenes/lupa_2020.png" alt="">
+                <select name="" id="" required>
+                    <option value="">Elija una carrera</option>
+                    <option value="Ingenieria Civil">Ingenieria Civil</option>
+                    <option value="Ingenieria de Sistemas">Ingenieria de Sistemas</option>
+                    <option value="Ingenieria Mecanica">Ingenieria Mecanica</option>
+                    <option value="Licenciatura en Administracion de Empresas">Licenciatura en Administracion de Empresas</option>
+                    <option value="Licenciatura en Psicologia">Licenciatura en Psicologia</option>
+                </select>
+                <input type="submit" name="" value="Buscar">
+            </form>
+            <form class="barradebusqueda" id="tecnicatura" >
+                <img src="imagenes/lupa_2020.png" alt="">
+                <select name="" id="" required>
+                    <option value="">Elija una tecnicatura</option>
+                    <option value="Tecnico en Informatica">Tecnico en Informatica</option>
+                    <option value="Tecnico en Gestion Ambiental">Tecnico en Gestion Ambiental</option>
+                    <option value="Tecnico en Administracion de Empresas">Tecnico en Administracion de Empresas</option>
+                    <option value="Tecnico en Enfermeria">Tecnico en Enfermeria</option>
+                    <option value="Tecnico en Mecanica Automotriz">Tecnico en Mecanica Automotriz</option>
+
+                </select>
+                <input type="submit" name="" value="Buscar">
+            </form>
             <div class="universidades">
                 <div class="universidad"> 
                     <div class="imagenesuni">
@@ -175,3 +207,4 @@
 </html>
 <script src="codigojs/carrusel.js"></script>
 <script src="codigojs/redirigir.js"></script>
+<script src="codigojs/botonesbarra.js"></script>
