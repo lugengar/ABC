@@ -19,11 +19,10 @@ const circulos = document.querySelectorAll('.circulo');
 const imagenes = document.querySelectorAll('.imagen');
 let currentIndex = 0;
 let intervalId;
-
+let click = false;
 function changeImage(index) {
     const imagenActiva = document.querySelector('.imagen.activo');
     const nuevaImagen = imagenes[index];
-
     circulos.forEach(circulo => circulo.classList.remove('activo'));
     circulos[index].classList.add('activo');
 
@@ -33,8 +32,12 @@ function changeImage(index) {
     imagenActiva.addEventListener('transitionend', () => {
         imagenActiva.classList.remove('saliente');
         imagenActiva.classList.remove('activo');
+        if(click == true){
+            setTimeout(function cargandof(){
+                click = false;
+            },100)
+        }
     }, { once: true });
-
     nuevaImagen.classList.add('activo');
 }
 
@@ -48,9 +51,12 @@ function resetInterval() {
 
 circulos.forEach((circulo, index) => {
     circulo.addEventListener('click', () => {
-        currentIndex = index; 
-        changeImage(index);
-        resetInterval();
+        if(click == false){
+            click = true;
+            currentIndex = index; 
+            changeImage(index);
+            resetInterval();
+        }
     });
 });
 
