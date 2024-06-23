@@ -17,4 +17,11 @@ if ($query) {
         echo '<button onclick="parent.navigateToPage(\'detail_page.php?id=' . $result['id'] . '\')">' . htmlspecialchars($result['nombre']) . '</button><br>';
     }
 }
+
 ?>
+<style>
+    button{
+        height:100vh;
+        width:100vh;
+    }
+</style>

@@ -9,7 +9,7 @@
         <input type="text" id="searchQuery" placeholder="Buscar..." oninput="updateResults()">
         <button type="button" onclick="search()">Buscar</button>
     </form>
-    <iframe id="resultsFrame" style="width: 100%; height: 300px;"></iframe>
+    <iframe id="resultsFrame"></iframe>
     <script>
         function updateResults() {
     const query = document.getElementById('searchQuery').value;
@@ -28,5 +28,23 @@ function search() {
 }
 
     </script>
+    <style>
+        body{
+            overflow:hidden;
+        }
+        #searchForm{
+            z-index: 1000;
+            position: absolute;
+        }
+        iframe{
+            z-index: 100;
+
+            position:absolute;
+            height:100%;
+            width: 100%;
+            left:0;
+            top:0;
+        }
+    </style>
 </body>
 </html>
