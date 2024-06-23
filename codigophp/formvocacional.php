@@ -32,3 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "<p>Según tus respuestas, la carrera más adecuada para ti es: <strong>$career</strong></p>";
 }
 ?>
+<link rel="stylesheet" href="../estiloscss/universidad.css">
+<script src="../codigojs/confetti.js"></script>
+<script>
+    createConfetti();
+    setTimeout(cleanUpConfetti, 4000);
+</script>
