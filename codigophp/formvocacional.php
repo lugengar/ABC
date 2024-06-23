@@ -1,3 +1,6 @@
+<div class="content">
+
+
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Capturamos las respuestas del formulario
@@ -32,9 +35,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "<p>Según tus respuestas, la carrera más adecuada para ti es: <strong>$career</strong></p>";
 }
 ?>
+<a href="../index.html"  class="botonuni">SALIR</a>
+</div>
+<style>
+    .content{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap; 
+    }
+    .content h1, p{
+        margin-left:5vw;
+        margin-right:5vw;
+        width: 80vw;
+        height:max-content;
+        text-align: center;
+    }
+    .botonuni{
+        font-size: 2vh;
+        border: none;
+        border-radius: 1.5vh;
+        height: 5vh;
+        width: 18vh;
+        background-color: #e81f76;
+        color: white;
+        transform: translateY(-2.5vh);
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        margin-left:30vw;
+        margin-right:30vw;
+    }
+</style>
 <link rel="stylesheet" href="../estiloscss/universidad.css">
 <script src="../codigojs/confetti.js"></script>
 <script>
     createConfetti();
     setTimeout(cleanUpConfetti, 4000);
+
 </script>
