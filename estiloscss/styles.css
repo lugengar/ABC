@@ -314,6 +314,11 @@ input[type="submit"]{
     background-color: #e81f76;
     color: white;
     transform: translateY(-2.5vh);
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 
 }
 .universidad .botonuni:hover{
