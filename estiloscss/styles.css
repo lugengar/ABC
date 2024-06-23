@@ -12,7 +12,7 @@ input[type="submit"]:hover, a:hover, button:hover{
     cursor: pointer;
     transform: scale(1.1);
 }
-h1, button{
+h1, button, .botonuni{
     font-family: "Encode Sans", sans-serif;
     font-weight: 700;
     font-style: normal;
