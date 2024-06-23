@@ -4,16 +4,14 @@ document.querySelectorAll(".inscribirse").forEach(element => {
         event.preventDefault();
         if(click == false){
         click = true;
-        // Create confetti
         createConfetti();
         
-        // Clean up confetti after 5 seconds
         setTimeout(cleanUpConfetti, 4000);
 
 
         function createConfetti() {
-        const confettiColors = ['#ff4136', '#0074d9', '#2ecc40', '#ffdc00', '#ff1493']; // Colors: red, blue, green, yellow, pink
-        const confettiElements = 40; // Number of confetti particles
+        const confettiColors = ['#ff4136', '#0074d9', '#2ecc40', '#ffdc00', '#ff1493']; 
+        const confettiElements = 40;
         const container = document.createElement('div');
         container.classList.add('confetti-container');
         
@@ -24,11 +22,9 @@ document.querySelectorAll(".inscribirse").forEach(element => {
             confetti.style.animationDelay = `${Math.random() * 2}s`;
             confetti.style.animationDuration = `${Math.random() * 3 + 1.5}s`;
             
-            // Random rotation angle
             const randomRotation = Math.random() * 360;
             confetti.style.transform = `rotate(${randomRotation}deg)`;
             
-            // Random color
             const randomColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
             confetti.style.backgroundColor = randomColor;
             
