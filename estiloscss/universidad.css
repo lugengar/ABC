@@ -523,12 +523,16 @@ input[type="submit"]{
 .footer .textofooter{
     grid-area: TEXT;
     display: flex;
-    gap: 8%;
+    gap: 1vh;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     z-index: 10;
 }
-.textofooter ul, .textofooter p{
-    width: 60vh;
+.textofooter h1{
+    width: max-content;
+    text-align: center;
+    color: #e81f76;
 }
 .footer .redesociales{
     grid-area: REDE;
