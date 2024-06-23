@@ -104,7 +104,7 @@ input[type="submit"]{
 }
 .volverarriba{
     opacity: 1;
-
+    pointer-events: all;
     grid-area: VOL;
     position: block;
     z-index: auto;
