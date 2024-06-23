@@ -538,6 +538,17 @@ input[type="submit"]{
     gap: 8%;
     flex-wrap: wrap;
 }
+.universidad .redesociales{
+    background-color: white;
+   width: 100%;
+   height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    gap: 2%;
+    flex-wrap: wrap;
+    transform: translateY(1vh);
+}
 .redesociales .redsocial{
     width: 5vh;
     height: 5vh;
@@ -547,6 +558,7 @@ input[type="submit"]{
     background-repeat: no-repeat;
     background-position: center;
     box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.2);
+    background-color: white;
 
 }
 /*ESTILOS PARA LA VERSION DE MOBILES*/
