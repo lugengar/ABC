@@ -106,9 +106,8 @@ input[type="submit"]{
     opacity: 1;
     pointer-events: all;
     grid-area: VOL;
-    z-index: 2000;
+    z-index: 2300;
     top: 7vh;
-
 }
 .barradebusqueda img{
    height: 5vh;
