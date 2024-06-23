@@ -181,6 +181,7 @@ input[type="submit"]{
     display: flex;
     justify-content: center;
     gap: 2vh;
+    z-index: 1;
 }
 
 .circulo {
@@ -193,24 +194,31 @@ input[type="submit"]{
 }
 .imagen {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 100%;
+    transition: left 0.5s ease-in-out;
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transition: opacity 0.5s;
-}
-.imagen.activo{
-    opacity: 100;
 
+}
+.imagen.activo {
+    left: 0;
+    opacity: 1;
+
+}
+
+.imagen.saliente {
+    left: -100%;
 }
 
 .circulo.activo {
     background-color: #00adc1; /* Color del circulo activo */
 }
 .texto1{
+    box-shadow: 0 1vh 2vh 0.5vh rgba(0, 0, 0, 0.2);
     font-size: 5vh;
     background-color: #e81f76; 
     color: black; 
@@ -219,6 +227,7 @@ input[type="submit"]{
     color: white;
 }
 .texto2{
+    box-shadow: 0 1vh 2vh 0.5vh rgba(0, 0, 0, 0.2);
     font-size: 5vh;
     background-color: #00aec3; 
     color: black; 
@@ -328,13 +337,39 @@ input[type="submit"]{
 }
 .universidad .imagenesuni{
     width: 100%;
-    height: 20vh;
-    background-image: url(../imagenes/gente.jpg);
+    height: 22vh;
+    display: grid;
+    position: relative;
+    grid-template: 
+    "."auto
+    "CIR"5vh/
+    1fr;
+}
+.circulo2 {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+ 
+    cursor: pointer;
+}
+.circulo2.activo {
+    background-color: #00adc1; /* Color del circulo activo */
+}
+.imagenuni{
+    opacity: 0;
     background-size:  cover;
     background-repeat: no-repeat;
     background-position: center;
+    transition: opacity 0.5s;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
 }
-
+.imagenuni.activo{
+    opacity: 1;
+}
 .universidad .nombreuni{
     padding-top: 1vh;
     font-size: 3vh;
@@ -396,6 +431,8 @@ input[type="submit"]{
     border-radius: 50vh;
     background-repeat: no-repeat;
     background-position: center;
+    box-shadow: 0 1vh 2vh 0.5vh rgba(0, 0, 0, 0.2);
+
 }
 .botones{
     grid-area: BOT;
