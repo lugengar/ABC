@@ -68,7 +68,7 @@ input[type="submit"]{
     background-position: left;
     background-size: 9%;
     background-repeat: no-repeat;
-    pointer-events: all;
+   
 }
 
 [popover] h1{
