@@ -124,6 +124,14 @@ input[type="submit"]{
    padding-left: 1vh;
 }
 
+.universidad input, .universidad select{
+    border: none;
+    border-radius: 1.5vh;
+    height: 5vh;
+    color: gray;
+    width: 30vh;
+    padding-left: 1vh;
+ }
 .barradebusqueda input[type="submit"], .barradebusqueda button{
    border: none;
    border-radius: 1.5vh;
@@ -390,6 +398,7 @@ input[type="submit"]{
     padding-left: 2vh;
     padding-right: 2vh;
     color: #00adc1;
+    text-align: center;
 }
 .universidad .barrauni{
 
@@ -575,6 +584,18 @@ input[type="submit"]{
     background-color: white;
 
 }
+#header{
+    transition: opacity 0.2s ease-in-out;
+}
+.hidden {
+    opacity: 0%;
+    pointer-events: none;
+}
+
+.visible {
+    opacity: 100%;
+}
+
 /*ESTILOS PARA LA VERSION DE MOBILES*/
 @media (max-width: 768px) {
     .barradebusqueda .imglupa{

@@ -24,7 +24,7 @@ font-weight: 400;
 font-style: normal;
 }
 
-input,select,option{
+input,select,option, textarea{
     font-family: "Roboto", sans-serif;
 font-weight: 400;
 font-style: normal;
@@ -120,7 +120,33 @@ input[type="submit"]{
    width: 30vh;
    padding-left: 1vh;
 }
+.universidad input, .universidad textarea{
+    border: none;
+    border-radius: 1.5vh;
+    height: 5vh;
+    color: gray;
+    width: 35vh;
+    padding-left: 1vh;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.2);
+    margin-bottom: 2vh;
+    border: rgba(128, 128, 128, 0.438) solid 0.1vh;
+ }
 
+ .universidad textarea{
+   resize: none;
+   height: 15vh;
+   margin-bottom: 5vh;
+
+ }
+ .universidad input[type="submit"]{
+    border: none;
+    border-radius: 1.5vh;
+    height: 5vh;
+    background-color: #e81f76;
+    color: white;
+    padding-left: 2vh;
+    padding-right: 2vh;
+ }
 .barradebusqueda input[type="submit"], .barradebusqueda button{
    border: none;
    border-radius: 1.5vh;
@@ -316,7 +342,7 @@ input[type="submit"]{
 .lista{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 5vh;
     flex-wrap: wrap; 
 }
@@ -380,6 +406,7 @@ input[type="submit"]{
     background-position: center;
     transition: background-size 0.5s;
 }
+
 .universidad .imageninfo:hover{
 
     background-size:  20vh;
@@ -392,7 +419,22 @@ input[type="submit"]{
     height: max-content;
     padding-left: 2vh;
     padding-right: 2vh;
+    text-align: center;
     color: #00adc1;
+}
+.universidad .nombreuni2{
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+
+    font-size: 3vh;
+    width: 100%;
+    height: max-content;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    color: white;
+    background-color: #00adc1;;
+    text-align: center;
+    transform: translateY(-3vh);
 }
 .universidad .barrauni{
 
@@ -400,6 +442,13 @@ input[type="submit"]{
     height: 0.01vh;
     width: 40vh;
     transform: translateY(2vh);
+
+}
+.universidad .barrauni2{
+    transform: translateY(-2.5vh);
+    border-top: #00adc1 solid 0.25vh;
+    height: 0.01vh;
+    width: 40vh;
 
 }
 .universidad .descripcionuni{
@@ -576,10 +625,24 @@ input[type="submit"]{
     background-position: center;
     box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.2);
     background-color: white;
+    display: none;
 
 }
+#header{
+    transition: opacity 0.2s ease-in-out;
+}
+.hidden {
+    opacity: 0%;
+    pointer-events: none;
+}
+.visible {
+    opacity: 100%;
+}
+
+
 /*ESTILOS PARA LA VERSION DE MOBILES*/
 @media (max-width: 768px) {
+    
     .barradebusqueda .imglupa{
         display: none;
     }

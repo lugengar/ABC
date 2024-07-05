@@ -34,25 +34,25 @@
             </div>
             <div class="logo_pba_vertical"></div>
         </main>
-        <header class="header">
-            <a href="index.html" class="logo_pba_horizontal"></a>
+        <header class="header" id="header">
+            <a href="index.html" class="logo_pba_horizontal " ></a>
             <a href="formulario.html" class="boton_nose_que_estudiar">No sé que estudiar</a>
         </header>
         
         <main class="main">
             <div class="informacion lista">
+                <div class="universidad" id="info">  
+                    <div class="imageninfo" style="background-image: url(imagenes/informacion.png);"></div>
+                    <div class="barrauni"></div>
+                    <h1 class="nombreuni">INFORMACIÓN</h1>
+                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
+                </div>
                 <div class="universidad"> 
                     <iframe  class="imageninfo" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13150.23923620172!2d-58.542955899999995!3d-34.51404235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb08d0e03c427%3A0xb9671110c4893ecd!2sEasy!5e0!3m2!1ses-419!2sar!4v1719099532427!5m2!1ses-419!2sar" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     <div class="barrauni"></div>
                     <h1 class="nombreuni">UBICACIÓN</h1>
                     <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
                     <button class="botonuni pop" popovertarget="googlemaps">ABRIR MAPA</button>
-                </div>
-                <div class="universidad"> 
-                    <div class="imageninfo" style="background-image: url(imagenes/informacion.png);"></div>
-                    <div class="barrauni"></div>
-                    <h1 class="nombreuni">INFORMACIÓN</h1>
-                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
                 </div>
                 <div class="universidad"> 
                     <div class="imageninfo"style="background-image: url(imagenes/correo.png);"></div>
@@ -70,14 +70,16 @@
                     <a class="botonuni " href="mailto:inscripcion@tecnica1vl.org" >ENVIAR CORREO</a>
                     
                 </div> 
-                <div class="universidad"> 
+                
+                <form class="universidad" id="formulariodecontacto"> 
                     <div class="imageninfo"style="background-image: url(imagenes/papeles.png);"></div>
                     <div class="barrauni"></div>
-                    <h1 class="nombreuni">FORMULARIO DE INSCRIPCIÓN</h1>
-                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
-                    <button class="botonuni pop" popovertarget="inscribirme">INSCRIBIRME</button>
-                </div>   
-                
+                    <h1 class="nombreuni">CONSULTAR INSCRIPCIÓN</h1>
+                    <input type="text" id="name" name="name" required placeholder="Nombre"><br><br>
+                    <input type="email" id="email" name="email" required placeholder="Correo"><br><br>
+                    <textarea id="message" name="message" required placeholder="Mensaje"></textarea><br><br>
+                    <button class="botonuni" type="submit">Enviar</button>
+                </form>   
             </div>
             <div class="botones" id="botones">
                 <button class="boton" onclick="window.location.href='./index.html'">
@@ -159,9 +161,8 @@
                 <div class="universidad"> 
                     <div class="imageninfo"style="background-image: url(imagenes/papeles.png);"></div>
                     <div class="barrauni"></div>
-                    <h1 class="nombreuni">FORMULARIO DE INSCRIPCIÓN</h1>
-                    <p class="descripcionuni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maxime in ab vero? Inventore molestiae dignissimos consectetur velit quae culpa dolorum, voluptas blanditiis exercitationem, earum possimus, et recusandae fugiat ad.</p>
-                    <a class="botonuni" href='./inscripcion.html'>INSCRIBIRME</a>
+                    <h1 class="nombreuni" style="padding-bottom: 5vh;">CONSULTAR INSCRIPCIÓN</h1>
+                    <a class="botonuni" href='#formulariodecontacto'>INSCRIBIRME</a>
                 </div>   
                 
             </div>
@@ -206,3 +207,5 @@
 <script src="codigojs/carrusel.js"></script>
 <script src="codigojs/botonesbarra.js"></script>
 <script src="codigojs/redirigir.js"></script>
+<script src="codigojs/scroll.js"></script>
+<script src="codigojs/enviarcorreo.js"></script>
