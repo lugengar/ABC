@@ -6,7 +6,7 @@ document.getElementById('formulariodecontacto').addEventListener('submit', funct
     var message = document.getElementById('message').value;
 
     var mailtoLink = 'mailto:destinatario@correo.com' +
-    '?subject=' + encodeURIComponent('Mensaje de ' + name) +
+    '?subject=' + encodeURIComponent('CONSULTA DESDE LA WEB DE ABC - ' + name) +
     '&body=' + encodeURIComponent('Nombre: ' + name + '\n' +
     'Correo Electrónico: ' + email + '\n' +
     'Mensaje: ' + message);

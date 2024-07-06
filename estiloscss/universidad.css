@@ -174,10 +174,6 @@ input[type="submit"]{
     padding-right: 1vh;
 }
 .boton_nose_que_estudiar{
-    background-image: url(../imagenes/signopregunta.png);
-    background-size:  5vh;
-    background-repeat: no-repeat;
-    background-position: right;
     display: block;
     grid-area: BTN;
     font-family: "Roboto", sans-serif;
@@ -188,6 +184,7 @@ input[type="submit"]{
     font-size: 2vh;
     text-align: left;
     padding-top: 0.4vh;
+    position: relative;
 }
 .logo_pba_horizontal{
     grid-area: LOG;
@@ -297,7 +294,6 @@ input[type="submit"]{
 }
 
 .logo_pba_vertical{
-    pointer-events: none;
 
     width: 16vh;
     height: 37vh;
@@ -592,6 +588,7 @@ input[type="submit"]{
     gap: 2%;
     flex-wrap: wrap;
 }
+
 .universidad .redesociales{
     background-color: white;
    width: 100%;
@@ -601,19 +598,43 @@ input[type="submit"]{
     align-items:center;
     gap: 2%;
     flex-wrap: wrap;
-    transform: translateY(1vh);
+    transform: translateY(-2.5vh);
 }
 .universidad .redesociales .redsocial{
-    width: 5vh;
-    height: 5vh;
-    border-radius: 25vh;
+    width: 6vh;
+    height: 6vh;
+    border-radius: 50vh;
     overflow: hidden;
-    background-size:  cover;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.2);
     background-color: white;
-
+}
+.universidad .redesociales .redsocial2{
+    width: 6vh;
+    height: 6vh;
+    border-radius: 50vh;
+    overflow: hidden;
+    background-size: 5vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.2);
+    background-color: #e81f76;
+    font-size: 2vh;
+    transition: width 0.5s;
+    color: transparent;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    align-items: center;
+}
+.universidad .redesociales .redsocial2:hover{
+    width: 20vh;
+    font-size: 2vh;
+    background-size: 0vh;
+    color: white;
 }
 .footer .redesociales .redsocial{
     width: 3vh;
@@ -638,7 +659,19 @@ input[type="submit"]{
 .visible {
     opacity: 100%;
 }
-
+.circulopregunta{
+    width: 5vh;
+    height: 5vh;
+    background-color: #00adc1;
+    border-radius: 50vh;
+    background-size:  cover;
+    background-repeat: no-repeat;
+    background-position: center;
+   pointer-events: none;
+    position: absolute;
+    right: 0%;
+    top: 0.5vh;
+}
 
 /*ESTILOS PARA LA VERSION DE MOBILES*/
 @media (max-width: 768px) {

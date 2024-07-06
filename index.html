@@ -34,35 +34,35 @@
         </main>
         <header class="header"id="header">
             <a href="index.html" class="logo_pba_horizontal"></a>
-            <a href="formulario.html" class="boton_nose_que_estudiar">No sé que estudiar</a>
+            <a href="formulario.html" class="boton_nose_que_estudiar">No sé que estudiar <div class="circulopregunta"></div></a>
         </header>
         
         <main class="main">
            
             <div class="botones" id="botones">
                 <button class="boton " onclick="barradebusqueda('distrito')">
-                    <div class="imagenboton" style="background-image: url(imagenes/mapa.png);"></div>
+                    <div class="imagenboton" style="background-image: url(imagenes/iconos/ubicacion.svg);"></div>
                     <h1>Buscar por distrito</h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('carrera')">
-                    <div class="imagenboton" style=" background-image: url(imagenes/gorro.png);"></div>
+                    <div class="imagenboton" style=" background-image: url(imagenes/iconos/sombrero.svg);"></div>
                     <h1>Buscar por carrera o ingenieria</h1>
                 </button>
-                <button class="boton" onclick="barradebusqueda('tecnicatura')"><div class="imagenboton" style=" background-image: url(imagenes/diploma.png);"></div>
+                <button class="boton" onclick="barradebusqueda('tecnicatura')"><div class="imagenboton" style=" background-image: url(imagenes/iconos/diploma.svg);"></div>
                     <h1>Buscar por terciario o tecnicatura</h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('nombre')">
-                    <div class="imagenboton" style=" background-image: url(imagenes/letra_a.png);"></div>
+                    <div class="imagenboton" style=" background-image: url(imagenes/iconos/nombre.svg);"></div>
                     <h1>Buscar por nombre del establecimiento</h1>
                 </button>
             </div>
             <form class="barradebusqueda activo" id="nombre">
-                <img src="imagenes/lupa_2020.png" class="imglupa" alt="">
+                <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
                 <input type="text" name="" placeholder="Nombre del establecimiento" required>
                 <input type="submit" name="" value="Buscar">
             </form>
             <form class="barradebusqueda" id="distrito" >
-                <img src="imagenes/lupa_2020.png" alt="">
+                <img src="imagenes/iconos/lupa.svg" alt="">
                 <select name="" id="" required>
                     <option value="">Elija un distrito</option >
                     <option value="Tigre">Tigre</option>
@@ -70,7 +70,7 @@
                 <input type="submit" name="" value="Buscar">
             </form>
             <form class="barradebusqueda" id="carrera" >
-                <img src="imagenes/lupa_2020.png" alt="">
+                <img src="imagenes/iconos/lupa.svg" alt="">
                 <select name="" id="" required>
                     <option value="">Elija una carrera</option>
                     <option value="Ingenieria Civil">Ingenieria Civil</option>
@@ -82,7 +82,7 @@
                 <input type="submit" name="" value="Buscar">
             </form>
             <form class="barradebusqueda" id="tecnicatura" >
-                <img src="imagenes/lupa_2020.png" alt="">
+                <img src="imagenes/iconos/lupa.svg" alt="">
                 <select name="" id="" required>
                     <option value="">Elija una tecnicatura</option>
                     <option value="Tecnico en Informatica">Tecnico en Informatica</option>
