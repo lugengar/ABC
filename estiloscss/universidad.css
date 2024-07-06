@@ -61,7 +61,7 @@ input[type="submit"]{
 [popover]::backdrop{
     backdrop-filter: blur(1vh);
     background-color: rgba(0, 0, 0, 0.8);
-    background-image: url(../imagenes/logo-pba-desktop.png);
+    background-image: url(../imagenes/otros/logo-pba-desktop.png);
     background-position: left;
     background-size: 9%;
     background-repeat: no-repeat;
@@ -196,7 +196,7 @@ input[type="submit"]{
 /*ESTILOS DEL CARRUCEL DE IMAGENES INICIAL*/
 .carrusel{
     border-top: white solid 1vh;
-    background-image: url(../imagenes/199.jpg);
+    background-image: url(../imagenes/otros/199.jpg);
     background-size:  cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -298,7 +298,7 @@ input[type="submit"]{
     width: 16vh;
     height: 37vh;
     background-color: white;
-    background-image: url(../imagenes/logo-pba-desktop.png);
+    background-image: url(../imagenes/otros/logo-pba-desktop.png);
     background-size:  14vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -387,7 +387,7 @@ input[type="submit"]{
 .universidad .imagenesuni{
     width: 100%;
     height: 22vh;
-    background-image: url(../imagenes/coding.jpg);
+    background-image: url(../imagenes/otros/coding.jpg);
     background-size:  cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -546,7 +546,7 @@ input[type="submit"]{
         position: relative;
 }
 .footer .imagenfooter{
-    background-image: url(../imagenes/imagen_footer2.png);
+    background-image: url(../imagenes/otros/imagen_footer2.png);
     background-repeat: repeat-x;
     background-size: 200vh;
     background-position: top;
@@ -559,7 +559,7 @@ input[type="submit"]{
 
 .footer .logo_pba_vertical2{
     grid-area: LOG;
-    background-image: url(../imagenes/logo-pba-desktop.png);
+    background-image: url(../imagenes/otros/logo-pba-desktop.png);
     background-size:  contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -708,7 +708,7 @@ input[type="submit"]{
         height: 12vh;
         width: 100%;
         background-color: white;
-        background-image: url(../imagenes/logo-pba-mobile.png);
+        background-image: url(../imagenes/otros/logo-pba-mobile.png);
         background-size:  contain;
         background-repeat: no-repeat;
         background-position: center;
@@ -790,7 +790,7 @@ input[type="submit"]{
       [popover]::backdrop{
         backdrop-filter: blur(1vh);
         background-color: rgba(0, 0, 0, 0.8);
-        background-image: url(../imagenes/logo-pba-mobile.png);
+        background-image: url(../imagenes/otros/logo-pba-mobile.png);
         background-position: top;
         background-size: 50vh;
         background-repeat: no-repeat;
