@@ -159,10 +159,6 @@ input[type="submit"]{
     padding-right: 1vh;
 }
 .boton_nose_que_estudiar{
-    background-image: url(../imagenes/iconos/pregunta.svg);
-    background-size:  5vh;
-    background-repeat: no-repeat;
-    background-position: right;
     display: block;
     grid-area: BTN;
     font-family: "Roboto", sans-serif;
@@ -173,6 +169,20 @@ input[type="submit"]{
     font-size: 2vh;
     text-align: left;
     padding-top: 0.4vh;
+    position: relative;
+}
+.circulopregunta{
+    width: 5vh;
+    height: 5vh;
+    background-color: #00adc1;
+    border-radius: 50vh;
+    background-size:  cover;
+    background-repeat: no-repeat;
+    background-position: center;
+   pointer-events: none;
+    position: absolute;
+    right: 0%;
+    top: 0.5vh;
 }
 .logo_pba_horizontal{
     grid-area: LOG;
