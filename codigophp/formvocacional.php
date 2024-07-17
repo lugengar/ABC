@@ -52,14 +52,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         text-align: center;
     }
     .botonuni{
-        font-size: 2vh;
+        font-size: 2dvh;
         border: none;
-        border-radius: 1.5vh;
-        height: 5vh;
-        width: 18vh;
+        border-radius: 1.5dvh;
+        height: 5dvh;
+        width: 18dvh;
         background-color: #e81f76;
         color: white;
-        transform: translateY(-2.5vh);
+        transform: translateY(-2.5dvh);
         display: flex;
         text-align: center;
         align-items: center;
