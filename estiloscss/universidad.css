@@ -68,14 +68,14 @@ input[type="submit"]{
 }
 
 [popover] h1{
-    width: 80vw;
+    width: 80dvw;
     text-align: center;
     color: #00adc1;
     font-weight: 700;
 }
 
 [popover] :nth-child(2) {
-    width: 80vw;
+    width: 80dvw;
     height: 86dvh;
   }
 /*ESTILOS DE LA BARRA DE BUSQUEDA Y PARA VOLVER HACIA ARRIBA*/
@@ -823,7 +823,7 @@ input[type="submit"]{
         padding-right: 1dvh;
     }
     [popover] :nth-child(2) {
-        width: 80vw;
+        width: 80dvw;
         height: 60dvh;
       }
       [popover]::backdrop{

@@ -45,9 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         flex-wrap: wrap; 
     }
     .content h1, p{
-        margin-left:5vw;
-        margin-right:5vw;
-        width: 80vw;
+        margin-left:5dvw;
+        margin-right:5dvw;
+        width: 80dvw;
         height:max-content;
         text-align: center;
     }
@@ -65,8 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        margin-left:30vw;
-        margin-right:30vw;
+        margin-left:30dvw;
+        margin-right:30dvw;
     }
 </style>
 <link rel="stylesheet" href="../estiloscss/universidad.css">

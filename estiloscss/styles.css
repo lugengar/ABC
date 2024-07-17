@@ -72,14 +72,14 @@ input[type="submit"]{
 }
 
 [popover] h1{
-    width: 80vw;
+    width: 80dvw;
     text-align: center;
     color: #00adc1;
     font-weight: 700;
 }
 
 [popover] :nth-child(2) {
-    width: 80vw;
+    width: 80dvw;
     height: 86dvh;
   }
 .barradebusqueda{
@@ -713,7 +713,7 @@ input[type="submit"]{
         padding-right: 1dvh;
     }
     [popover] :nth-child(2) {
-        width: 80vw;
+        width: 80dvw;
         height: 60dvh;
       }
       .footer .imagenfooter{
