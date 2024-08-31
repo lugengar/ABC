@@ -248,7 +248,7 @@ function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contact
                         <div class="lista5" style="gap: 0vh;">
                     <h1 class="nombreuni">SOLICITAR MAS INFORMACIÓN</h1>
                     <input type="hidden" id="receptor" name="receptor" value="'.$correo.'" required>
-                    <input type="text" id="nombre" name="nombre" required placeholder="Nombre">
+                    <input type="text" id="nombree" name="nombre" required placeholder="Nombre">
                     <input type="hidden" id="universidad" name="universidad" value="'.$id.'">
                     <input type="mail" id="email" name="email" required placeholder="Correo">
                     <textarea id="message" name="mensaje" required placeholder="Hola. Me gustaría obtener información sobre.."></textarea>
