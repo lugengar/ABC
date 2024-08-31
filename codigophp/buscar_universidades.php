@@ -63,46 +63,29 @@ if (isset($_GET['busqueda']) & isset($_GET['tipo'])) {
     if($tipo == "nombre"){    
         $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE nombre LIKE ?");
     
+    $stmt->bind_param("s", $param);
       
 
-    }else if($tipo == "carrera"){ 
+    }elseif($tipo == "carrera" || $tipo == "tecnicatura"){ 
         $sql2 = "SELECT * FROM planestudio WHERE fk_carrera = ".$busqueda;
         $carrera = $busqueda;
         $planestudio = $conn->query($sql2);
-        $establecimientos= [];
-        while ($row = $planestudio->fetch_assoc()) {
-            array_push($establecimientos, $row["fk_establecimiento"]);
+        $establecimientos = [];
+        foreach($planestudio as $plan) {
+            $establecimientos[] = $plan["fk_establecimiento"];
         }
-        $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento IN (?)");
-        $param =implode(", ", $establecimientos);
-
-    }else if($tipo == "tecnicatura"){ 
-        $sql2 = "SELECT * FROM planestudio WHERE fk_carrera = ".$busqueda;
-        $carrera = $busqueda;
-        $planestudio = $conn->query($sql2);
-        $establecimientos= [];
-        while ($row = $planestudio->fetch_assoc()) {
-            array_push($establecimientos, $row["fk_establecimiento"]);
-        }
-        $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento IN (?)");
-       $param =implode(", ", $establecimientos);
-
-    }else if($tipo == "distrito"){ 
+        $placeholders = implode(', ', array_fill(0, count($establecimientos), '?'));
+        $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento IN ($placeholders)");
+        $stmt->execute($establecimientos);
+    }
+    else if($tipo == "distrito"){ 
         $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE fk_distrito LIKE ?");
-        
-
+        $stmt->bind_param("s", $param);
     }
     
-    // Asignar parámetro y ejecutar consulta
-    $stmt->bind_param("s", $param);
     $stmt->execute();
 
-    // Obtener resultados
     $result = $stmt->get_result();
-    // Añadir comodines para buscar cualquier parte de la cadena
-    
-   
-    // Mostrar resultados (ejemplo básico)
     
 }else{
     $stmt = $conn->prepare("SELECT * FROM establecimiento");
