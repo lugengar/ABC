@@ -8,15 +8,15 @@
 </head>
 <body>
     <div class="container">
-        <?php
-        // Verificar si se ha enviado el formulario
+    <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Procesar los datos del formulario
+            // Datos de conexión a la base de datos
             $servername = "localhost";
             $username = "root";
             $password = "";
             $database = "abc";
 
+            // Conexión a la base de datos
             $conn = mysqli_connect($servername, $username, $password, $database);
 
             if (!$conn) {
@@ -27,33 +27,35 @@
             $apellido = $_POST["apellido"];
             $email = $_POST["email"];
             $contrasena = $_POST["contrasena"];
+            
+            $hashed_password = password_hash($contrasena, PASSWORD_DEFAULT);
 
-            // Verificar si el email ya está registrado
-            $sql = "SELECT id FROM usuarios WHERE email = '$email'";
-            $result = mysqli_query($conn, $sql);
+        // Verificar si el email ya está registrado
+        $sql = "SELECT id FROM usuarios WHERE email = '$email'";
+        $result = mysqli_query($conn, $sql);
 
-            if (mysqli_num_rows($result) > 0) {
-                echo "<p class='error'>El correo electrónico ya está registrado.</p>";
+        if (mysqli_num_rows($result) > 0) {
+            echo "<p class='error'>El correo electrónico ya está registrado.</p>";
+        } else {
+            // Insertar nuevo usuario en la base de datos con la contraseña hasheada
+            $sql = "INSERT INTO usuarios (nombre, apellido, email, contrasena) VALUES ('$nombre', '$apellido', '$email', '$hashed_password')";
+            
+            if (mysqli_query($conn, $sql)) {
+                echo "<p class='success-message' id='success-message'>Registro exitoso. Redirigiendo al inicio...</p>";
+                echo "<script>
+                        document.getElementById('success-message').style.display = 'block';
+                        setTimeout(function(){
+                            window.location.href = 'inicio.php';
+                        }, 3000); // 3 segundos de espera
+                        </script>";
             } else {
-                // Insertar nuevo usuario en la base de datos
-                $sql = "INSERT INTO usuarios (nombre, apellido, email, contrasena) VALUES ('$nombre', '$apellido', '$email', '$contrasena')";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<p class='success-message' id='success-message'>Registro exitoso. Redirigiendo al inicio...</p>";
-                    echo "<script>
-                            document.getElementById('success-message').style.display = 'block';
-                            setTimeout(function(){
-                                window.location.href = 'index.php';
-                            }, 3000); // 3 segundos de espera
-                            </script>";
-                } else {
-                    echo "Error al registrar usuario: " . mysqli_error($conn);
-                }
+                echo "Error al registrar usuario: " . mysqli_error($conn);
             }
-
-            mysqli_close($conn);
         }
-        ?>
+
+        mysqli_close($conn);
+        }
+    ?>
 
         <!-- Formulario de registro -->
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
