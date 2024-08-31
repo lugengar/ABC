@@ -10,6 +10,7 @@
 </head>
 <body>
     <?php
+    $row = null;
         include "./codigophp/buscar_universidades.php";
         $tipo = "nombre";
         if(isset($_GET["tipo"])){
