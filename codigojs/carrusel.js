@@ -2,6 +2,8 @@
 const imagenes = document.querySelectorAll('.imagen');
 
 if(imagenes.length > 1){
+const circulos2 = document.querySelectorAll('.circulo2');
+
 circulos2.forEach((circulo) => {
     circulo.addEventListener('click', () => {
         let imagenes = circulo.parentNode.parentNode.querySelectorAll(".imagenuni")
@@ -14,7 +16,6 @@ circulos2.forEach((circulo) => {
         imagenes[index].classList.add('activo');
     });
 });
-const circulos2 = document.querySelectorAll('.circulo2');
     
 
 const circulos = document.querySelectorAll('.circulo');

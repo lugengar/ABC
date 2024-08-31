@@ -2,6 +2,7 @@
 <html lang="en-es">
 <head>
 <?php
+    try {
         include "./codigophp/mostrar_universidad.php";
         include "claves.php";
         include "./codigophp/construccion.php";
@@ -11,6 +12,9 @@
                 $tipo = $_GET["tipo"];
             }
         }
+    } catch (Exception $e) {
+        header("Location: index.php");
+    }
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

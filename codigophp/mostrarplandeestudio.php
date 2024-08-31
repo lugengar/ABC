@@ -21,7 +21,7 @@ if (isset($_GET['carrera']) && isset($_GET['universidad'])) {
         echo "<p class='error'>No se encontraron resultados para la búsqueda: " . htmlspecialchars($busqueda) . "</p>";
     } else {
         $establecimientos = null;
-
+        $sqll = "";
         // Usar una consulta preparada para obtener otros establecimientos
         $stmt2 = $conn->prepare("SELECT fk_establecimiento FROM planestudio WHERE fk_carrera = ?");
         $stmt2->bind_param("s", $busqueda);
@@ -35,10 +35,11 @@ if (isset($_GET['carrera']) && isset($_GET['universidad'])) {
             }
 
             $in_query = implode(',', array_fill(0, count($ids), '?'));
-            $stmt3 = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento IN ($in_query)");
+            $stmt3 = $conn->prepare("SELECT DISTINCT * FROM establecimiento WHERE id_establecimiento IN ($in_query) AND id_establecimiento != $universidad");
             $stmt3->bind_param(str_repeat('s', count($ids)), ...$ids);
             $stmt3->execute();
             $establecimientos = $stmt3->get_result();
+            
         $stmt3->close();
 
         }

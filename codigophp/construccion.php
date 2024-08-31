@@ -360,24 +360,31 @@ global $establecimientoactual;
           </div>
         </div>
        ');
-       if($establecimientos != null){
-            echo '<div class="universidad" id="establecimiento"> 
-            <div class="imageninfo"style="background-image: url(imagenes/iconos/ubicacion.svg);"></div>
-            <div class="barrauni"></div>
-       
 
-            <h1 class="nombreuni">TAMBIEN SE CURSA EN</h1><p class="descripcionuni" style="height: 25dvh;">
-            Podes cursar "'.$titulo.'" en los siguientes establecimientos:<br>';
-            foreach($establecimientos as $key => $establecimiento) {
-                if($establecimientoactual["id_establecimiento"] != $establecimiento["id_establecimiento"]){
-                    echo '- <a href="./universidad.php?universidad='.$establecimiento["id_establecimiento"].'&carrera='.$carrera.'#redes">'.$establecimiento["nombre"].'</a> <br>';
+       if($establecimientos != null){
+            if($establecimientos->num_rows > 0){
+
+                echo '<div class="universidad" id="establecimiento"> 
+                <div class="imageninfo"style="background-image: url(imagenes/iconos/ubicacion.svg);"></div>
+                <div class="barrauni"></div>
+        
+                
+                <h1 class="nombreuni">TAMBIEN SE CURSA EN</h1><p class="descripcionuni" style="height: 25dvh;">
+                Podes cursar "'.$titulo.'" en los siguientes establecimientos:<br>';
+            
+                foreach($establecimientos as $key => $establecimiento) {
+                    if($establecimientoactual["id_establecimiento"] != $establecimiento["id_establecimiento"]){
+                        echo '- <a href="./universidad.php?universidad='.$establecimiento["id_establecimiento"].'&carrera='.$carrera.'#redes">'.$establecimiento["nombre"].'</a> <br>';
+                    }
+
                 }
+
+                echo'</p>
+                            
+                    
+                    </div>
+                ';
             }
-            echo'</p>
-                        
-                   
-                </div>
-            ';
        }
 
 
