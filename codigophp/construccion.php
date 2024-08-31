@@ -242,7 +242,7 @@ function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contact
             echo'</div> </div>';
             if($haycorreo == true){// EN CASO DE NO CONTAR CON UN CONTACTO NO MOSTRARA LA INSCRIPCION
                 echo ('
-                <form class="universidad horizontal" method="post" action="./codigophp/enviarcorreo.php" id="formulariodecontacto"> 
+                <form class="universidad horizontal" method="post" action="./codigophp/enviarcorreo.php" id="formulariodecontacto" onsubmit="return verificarRecaptcha()">
                     <div class="imageninfo2"style="background-image: url(imagenes/iconos/inscripcion.svg);"></div>
                     <div class="barrauni3"></div>
                         <div class="lista5" style="gap: 0vh;">
@@ -256,7 +256,18 @@ function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contact
                     <button  class="botonuni inscribirse" type="submit">Enviar</button>
                     </div>
                 </form> 
+                <script>
+                    function verificarRecaptcha() {
+                        var response = grecaptcha.getResponse();
+                        if (response.length === 0) {
+                            alert("Por favor, completa el reCAPTCHA.");
+                            return false;
+                        }
+                        return true;
+                    }
+                </script>
                 ');
+                
             }
             //echo'</div>';   
 
