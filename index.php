@@ -11,6 +11,12 @@
 <body>
     <?php
         include "./codigophp/buscar_universidades.php";
+        $tipo = "nombre";
+        if(isset($_GET["tipo"])){
+            if(isset($_GET["tipo"])){
+                $tipo = $_GET["tipo"];
+            }
+        }
     ?>
         <div class="overlay" id="overlay"></div>
     
@@ -62,7 +68,7 @@
             </div>
 
 
-            <div class="identificador" id="identificador1" style="top: 100dvh;"></div>
+            <div class="identificador" id="identificador1" style="top: 100vh;"></div>
             <div class="botones" id="botones">
 
 
@@ -80,7 +86,7 @@
 
 
 
-                <button class="boton " onclick="barradebusqueda('distrito')">
+                <button class="boton" onclick="barradebusqueda('distrito')">
                     <div class="imagenboton" style="background-image: url(imagenes/iconos/ubicacion.svg);"></div>
                     <h1>Buscar universidad por distrito</h1>
                 </button>
@@ -96,13 +102,13 @@
                     <h1>Buscar por nombre de la universidad</h1>
                 </button>
             </div>
-            <form class="barradebusqueda activo" id="nombre" method="GET" action="./index.php#identificador2">
+            <form class="barradebusqueda <?php if($tipo == "nombre"){echo 'activo';} ?>" id="nombre" method="GET" action="./index.php#identificador2">
                 <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
                 <input type="text" name="busqueda" placeholder="Nombre del establecimiento" required>
                 <input type="hidden" name="tipo" value="nombre" required>
                 <input type="submit" value="Buscar">
             </form>
-            <form class="barradebusqueda" id="distrito" method="GET" action="./index.php#identificador2">
+            <form class="barradebusqueda <?php if($tipo == "distrito"){echo 'activo';} ?>" id="distrito" method="GET" action="./index.php#identificador2">
             <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
                 <select name="busqueda"id="" required>
                     <option value="">Elija un distrito</option >
@@ -114,7 +120,7 @@
                 <input type="hidden" name="tipo" value="distrito" required>
                 <input type="submit" name="" value="Buscar" >
             </form>
-            <form class="barradebusqueda" id="carrera" method="GET" action="./index.php#identificador2">
+            <form class="barradebusqueda <?php if($tipo == "carrera"){echo 'activo';} ?>" id="carrera" method="GET" action="./index.php#identificador2">
             <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
                 <select name="busqueda" id="" required>
                     <option value="">Elija una carrera</option>
@@ -126,7 +132,7 @@
                 <input type="hidden" name="tipo" value="carrera" required>
                 <input type="submit" name="" value="Buscar">
             </form>
-            <form class="barradebusqueda" id="tecnicatura" method="GET" action="./index.php#identificador2">
+            <form class="barradebusqueda <?php if($tipo == "tecnicatura"){echo 'activo';} ?>" id="tecnicatura" method="GET" action="./index.php#identificador2">
             <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
                 <select name="busqueda" id="" required>
                     <option value="">Elija una tecnicatura</option>
@@ -139,7 +145,7 @@
                 <input type="submit" name="" value="Buscar">
             </form>
             <div class="universidades" id="uni" style="padding-top:0vh; position:relative;">
-            <div class="identificador" id="identificador2" style="top: -20dvh;"></div>
+            <div class="identificador" id="identificador2" style="top: -20vh;"></div>
 
                 <?php
                     etiqueta();
@@ -156,6 +162,7 @@
         <footer class="footer">
             <div class="imagenfooter"></div>
             <div class="logo_pba_vertical2"></div>
+            <div class="logodte"></div>
 
             <div class="textofooter">
                 <h1>&copy; 2024 Escuela Secundaria Técnica N1 Vicente Lopez. Todos los derechos reservados.</h1>

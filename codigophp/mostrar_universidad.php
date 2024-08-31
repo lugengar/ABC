@@ -4,10 +4,10 @@ $result = null;
 
 if (isset($_GET['universidad'])) { 
     include "./codigophp/conexionbs.php";
-    $universidad = $_GET['universidad'];
+    $universidad = filter_var($_GET['universidad'], FILTER_SANITIZE_SPECIAL_CHARS);
 
     $stmt = $conn->prepare("
-        SELECT e.id_establecimiento, e.ubicacion, e.servicios, e.nombre AS nombre_universidad, e.descripcion, d.nombre AS nombre_distrito
+        SELECT e.id_establecimiento, e.ubicacion,e.tipo_establecimiento, e.servicios, e.nombre AS nombre_universidad, e.descripcion, d.nombre AS nombre_distrito
         FROM establecimiento e
         INNER JOIN distrito d ON e.fk_distrito = d.id_distrito
         WHERE e.id_establecimiento = ?

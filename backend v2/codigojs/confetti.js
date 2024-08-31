@@ -1,36 +1,14 @@
-//CREA UN MENSAJE DE REFERENCIA PARA ENVIAR UN CORREO
-/*
-document.getElementById('formulariodecontacto').addEventListener('submit', function(event) {
-    event.preventDefault(); 
-    createConfetti();
-    setTimeout(cleanUpConfetti, 4000);
-   // var name = document.getElementById('name').value;
-   // var email = document.getElementById('email').value;
-    var enviador = document.getElementById('email').value;
-    var receptor = document.getElementById('receptor').value;
-    var message = document.getElementById('message').value;
-
-    var mailtoLink = 'mailto:'+ receptor +
-    '?subject=' + encodeURIComponent('CONSULTA DESDE LA WEB DE ABC') +
-    '&body=' + encodeURIComponent(enviador+": "+message);
-    window.location.href = mailtoLink;
- 
-});
-
 let click = false;
-*/
-
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has('enviado') && urlParams.get('enviado') === 'true') {
-    createConfetti();
-    setTimeout(cleanUpConfetti, 4000);
-}else if (urlParams.has('enviado') && urlParams.get('enviado') === 'false'){
-    document.  querySelector(".g-recaptcha").style.animation = "error 2s infinite";
-}
-
-
-// Llama a la función verificarYEjecutar cuando se cargue la página
-
+document.querySelectorAll(".inscribirse").forEach(element => {
+    element.addEventListener('click', function(event) {
+        event.preventDefault();
+        if(click == false){
+            click = true;
+            createConfetti();
+            setTimeout(cleanUpConfetti, 4000);
+        }
+    });
+});
 
 function createConfetti() {
     const confettiColors = ['#ff4136', '#0074d9', '#2ecc40', '#ffdc00', '#ff1493']; 

@@ -42,21 +42,23 @@ function buscardistritos(){ //BUSCA LOS DISTRITOS PARA MOSTRARLOS
 }
 function etiqueta(){
     if (isset($_GET['busqueda']) & isset($_GET['tipo'])) {
-        $busqueda = $_GET['busqueda'];
+        $busqueda = filter_var($_GET['busqueda'], FILTER_SANITIZE_SPECIAL_CHARS);
         echo '<div class="etiquetas"><a href="index.php#identificador2" id="etiqueta" class="etiqueta">Eliminar busqueda: '.$busqueda.'</a></div> <div class="barraseparadora" ></div>';
     }
 }
+$carrera = null;
+
 function buscar(){ //BUSCA EN GENERAL POR LOS 4 MEDIOS DISTRITO, TECNICO,LICENCIATURA O NOMBRE
     global $conn;
+    global $carrera;
     global $stmt;
     global $result;
 // Validar y limpiar el parámetro de búsqueda
 if (isset($_GET['busqueda']) & isset($_GET['tipo'])) {
 
-    $busqueda = $_GET['busqueda'];
-    $tipo = $_GET['tipo'];
+    $busqueda = filter_var($_GET['busqueda'], FILTER_SANITIZE_SPECIAL_CHARS);
+    $tipo = filter_var($_GET['tipo'], FILTER_SANITIZE_SPECIAL_CHARS);
     $param = "%$busqueda%";
-
     // Preparar la consulta usando una consulta preparada
     if($tipo == "nombre"){    
         $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE nombre LIKE ?");
@@ -65,6 +67,7 @@ if (isset($_GET['busqueda']) & isset($_GET['tipo'])) {
 
     }else if($tipo == "carrera"){ 
         $sql2 = "SELECT * FROM planestudio WHERE fk_carrera = ".$busqueda;
+        $carrera = $busqueda;
         $planestudio = $conn->query($sql2);
         $establecimientos= [];
         while ($row = $planestudio->fetch_assoc()) {
@@ -75,6 +78,7 @@ if (isset($_GET['busqueda']) & isset($_GET['tipo'])) {
 
     }else if($tipo == "tecnicatura"){ 
         $sql2 = "SELECT * FROM planestudio WHERE fk_carrera = ".$busqueda;
+        $carrera = $busqueda;
         $planestudio = $conn->query($sql2);
         $establecimientos= [];
         while ($row = $planestudio->fetch_assoc()) {
@@ -116,7 +120,7 @@ if ($result != null){
     while ($row = $result->fetch_assoc()) {
         $sql2 = "SELECT * FROM imagenes WHERE fk_establecimiento = ".$row["id_establecimiento"];
         $imagenes = $conn->query($sql2);
-        universidad($row["id_establecimiento"], $row["nombre"], $row["descripcion"], $imagenes); #$row["imagenes"]);
+        universidad($row["id_establecimiento"], $row["nombre"], $row["descripcion"], $imagenes, $carrera); #$row["imagenes"]);
     }
 }
 }else{
