@@ -1,6 +1,6 @@
 <?php
-$secretkey1 = "";
-$secretkey2 = "";
+$secretkey1 = "NADA";
+$secretkey2 = "NADA";
 
 
 ?>
