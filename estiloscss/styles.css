@@ -85,7 +85,19 @@ input[type="submit"] {
     left: 0;
     height: 20vh;
 }
+.barratexto{
+   
+    text-align: end;
+   
+    font-family: "Encode Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2.5vh;
+    color: white;
+    margin-right: 5vh;
+}
 .barradebusqueda {
+    
     position: sticky;
     z-index: 1000;
     top: 7vh;
@@ -351,7 +363,7 @@ input[type="submit"] {
         "UNI UNI UNI"
         "VOL VOL VOL"
         ". . .";
-    grid-template-rows: max-content 10vh auto 10vh;
+    grid-template-rows: max-content minmax(10dvh, max-content) auto 10vh;
     grid-template-columns: auto auto auto;
 }
 
@@ -757,6 +769,23 @@ body.inactive .overlay {
     padding-right: 1vh;
 }
 @media (max-width: 1000px) {
+    
+    .barradebusqueda  input[type="submit"] {
+        margin-left: 1vh;
+    }
+  
+    .barradebusqueda .imglupa {
+        display: none;
+    }
+    .barradebusqueda  input{
+        transition: none;
+
+    }
+    .barradebusqueda {
+        padding-bottom: 2vh;
+        gap: 0;
+        transition: none;
+    }
     .universidad .imageninfo2 {
         display: none;
     }
@@ -902,9 +931,23 @@ body.inactive .overlay {
         transform: scale(1);
     }
 
-   
+    .barradebusqueda  input[type="submit"] {
+        margin-left: 1vh;
+    }
+    .barradebusqueda  input{
+        transition: none;
+
+    }
+    .barratexto{
+        margin-right: 0;
+    }
     .barradebusqueda .imglupa {
         display: none;
+    }
+    .barradebusqueda {
+        padding-bottom: 2vh;
+        gap: 0;
+        transition: none;
     }
     
     .filtro {

@@ -113,7 +113,17 @@ input[type="submit"] {
 }
 
 /*ESTILOS DE LA BARRA DE BUSQUEDA Y PARA VOLVER HACIA ARRIBA*/
+
+.barratexto{
+    font-family: "Encode Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2.5vh;
+    color: white;
+    margin-right: 5vh;
+}
 .barradebusqueda {
+    
     position: sticky;
     z-index: 1000;
     top: 7vh;
@@ -129,7 +139,6 @@ input[type="submit"] {
     box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
     transition: opacity 0.5s;
 }
-
 .barradebusqueda.activo {
     pointer-events: all;
     opacity: 1;
@@ -435,7 +444,7 @@ input[type="submit"] {
         "INFC INFC INFC"
         "VOL VOL VOL"
         ". . .";
-    grid-template-rows: max-content max-content 10vh auto max-content 10vh;
+    grid-template-rows: max-content max-content minmax(10vh, max-content) auto max-content 10vh;
     grid-template-columns: auto auto auto;
 }
 
@@ -987,7 +996,25 @@ body.inactive .pop2,
 body.inactive .overlay {
     pointer-events: auto;
 }
+@media (max-width: 1000px){
+    
+    .barradebusqueda  input[type="submit"] {
+        margin-left: 1vh;
+    }
+    
+    .barradebusqueda .imglupa {
+        display: none;
+    }
+    .barradebusqueda  input{
+        transition: none;
 
+    }
+    .barradebusqueda {
+        padding-bottom: 2vh;
+        gap: 0;
+        transition: none;
+    }
+}
 @media (max-width: 1400px) {
     .lista4 {
         display: grid;
@@ -1288,11 +1315,24 @@ body.inactive .overlay {
     #info {
         width: auto;
     }
-
+    .barradebusqueda  input[type="submit"] {
+        margin-left: 1vh;
+    }
+    .barratexto{
+        margin-right: 0;
+    }
     .barradebusqueda .imglupa {
         display: none;
     }
+    .barradebusqueda  input{
+        transition: none;
 
+    }
+    .barradebusqueda {
+        padding-bottom: 2vh;
+        gap: 0;
+        transition: none;
+    }
     .footer .imagenfooter {
         animation: footer 180s linear infinite;
     }

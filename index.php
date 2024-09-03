@@ -104,12 +104,16 @@
                 </button>
             </div>
             <form class="barradebusqueda <?php if($tipo == "nombre"){echo 'activo';} ?>" id="nombre" method="GET" action="./index.php#identificador2">
-                <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
-                <input type="text" name="busqueda" placeholder="Nombre del establecimiento" required>
+               <p class="barratexto">Nombre del establecimiento</p>
+            <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
+                <input type="text" name="busqueda" placeholder="" required>
                 <input type="hidden" name="tipo" value="nombre" required>
                 <input type="submit" value="Buscar">
             </form>
             <form class="barradebusqueda <?php if($tipo == "distrito"){echo 'activo';} ?>" id="distrito" method="GET" action="./index.php#identificador2">
+            
+            <p class="barratexto">Elija un distrito</p>
+            
             <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
                 <select name="busqueda"id="" required>
                     <option value="">Elija un distrito</option >
@@ -122,6 +126,7 @@
                 <input type="submit" name="" value="Buscar" >
             </form>
             <form class="barradebusqueda <?php if($tipo == "carrera"){echo 'activo';} ?>" id="carrera" method="GET" action="./index.php#identificador2">
+            <p class="barratexto">Elija una carrera</p>
             <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
                 <select name="busqueda" id="" required>
                     <option value="">Elija una carrera</option>
@@ -134,6 +139,8 @@
                 <input type="submit" name="" value="Buscar">
             </form>
             <form class="barradebusqueda <?php if($tipo == "tecnicatura"){echo 'activo';} ?>" id="tecnicatura" method="GET" action="./index.php#identificador2">
+            <p class="barratexto">Elija una tecnicatura</p>
+
             <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
                 <select name="busqueda" id="" required>
                     <option value="">Elija una tecnicatura</option>

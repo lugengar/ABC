@@ -69,24 +69,30 @@
                 </button>
             </div>
             <form class="barradebusqueda <?php if($tipo == "nombre"){echo 'activo';} ?>" id="nombre" method="GET" action="./universidad.php#identificador2">
-                <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
-                <input type="text" name="busqueda" placeholder="Nombre de la carrera/tecnicatura" required>
+            <p class="barratexto">Nombre de la carrera/tecnicatura</p>
+                
+            <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
+                <input type="text" name="busqueda" placeholder="" required>
                 <?php echo '<input type="hidden" name="universidad" value="'.$row["id_establecimiento"].'" required>';?>
                 <input type="hidden" name="tipo" value="nombre" required>
                 <input type="submit" name="" value="Buscar">
             </form>
             <form class="barradebusqueda <?php if($tipo == "tecnicatura"){echo 'activo';} ?>" id="tecnicatura" method="GET" action="./universidad.php#identificador2">
-                <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
+            <p class="barratexto">Nombre de la tecnicatura</p>
+                
+            <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
                 <?php echo '<input type="hidden" name="universidad" value="'.$row["id_establecimiento"].'" required>';?>
                 <input type="hidden" name="tipo" value="tecnicatura" required>
-                <input type="text"name="busqueda" placeholder="Nombre de la tecnicatura" required>
+                <input type="text"name="busqueda" placeholder="" required>
                 <input type="submit" name="" value="Buscar">
             </form>
             <form class="barradebusqueda <?php if($tipo == "carrera"){echo 'activo';} ?>" id="carrera" method="GET" action="./universidad.php#identificador2">
-                <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
+            <p class="barratexto">Nombre de la carrera</p>
+               
+            <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
                 <?php echo '<input type="hidden" name="universidad" value="'.$row["id_establecimiento"].'" required>';?>
                 <input type="hidden" name="tipo" value="carrera" required>
-                <input type="text" name="busqueda" placeholder="Nombre de la carrera" required>
+                <input type="text" name="busqueda" placeholder="" required>
                 <input type="submit" name="" value="Buscar">
             </form>
 
