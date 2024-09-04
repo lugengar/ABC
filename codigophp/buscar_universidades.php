@@ -74,9 +74,18 @@ if (isset($_GET['busqueda']) & isset($_GET['tipo'])) {
         foreach($planestudio as $plan) {
             $establecimientos[] = $plan["fk_establecimiento"];
         }
-        $placeholders = implode(', ', array_fill(0, count($establecimientos), '?'));
-        $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento IN ($placeholders)");
-        $stmt->execute($establecimientos);
+
+        if (!empty($establecimientos)) {
+            $placeholders = implode(', ', array_fill(0, count($establecimientos), '?'));
+            $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento IN ($placeholders)");
+
+            $types = str_repeat('i', count($establecimientos)); 
+
+            $stmt->bind_param($types, ...$establecimientos);
+
+            $stmt->execute();
+            $result = $stmt->get_result();
+        }
     }
     else if($tipo == "distrito"){ 
         $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE fk_distrito LIKE ?");
