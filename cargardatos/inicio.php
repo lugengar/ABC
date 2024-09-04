@@ -128,14 +128,15 @@
                 `;
             } else if (tabla === "imagenes") {
                 formFields.innerHTML = `
-                    <label for="url">URL:</label>
-                    <input type="text" id="url" name="url" required>
+                    <label for="imagen">Cargar imagen:</label>
+                    <input type="file" id="imagen" name="imagen" accept="image/*" required>
+                    <br>
                     <label for="fk_establecimiento">FK Establecimiento:</label>
                     <select id="fk_establecimiento" name="fk_establecimiento" required>
                         <option value="">--Selecciona un establecimiento--</option>
                         <?php foreach ($establecimientos as $row) { ?>
-                            <option value="<?php echo $row['id_establecimiento']; ?>">
-                                <?php echo $row['id_establecimiento'] . " - " . $row['nombre']; ?>
+                            <option value="<?php echo htmlspecialchars($row['id_establecimiento']); ?>">
+                                <?php echo htmlspecialchars($row['id_establecimiento']) . " - " . htmlspecialchars($row['nombre']); ?>
                             </option>
                         <?php } ?>
                     </select>
