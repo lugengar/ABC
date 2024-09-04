@@ -166,10 +166,10 @@
                     <h1>Buscar universidad por distrito</h1>
                 </button>
 
-                <button class="boton" onclick="barradebusqueda('distrito')">
+                <!-- <button class="boton" onclick="barradebusqueda('distrito')">
                     <div class="imagenboton" style="background-image: url(imagenes/iconos/ubicacion.svg);"></div>
                     <h1>Buscar universidad por distrito</h1>
-                </button>
+                </button> -->
                 <button class="boton" onclick="barradebusqueda('carrera')">
                     <div class="imagenboton" style=" background-image: url(imagenes/iconos/sombrero.svg);"></div>
                     <h1>Buscar universidad por carrera</h1>
