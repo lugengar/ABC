@@ -32,7 +32,11 @@ function universidad($id,$nombre ,$descripcion, $imagenes,$carreras){ //CREA EL 
             echo '</div> <div class="barrauni"></div>';
         }
     }else{
-        echo'<h1 class="nombreuni">NO HAY IMAGENES</h1>';
+        echo '<div class="imagenesuni">';
+
+        echo'<h1 class=" imagenuni activo errorimg"></h1>';
+        echo '</div> <div class="barrauni"></div>';
+
     }
     echo('
         <h1 class="nombreuni">'.$nombre.'</h1>
@@ -136,6 +140,7 @@ function arreglar_url($url){ // MODIFICA LAS URL PARA QUE FUNCIONEN CORRECTAMENT
         $url = "https://www.".$url;
     }
     return $url;
+    
 
 }
 function arreglarpdf($url){ //MODIFICA EL NOMBRE DEL ARCHIVO PDF EN CASO DE QUE ALGO NO ESTE BIEN
@@ -307,13 +312,14 @@ function carrusel($nombre,$tipo,$imagenes){ // CREA EL CARRUSEL DE IMAGENES
             echo'</div>';
         }
     }else{
-        echo'<h1 class="error imagenuni">NO HAY IMAGENES</h1>
-        <div class="filtro">
+        echo '<div class="imagenes">';
+        echo'<h1 class=" imagen activo errorimg"></h1>';
+        echo '</div><div class="filtro">
         <div class="contenidotexto">
-                <h1 class="texto1">'.$nombre.'</h1>
+                <h1 class="texto1">'.$tipo.'</h1>
         </div>
         <div class="contenidotexto">
-            <h1 class="texto2">'.$ubicacion.'</h1>
+            <h1 class="texto2">'.$nombre.'</h1>
         </div>';
         
     }
@@ -331,7 +337,6 @@ function carrera($id,$nombre,$descripcion, $id_establecimiento,$titulo){ //CREA 
     echo ('
         <form class="universidad carrera" method="GET" action="./universidad.php#redes" style="height: 45vh; overflow-y: hidden;">
             <h1 class="nombreuni" >'.$nombre.'</h1>
-          
             <p class="descripcionuni"style="height: 20vh;">'.$descripcion.'</p>
             <input type="submit" value="SABER MAS.." class="botonuni"></button>
             <input type="hidden" name="universidad" value="'.$id_establecimiento.'" required>

@@ -238,9 +238,21 @@ input[type="submit"] {
     overflow: hidden;
     display: flex;
     position: relative;
-    background-color: black;
+    background-color: white;
+
+}
+.imagenuni.errorimg {
+    background-image: url(../imagenes/otros/logo-pba-mobile.png);
+    background-position: center;
+    background-size: 40vh;
+    background-repeat: no-repeat;
 }
 
+.imagenuni.activo {
+    left: 0;
+    opacity: 1;
+
+}
 .circulos {
     align-items: center;
     grid-area: CIR;
@@ -1074,6 +1086,8 @@ body.inactive .overlay {
     }
 
     .overlay {
+   
+
         position: fixed;
         top: 0;
         left: 0;
@@ -1128,7 +1142,6 @@ body.inactive .overlay {
     0% {
         background-position-x: -100vh;
     }
-
     100% {
         background-position-x: 100vh;
     }

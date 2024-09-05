@@ -66,27 +66,28 @@ if (isset($_GET['busqueda']) & isset($_GET['tipo'])) {
     $stmt->bind_param("s", $param);
       
 
-    }elseif($tipo == "carrera" || $tipo == "tecnicatura"){ 
-        $sql2 = "SELECT * FROM planestudio WHERE fk_carrera = ".$busqueda;
-        $carrera = $busqueda;
-        $planestudio = $conn->query($sql2);
-        $establecimientos = [];
-        foreach($planestudio as $plan) {
-            $establecimientos[] = $plan["fk_establecimiento"];
-        }
-
-        if (!empty($establecimientos)) {
-            $placeholders = implode(', ', array_fill(0, count($establecimientos), '?'));
-            $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento IN ($placeholders)");
-
-            $types = str_repeat('i', count($establecimientos)); 
-
-            $stmt->bind_param($types, ...$establecimientos);
-
-            $stmt->execute();
-            $result = $stmt->get_result();
-        }
+}elseif($tipo == "carrera" || $tipo == "tecnicatura"){ 
+    $sql2 = "SELECT * FROM planestudio WHERE fk_carrera = ".$busqueda;
+    $carrera = $busqueda;
+    $planestudio = $conn->query($sql2);
+    $establecimientos = [];
+    foreach($planestudio as $plan) {
+        $establecimientos[] = $plan["fk_establecimiento"];
     }
+
+    if (!empty($establecimientos)) {
+        $placeholders = implode(', ', array_fill(0, count($establecimientos), '?'));
+        $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento IN ($placeholders)");
+
+        $types = str_repeat('i', count($establecimientos)); 
+
+        $stmt->bind_param($types, ...$establecimientos);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+    }
+}
+
     else if($tipo == "distrito"){ 
         $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE fk_distrito LIKE ?");
         $stmt->bind_param("s", $param);

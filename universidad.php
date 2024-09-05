@@ -24,6 +24,7 @@
     echo '<title>'.$row["nombre_universidad"].'</title>';
     echo '<meta name="description" content="Ofertas de Educación Superior Región 6, '.$row["nombre_universidad"].'">';
     ?>
+   
 
 </head>
 <body>

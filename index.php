@@ -57,7 +57,7 @@
             <!-- MAPA -->
             <div popover class="pop2">
                 <h1>HAGA CLIC FUERA DEL CUADRO PARA SALIR</h1>
-                <!-- ACA VA EL DIV O LO Q SEA DEL MAPA. EL TAMAÑO SE AJUSTA AUTOMATICAMENTE-->
+                <!-- ACA VA EL DIV O LO Q SEA DEL MAPA. EL TAMAÑO SE AJUSTA AUTOMATICAMENTE
                 <div id="mapa">
                     <p></p>
                     <img id="imagenmapa" src="./imagenes/otros/mapa2.svg" alt="">
@@ -155,21 +155,26 @@
                             width: 35px;
                         }
                     </style>
-                </div>
+                </div>-->
+              <iframe src="mapa.php" loading="lazy" frameborder="0"></iframe>
+               <?php //include "mapa2.php";?>
             </div>
 
             <div class="identificador" id="identificador1" style="top: 100vh;"></div>
             <div class="botones" id="botones">
-
                 <button class="boton pop" >
                     <div class="imagenboton" style="background-image: url(imagenes/iconos/ubicacion.svg);"></div>
                     <h1>Buscar universidad por distrito</h1>
                 </button>
 
-                <!-- <button class="boton" onclick="barradebusqueda('distrito')">
+                <!-- MAPA 
+
+                <button class="boton" onclick="barradebusqueda('distrito')">
                     <div class="imagenboton" style="background-image: url(imagenes/iconos/ubicacion.svg);"></div>
                     <h1>Buscar universidad por distrito</h1>
-                </button> -->
+                </button>
+ -->
+
                 <button class="boton" onclick="barradebusqueda('carrera')">
                     <div class="imagenboton" style=" background-image: url(imagenes/iconos/sombrero.svg);"></div>
                     <h1>Buscar universidad por carrera</h1>

@@ -12,19 +12,21 @@ function barradebusqueda(id){
     let cantidad = (carreras.length > 0);
     let cantidad2 = (tecnicaturas.length > 0);
     let cantidad3 = (error.length > 1);
-    if(!cantidad3){error.style.display = "none"}
+    if(!cantidad3){
+        error[0].style.display = "none"
+    }
     if(id == "carrera"){
         display2 = "none"
         display = "flex"
-        if(!cantidad){if(cantidad3){error[0].textContent ="No se encontraron resultados"}else{error.style.display = "flex"}}
+        if(!cantidad){if(cantidad3){error[0].textContent ="No se encontraron resultados"}else{error[0].style.display = "flex"}}
     }else if(id == "tecnicatura"){
         display = "none"
         display2 = "flex"
-        if(!cantidad2){if(cantidad3){error[0].textContent ="No se encontraron resultados"}else{error.style.display = "flex"}}
+        if(!cantidad2){if(cantidad3){error[0].textContent ="No se encontraron resultados"}else{error[0].style.display = "flex"}}
     }else{
         display = "flex"
         display2 = "flex"
-        if(!cantidad && !cantidad2){if(cantidad3){error[0].textContent ="No se encontraron resultados"}else{error.style.display = "flex"}}
+        if(!cantidad && !cantidad2){if(cantidad3){error[0].textContent ="No se encontraron resultados"}else{error[0].style.display = "flex"}}
     }
     if(cantidad){
         carreras.forEach((carrera) => {

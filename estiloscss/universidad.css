@@ -90,7 +90,18 @@ input[type="submit"] {
     justify-content: center;
     align-items: center;
 }
+.imagen.errorimg {
+    background-image: url(../imagenes/otros/logo-pba-mobile.png);
+    background-position: center;
+    background-size: 90vh;
+    background-repeat: no-repeat;
+}
 
+.imagen.imagen.activo {
+    left: 0;
+    opacity: 1;
+
+}
 [popover]::backdrop {
     backdrop-filter: blur(1vh);
     background-color: rgba(0, 0, 0, 0.8);
@@ -279,7 +290,7 @@ input[type="submit"] {
     overflow: hidden;
     display: flex;
     position: relative;
-    background-color: black;
+    background-color: white;
 }
 
 .circulos {
@@ -951,7 +962,7 @@ height: max-content;
     gap: 3vh;
     grid-template:
         ". . . . . ." auto
-        ". INFO INFO INFO MAP ." 40vh
+        ". INFO INFO INFO MAP ." minmax(40vh,max-content)
         ". REDE REDE REDE MAP ." max-content
         ". CAR CAR CAR PDF ." max-content
         ". MAS MAS INS INS ." max-content
