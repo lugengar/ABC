@@ -130,12 +130,12 @@
                             <?php } ?>
                         </select>
                         <label for="imagen">Imagen (solo JPG):</label>
-                        <input type="file" id="imagen" name="imagen" accept=".jpg" required>
+                        <input type="file" id="imagen" name="imagen" accept=".jpg" >
                     `;
                 } else if (tabla === "planestudio") {
                     formFields.innerHTML = `
                         <label for="pdf">PDF:</label>
-                        <input type="file" id="pdf" name="pdf" accept=".pdf" required>
+                        <input type="file" id="pdf" name="pdf" accept=".pdf" >
                         <label for="fk_carrera">FK Carrera:</label>
                         <select id="fk_carrera" name="fk_carrera" required>
                             <option value="">--Selecciona una carrera--</option>
