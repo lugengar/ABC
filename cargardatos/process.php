@@ -2,179 +2,208 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "abc";
+$database = "abc";
 
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+$conn = mysqli_connect($servername, $username, $password, $database);
+if (!$conn) {
+    die("Conexión fallida: " . mysqli_connect_error());
 }
 
-// Obtener datos del formulario
-$tabla = $_POST['tabla'];
-
-// Función para comprobar duplicados
-function checkDuplicate($conn, $table, $column, $value) {
-    $query = "SELECT COUNT(*) as count FROM $table WHERE $column = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $value);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    return $row['count'] > 0;
-}
-
-$executeStmt = true;
+$accion = $_POST['accion'] ?? '';
+$tabla = $_POST['tabla'] ?? '';
 
 if ($tabla === "carrera") {
-    $nombre = $_POST['nombre'];
-    $descripcion = $_POST['descripcion'];
-    $titulo = $_POST['titulo'];
+    if ($accion === "agregar") {
+        $nombre = $_POST['nombre'] ?? '';
+        $descripcion = $_POST['descripcion'] ?? '';
+        $titulo = $_POST['titulo'] ?? '';
 
-    if (!checkDuplicate($conn, 'carrera', 'nombre', $nombre)) {
-        $stmt = $conn->prepare("INSERT INTO carrera (nombre, descripcion, titulo) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $nombre, $descripcion, $titulo);
-        if ($stmt->execute()) {
-            echo "Carrera cargada correctamente.";
+        $sql = "INSERT INTO carrera (nombre, descripcion, titulo) VALUES (?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "sss", $nombre, $descripcion, $titulo);
+        mysqli_stmt_execute($stmt);
+
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            echo "Carrera agregada exitosamente.";
         } else {
-            echo "Error al cargar la carrera: " . $stmt->error;
+            echo "Error al agregar la carrera.";
         }
-    } else {
-        echo "Entrada duplicada para carrera con nombre: " . htmlspecialchars($nombre);
-        $executeStmt = false;
-    }
+        mysqli_stmt_close($stmt);
+    } else if ($accion === "eliminar") {
+        $id_carrera = $_POST['id_carrera'] ?? '';
 
-} elseif ($tabla === "contacto") {
-    $descripcion = $_POST['descripcion'];
-    $tipo = $_POST['tipo'];
-    $contacto = $_POST['contacto'];
+        if (empty($id_carrera)) {
+            die("No se seleccionó una carrera para eliminar.");
+        }
 
-    if (empty($contacto)) {
-        echo "El campo contacto no puede estar vacío.";
-        $executeStmt = false;
-    } else {
-        if (!checkDuplicate($conn, 'contacto', 'contacto', $contacto)) {
-            $fk_establecimiento = $_POST['fk_establecimiento'];
-            $stmt = $conn->prepare("INSERT INTO contacto (descripcion, tipo, contacto, fk_establecimiento) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("sssi", $descripcion, $tipo, $contacto, $fk_establecimiento);
-            if ($stmt->execute()) {
-                echo "Contacto cargado correctamente.";
-            } else {
-                echo "Error al cargar el contacto: " . $stmt->error;
-            }
+        $sql = "DELETE FROM carrera WHERE id_carrera = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $id_carrera);
+        mysqli_stmt_execute($stmt);
+
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            echo "Carrera eliminada exitosamente.";
         } else {
-            echo "Entrada duplicada para contacto con contacto: " . htmlspecialchars($contacto);
-            $executeStmt = false;
+            echo "Error al eliminar la carrera.";
         }
+        mysqli_stmt_close($stmt);
     }
+} else if ($tabla === "contacto") {
+    if ($accion === "agregar") {
+        $descripcion = $_POST['descripcion'] ?? '';
+        $tipo = $_POST['tipo'] ?? '';
+        $contacto = $_POST['contacto'] ?? '';
+        $fk_establecimiento = $_POST['fk_establecimiento'] ?? '';
 
-} elseif ($tabla === "distrito") {
-    $nombre = $_POST['nombre'];
+        $sql = "INSERT INTO contacto (descripcion, tipo, contacto, fk_establecimiento) VALUES (?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "sssi", $descripcion, $tipo, $contacto, $fk_establecimiento);
+        mysqli_stmt_execute($stmt);
 
-    if (!checkDuplicate($conn, 'distrito', 'nombre', $nombre)) {
-        $stmt = $conn->prepare("INSERT INTO distrito (nombre) VALUES (?)");
-        $stmt->bind_param("s", $nombre);
-        if ($stmt->execute()) {
-            echo "Distrito cargado correctamente.";
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            echo "Contacto agregado exitosamente.";
         } else {
-            echo "Error al cargar el distrito: " . $stmt->error;
+            echo "Error al agregar el contacto.";
         }
-    } else {
-        echo "Entrada duplicada para distrito con nombre: " . htmlspecialchars($nombre);
-        $executeStmt = false;
-    }
+        mysqli_stmt_close($stmt);
+    } else if ($accion === "eliminar") {
+        $id_contacto = $_POST['id_contacto'] ?? '';
 
-} elseif ($tabla === "establecimiento") {
-    $nombre = $_POST['nombre'];
-    $fk_distrito = $_POST['fk_distrito'];
+        if (empty($id_contacto)) {
+            die("No se seleccionó un contacto para eliminar.");
+        }
 
-    if (!checkDuplicate($conn, 'establecimiento', 'nombre', $nombre)) {
-        $stmt = $conn->prepare("INSERT INTO establecimiento (nombre, fk_distrito) VALUES (?, ?)");
-        $stmt->bind_param("si", $nombre, $fk_distrito);
-        if ($stmt->execute()) {
-            echo "Establecimiento cargado correctamente.";
+        $sql = "DELETE FROM contacto WHERE id_contacto = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $id_contacto);
+        mysqli_stmt_execute($stmt);
+
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            echo "Contacto eliminado exitosamente.";
         } else {
-            echo "Error al cargar el establecimiento: " . $stmt->error;
+            echo "Error al eliminar el contacto.";
         }
-    } else {
-        echo "Entrada duplicada para establecimiento con nombre: " . htmlspecialchars($nombre);
-        $executeStmt = false;
+        mysqli_stmt_close($stmt);
     }
+} else if ($tabla === "establecimiento") {
+    if ($accion === "agregar") {
+        $nombre = $_POST['nombre'] ?? '';
+        $ubicacion = $_POST['ubicacion'] ?? '';
+        $descripcion = $_POST['descripcion'] ?? '';
+        $tipo_establecimiento = $_POST['tipo_establecimiento'] ?? '';
+        $servicios = $_POST['servicios'] ?? '';
+        $fk_distrito = $_POST['fk_distrito'] ?? '';
 
-}  elseif ($tabla === "imagenes") {
-    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-        $imagen_file = $_FILES['imagen'];
-        $upload_dir = '../imagenes/universidades/'; // Directorio donde se guardarán las imágenes
-        $imagen_name = basename($imagen_file['name']);
-        $upload_file = $upload_dir . $imagen_name;
+        $imagen = $_FILES['imagen']['name'];
+        $imagen_tmp = $_FILES['imagen']['tmp_name'];
+        $imagen_ext = pathinfo($imagen, PATHINFO_EXTENSION);
 
-        if (move_uploaded_file($imagen_file['tmp_name'], $upload_file)) {
-            $fk_establecimiento = $_POST['fk_establecimiento'];
-            $url = $imagen_name; // Asignar el nombre de la imagen a la variable $url
+        if ($imagen_ext !== 'jpg') {
+            die("El archivo de imagen debe ser de tipo JPG.");
+        }
 
-            if (!checkDuplicate($conn, 'imagenes', 'url', $url)) {
-                $stmt = $conn->prepare("INSERT INTO imagenes (url, fk_establecimiento) VALUES (?, ?)");
-                $stmt->bind_param("si", $url, $fk_establecimiento);
-                if ($stmt->execute()) {
-                    echo "Imagen cargada correctamente.";
+        $imagen_nombre = uniqid() . ".jpg";
+        $upload_dir = '../imagenes/universidades/';
+        $upload_file = $upload_dir . $imagen_nombre;
+
+        if (move_uploaded_file($imagen_tmp, $upload_file)) {
+            $sql = "INSERT INTO establecimiento (nombre, ubicacion, descripcion, tipo_establecimiento, servicios, fk_distrito) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, "sssssi", $nombre, $ubicacion, $descripcion, $tipo_establecimiento, $servicios, $fk_distrito);
+            mysqli_stmt_execute($stmt);
+
+            if (mysqli_stmt_affected_rows($stmt) > 0) {
+                $id_establecimiento = mysqli_insert_id($conn);
+
+                $sql_imagen = "INSERT INTO imagenes (url, fk_establecimiento) VALUES (?, ?)";
+                $stmt_imagen = mysqli_prepare($conn, $sql_imagen);
+                mysqli_stmt_bind_param($stmt_imagen, "si", $imagen_nombre, $id_establecimiento);
+                mysqli_stmt_execute($stmt_imagen);
+
+                if (mysqli_stmt_affected_rows($stmt_imagen) > 0) {
+                    echo "Establecimiento e imagen agregados exitosamente.";
                 } else {
-                    echo "Error al cargar la imagen: " . $stmt->error;
+                    echo "Error al agregar la imagen.";
                 }
+                mysqli_stmt_close($stmt_imagen);
             } else {
-                echo "Entrada duplicada para imagen con nombre: " . htmlspecialchars($url);
-                $executeStmt = false;
+                echo "Error al agregar el establecimiento.";
             }
+            mysqli_stmt_close($stmt);
         } else {
-            echo "Error al subir la imagen.";
+            echo "Error al cargar la imagen.";
         }
-    } else {
-        echo "Error en el archivo de imagen: " . $_FILES['imagen']['error'];
+    } else if ($accion === "eliminar") {
+        $id_establecimiento = $_POST['id_establecimiento'] ?? '';
+
+        if (empty($id_establecimiento)) {
+            die("No se seleccionó un establecimiento para eliminar.");
+        }
+
+        $sql_imagen = "DELETE FROM imagenes WHERE fk_establecimiento = ?";
+        $stmt_imagen = mysqli_prepare($conn, $sql_imagen);
+        mysqli_stmt_bind_param($stmt_imagen, "i", $id_establecimiento);
+        mysqli_stmt_execute($stmt_imagen);
+
+        $sql = "DELETE FROM establecimiento WHERE id_establecimiento = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $id_establecimiento);
+        mysqli_stmt_execute($stmt);
+
+        if (mysqli_stmt_affected_rows($stmt) > 0 && mysqli_stmt_affected_rows($stmt_imagen) > 0) {
+            echo "Establecimiento e imagen eliminados exitosamente.";
+        } else {
+            echo "Error al eliminar el establecimiento o la imagen.";
+        }
+        mysqli_stmt_close($stmt);
+        mysqli_stmt_close($stmt_imagen);
     }
-} elseif ($tabla === "planestudio") {
-    if (isset($_FILES['pdf']) && $_FILES['pdf']['error'] === UPLOAD_ERR_OK) {
-        $pdf_file = $_FILES['pdf'];
-        $upload_dir = '../pdf/';
-        $pdf_name = basename($pdf_file['name']);
-        $upload_file = $upload_dir . $pdf_name;
+} else if ($tabla === "planestudio") {
+    if ($accion === "agregar") {
+        $pdf = $_FILES['pdf']['name'];
+        $pdf_tmp = $_FILES['pdf']['tmp_name'];
+        $fk_carrera = $_POST['fk_carrera'] ?? '';
+        $fk_establecimiento = $_POST['fk_establecimiento'] ?? '';
 
-        if (move_uploaded_file($pdf_file['tmp_name'], $upload_file)) {
-            $fk_carrera = $_POST['fk_carrera'];
-            $fk_establecimiento = $_POST['fk_establecimiento'];
+        $pdf_nombre = uniqid() . ".pdf";
+        $upload_dir = "pdf/";
+        $upload_file = $upload_dir . $pdf_nombre;
 
-            if (!checkDuplicate($conn, 'planestudio', 'fk_establecimiento', $fk_establecimiento)) {
-                $stmt = $conn->prepare("INSERT INTO planestudio (pdf, fk_carrera, fk_establecimiento) VALUES (?, ?, ?)");
-                $stmt->bind_param("sii", $pdf_name, $fk_carrera, $fk_establecimiento);
-                if ($stmt->execute()) {
-                    echo "Plan de estudio cargado correctamente.";
-                } else {
-                    echo "Error al cargar el plan de estudio: " . $stmt->error;
-                }
+        if (move_uploaded_file($pdf_tmp, $upload_file)) {
+            $sql = "INSERT INTO planestudio (pdf, fk_carrera, fk_establecimiento) VALUES (?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, "sii", $pdf_nombre, $fk_carrera, $fk_establecimiento);
+            mysqli_stmt_execute($stmt);
+
+            if (mysqli_stmt_affected_rows($stmt) > 0) {
+                echo "Plan de estudio agregado exitosamente.";
             } else {
-                echo "Entrada duplicada para plan de estudio con fk_establecimiento: " . htmlspecialchars($fk_establecimiento);
-                $executeStmt = false;
+                echo "Error al agregar el plan de estudio.";
             }
+            mysqli_stmt_close($stmt);
         } else {
-            echo "Error al subir el archivo PDF.";
+            echo "Error al cargar el archivo PDF.";
         }
-    } else {
-        echo "Error en el archivo PDF: " . $_FILES['pdf']['error'];
+    } else if ($accion === "eliminar") {
+        $id_planestudio = $_POST['id_planestudio'] ?? '';
+
+        if (empty($id_planestudio)) {
+            die("No se seleccionó un plan de estudio para eliminar.");
+        }
+
+        $sql = "DELETE FROM planestudio WHERE id_planestudio = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $id_planestudio);
+        mysqli_stmt_execute($stmt);
+
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            echo "Plan de estudio eliminado exitosamente.";
+        } else {
+            echo "Error al eliminar el plan de estudio.";
+        }
+        mysqli_stmt_close($stmt);
     }
 }
 
-// Cerrar conexión
-if (isset($stmt)) {
-    $stmt->close();
-}
-$conn->close();
-
-// Redirección automática después de 2 segundos
-if ($executeStmt) {
-    echo "<script>
-        setTimeout(function() {
-            window.location.href = 'inicio.php'; // Cambia 'inicio.php' por la URL de tu menú
-        }, 2000);
-    </script>";
-}
+mysqli_close($conn);
 ?>

@@ -1,34 +1,61 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "abc";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "abc";
 
-    // Crear conexión
-    $conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Verificar conexión
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
-    }
 
-    // Obtener datos del formulario
-    $id_carrera = $_POST['id_carrera'];
-    $nombre = $_POST['nombre'];
-    $descripcion = $_POST['descripcion'];
-    $titulo = $_POST['titulo'];
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
 
-    // Preparar y ejecutar la consulta
-    $stmt = $conn->prepare("INSERT INTO carrera (id_carrera, nombre, descripcion, titulo) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("isss", $id_carrera, $nombre, $descripcion, $titulo);
 
-    if ($stmt->execute() === TRUE) {
-        echo "Nuevo registro creado exitosamente";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
+$id_carrera = $_POST['id_carrera'];
+$nombre = $_POST['nombre'];
+$descripcion = $_POST['descripcion'];
+$titulo = $_POST['titulo'];
 
-    // Cerrar conexión
-    $stmt->close();
+
+$stmt = $conn->prepare("SELECT COUNT(*) FROM carrera WHERE id_carrera = ?");
+$stmt->bind_param("i", $id_carrera);
+$stmt->execute();
+$stmt->bind_result($count);
+$stmt->fetch();
+$stmt->close();
+
+if ($count > 0) {
+    echo "La carrera con el ID especificado ya existe.";
     $conn->close();
+    exit();
+}
+
+
+$stmt = $conn->prepare("SELECT COUNT(*) FROM carrera WHERE nombre = ?");
+$stmt->bind_param("s", $nombre);
+$stmt->execute();
+$stmt->bind_result($count);
+$stmt->fetch();
+$stmt->close();
+
+if ($count > 0) {
+    echo "La carrera con el nombre especificado ya existe.";
+    $conn->close();
+    exit();
+}
+
+
+$stmt = $conn->prepare("INSERT INTO carrera (id_carrera, nombre, descripcion, titulo) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("isss", $id_carrera, $nombre, $descripcion, $titulo);
+
+if ($stmt->execute() === TRUE) {
+    echo "Nuevo registro creado exitosamente";
+} else {
+    echo "Error: " . $stmt->error;
+}
+
+
+$stmt->close();
+$conn->close();
 ?>
