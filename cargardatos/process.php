@@ -107,13 +107,16 @@ if ($tabla === "carrera") {
         $upload_file = $upload_dir . $imagen_nombre;
 
         if (move_uploaded_file($imagen_tmp, $upload_file)) {
+
             $sql = "INSERT INTO establecimiento (nombre, ubicacion, descripcion, tipo_establecimiento, servicios, fk_distrito) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
             mysqli_stmt_bind_param($stmt, "sssssi", $nombre, $ubicacion, $descripcion, $tipo_establecimiento, $servicios, $fk_distrito);
             mysqli_stmt_execute($stmt);
 
             if (mysqli_stmt_affected_rows($stmt) > 0) {
+
                 $id_establecimiento = mysqli_insert_id($conn);
+
 
                 $sql_imagen = "INSERT INTO imagenes (url, fk_establecimiento) VALUES (?, ?)";
                 $stmt_imagen = mysqli_prepare($conn, $sql_imagen);
@@ -140,23 +143,39 @@ if ($tabla === "carrera") {
             die("No se seleccionó un establecimiento para eliminar.");
         }
 
+
+        $sql_planestudio = "DELETE FROM planestudio WHERE fk_establecimiento = ?";
+        $stmt_planestudio = mysqli_prepare($conn, $sql_planestudio);
+        mysqli_stmt_bind_param($stmt_planestudio, "i", $id_establecimiento);
+        mysqli_stmt_execute($stmt_planestudio);
+        mysqli_stmt_close($stmt_planestudio);
+
+
+        $sql_contacto = "DELETE FROM contacto WHERE fk_establecimiento = ?";
+        $stmt_contacto = mysqli_prepare($conn, $sql_contacto);
+        mysqli_stmt_bind_param($stmt_contacto, "i", $id_establecimiento);
+        mysqli_stmt_execute($stmt_contacto);
+        mysqli_stmt_close($stmt_contacto);
+
+
         $sql_imagen = "DELETE FROM imagenes WHERE fk_establecimiento = ?";
         $stmt_imagen = mysqli_prepare($conn, $sql_imagen);
         mysqli_stmt_bind_param($stmt_imagen, "i", $id_establecimiento);
         mysqli_stmt_execute($stmt_imagen);
+        mysqli_stmt_close($stmt_imagen);
+
 
         $sql = "DELETE FROM establecimiento WHERE id_establecimiento = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "i", $id_establecimiento);
         mysqli_stmt_execute($stmt);
 
-        if (mysqli_stmt_affected_rows($stmt) > 0 && mysqli_stmt_affected_rows($stmt_imagen) > 0) {
-            echo "Establecimiento e imagen eliminados exitosamente.";
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            echo "Establecimiento y registros relacionados eliminados exitosamente.";
         } else {
-            echo "Error al eliminar el establecimiento o la imagen.";
+            echo "Error al eliminar el establecimiento.";
         }
         mysqli_stmt_close($stmt);
-        mysqli_stmt_close($stmt_imagen);
     }
 } else if ($tabla === "planestudio") {
     if ($accion === "agregar") {

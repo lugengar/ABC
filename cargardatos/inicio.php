@@ -67,7 +67,7 @@
             var formFields = document.getElementById("formFields");
             formFields.innerHTML = ''; 
 
-            // Para "Agregar"
+
             if (accion === "agregar") {
                 if (tabla === "carrera") {
                     formFields.innerHTML = `

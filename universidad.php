@@ -72,10 +72,13 @@
             <p class="barratexto">Nombre de la carrera/tecnicatura</p>
                 
             <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
+            <div style="gap: 2vh;">
+
                 <input type="text" name="busqueda" placeholder="" required>
                 <?php echo '<input type="hidden" name="universidad" value="'.$row["id_establecimiento"].'" required>';?>
                 <input type="hidden" name="tipo" value="nombre" required>
                 <input type="submit" name="" value="Buscar">
+                </div>
             </form>
             <form class="barradebusqueda <?php if($tipo == "tecnicatura"){echo 'activo';} ?>" id="tecnicatura" method="GET" action="./universidad.php#identificador2">
             <p class="barratexto">Nombre de la tecnicatura</p>
@@ -83,8 +86,10 @@
             <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
                 <?php echo '<input type="hidden" name="universidad" value="'.$row["id_establecimiento"].'" required>';?>
                 <input type="hidden" name="tipo" value="tecnicatura" required>
+            <div style="gap: 2vh;">
                 <input type="text"name="busqueda" placeholder="" required>
                 <input type="submit" name="" value="Buscar">
+                </div>
             </form>
             <form class="barradebusqueda <?php if($tipo == "carrera"){echo 'activo';} ?>" id="carrera" method="GET" action="./universidad.php#identificador2">
             <p class="barratexto">Nombre de la carrera</p>
@@ -92,8 +97,10 @@
             <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
                 <?php echo '<input type="hidden" name="universidad" value="'.$row["id_establecimiento"].'" required>';?>
                 <input type="hidden" name="tipo" value="carrera" required>
+            <div style="gap: 2vh;">
                 <input type="text" name="busqueda" placeholder="" required>
                 <input type="submit" name="" value="Buscar">
+                </div>
             </form>
 
             <div class="universidades lista" style="position:relative;">

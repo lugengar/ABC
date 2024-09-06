@@ -9,14 +9,6 @@ body {
     padding: 0;
 }
 
-h2 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #00a99d; /* Turquesa */
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 .form-container {
     max-width: 1200px;
     margin: auto;
@@ -26,21 +18,24 @@ h2 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-form {
-    display: flex;
-    flex-direction: column;
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00a99d; /* Turquesa para encabezados */
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-label {
-    font-size: 16px;
-    color: #333;
+form label {
+    display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #333;
 }
 
-input[type="text"],
-select,
-input[type="file"] {
+form input[type="text"],
+form select,
+form input[type="file"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -49,8 +44,8 @@ input[type="file"] {
     font-size: 16px;
 }
 
-input[type="submit"] {
-    background-color: #007BFF; /* Azul */
+form input[type="submit"] {
+    background-color: #007BFF; /* Azul para botones de envío */
     color: #fff;
     padding: 12px 24px;
     border: none;
@@ -60,8 +55,8 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
-input[type="submit"]:hover {
-    background-color: #0056b3; /* Azul oscuro */
+form input[type="submit"]:hover {
+    background-color: #0056b3; /* Azul oscuro para hover */
 }
 
 .info-card {
@@ -82,13 +77,8 @@ input[type="submit"]:hover {
         font-size: 20px;
     }
 
-    input[type="submit"] {
+    form input[type="submit"] {
         padding: 10px;
         font-size: 14px;
     }
-}
-
-.success-message {
-    font-size: 40px;
-    text-align: center;
 }

@@ -190,9 +190,11 @@
             <form class="barradebusqueda <?php if($tipo == "nombre"){echo 'activo';} ?>" id="nombre" method="GET" action="./index.php#identificador2">
                <p class="barratexto">Nombre del establecimiento</p>
             <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">
+            <div style="gap:2vh;">
                 <input type="text" name="busqueda" placeholder="" required>
                 <input type="hidden" name="tipo" value="nombre" required>
                 <input type="submit" value="Buscar">
+                </div>
             </form>
             <form class="barradebusqueda <?php if($tipo == "distrito"){echo 'activo';} ?>" id="distrito" method="GET" action="./index.php#identificador2">
             
@@ -206,8 +208,10 @@
                         buscardistritos();
                     ?>
                 </select>
+                <div style="gap:2vh;">
                 <input type="hidden" name="tipo" value="distrito" required>
                 <input type="submit" name="" value="Buscar" >
+                </div>
             </form>
             <form class="barradebusqueda <?php if($tipo == "carrera"){echo 'activo';} ?>" id="carrera" method="GET" action="./index.php#identificador2">
             <p class="barratexto">Elija una carrera</p>
@@ -219,8 +223,10 @@
                         buscarcarrera();
                     ?>
                 </select>
+                <div style="gap:2vh;">
                 <input type="hidden" name="tipo" value="carrera" required>
                 <input type="submit" name="" value="Buscar">
+                </div>
             </form>
             <form class="barradebusqueda <?php if($tipo == "tecnicatura"){echo 'activo';} ?>" id="tecnicatura" method="GET" action="./index.php#identificador2">
             <p class="barratexto">Elija una tecnicatura</p>
@@ -233,8 +239,10 @@
                         buscartecnicatura();
                     ?>
                 </select>
+                <div style="gap:2vh;">
                 <input type="hidden" name="tipo" value="tecnicatura" required>
                 <input type="submit" name="" value="Buscar">
+                </div>
             </form>
             <div class="universidades" id="uni" style="padding-top:0vh; position:relative;">
             <div class="identificador" id="identificador2" style="top: -20vh;"></div>
