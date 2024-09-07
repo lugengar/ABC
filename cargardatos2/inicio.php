@@ -9,17 +9,7 @@
 <body>
     <?php
         // Datos de conexión a la base de datos
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "abc"; // Cambia esto al nombre real de tu base de datos
-
-        // Conexión a la base de datos
-        $conn = mysqli_connect($servername, $username, $password, $database);
-        if (!$conn) {
-            die("Conexión fallida: " . mysqli_connect_error());
-        }
-
+        include "../codigophp/conexionbs.php";
         // Consultas para obtener los datos de los FKs
         $distritos_result = mysqli_query($conn, "SELECT id_distrito, nombre FROM distrito");
         $establecimientos_result = mysqli_query($conn, "SELECT id_establecimiento, nombre FROM establecimiento");

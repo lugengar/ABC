@@ -1,17 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "abc";
-
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-
+ include "../codigophp/conexionbs.php";
 // Obtener datos del formulario
 $tabla = $_POST['tabla'];
 

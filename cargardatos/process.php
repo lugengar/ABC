@@ -1,14 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "abc";
-
-$conn = mysqli_connect($servername, $username, $password, $database);
-if (!$conn) {
-    die("Conexión fallida: " . mysqli_connect_error());
-}
-
+ include "../codigophp/conexionbs.php";
 $accion = $_POST['accion'] ?? '';
 $tabla = $_POST['tabla'] ?? '';
 

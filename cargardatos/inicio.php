@@ -8,16 +8,7 @@
 </head>
 <body>
     <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "abc";
-
-        $conn = mysqli_connect($servername, $username, $password, $database);
-        if (!$conn) {
-            die("Conexión fallida: " . mysqli_connect_error());
-        }
-
+         include "../codigophp/conexionbs.php";
 
         $distritos_result = mysqli_query($conn, "SELECT id_distrito, nombre FROM distrito");
         $establecimientos_result = mysqli_query($conn, "SELECT id_establecimiento, nombre FROM establecimiento");

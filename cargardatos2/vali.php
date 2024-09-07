@@ -12,16 +12,7 @@
     session_start();
 
     // Datos de conexión a la base de datos
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "abc";
-
-    // Conexión a la base de datos
-    $conn = mysqli_connect($servername, $username, $password, $database);
-    if (!$conn) {
-        die("Conexión fallida: " . mysqli_connect_error());
-    }
+    include "../codigophp/conexionbs.php";
 
     // Inicializar variables para manejar mensajes
     $login_success = false;

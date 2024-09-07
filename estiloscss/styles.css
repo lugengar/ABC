@@ -86,15 +86,23 @@ input[type="submit"] {
     height: 20vh;
 }
 .barratexto{
-   
-    text-align: end;
-   
+    padding-right: 6vh;
+    background-image: url(../imagenes/iconos/lupa.svg);
+    background-size: 5vh;
+    background-repeat: no-repeat;
+    background-position: right;
     font-family: "Encode Sans", sans-serif;
     font-weight: 700;
     font-style: normal;
     font-size: 2.5vh;
     color: white;
     margin-right: 5vh;
+    margin-bottom: 0;
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
 }
 .barradebusqueda {
     
@@ -536,6 +544,9 @@ input[type="submit"] {
     background-repeat: no-repeat;
     background-position: center;
 }
+#tipoestablecimiento{
+    background-size:5.5vh;
+}
 .botones {
    
     padding-bottom: 5vh;
@@ -798,6 +809,12 @@ body.inactive .overlay {
         gap: 0;
         transition: none;
     }
+    .barradebusqueda.volverarriba {
+        padding-bottom: 0;
+        gap: 0;
+        transition: none;
+    }
+    
     .universidad .imageninfo2 {
         display: none;
     }
@@ -946,12 +963,14 @@ body.inactive .overlay {
     .barradebusqueda  input[type="submit"] {
         margin-left: 1vh;
     }
-    .barradebusqueda  input{
+    .barradebusqueda  input[type="text"],
+    .barradebusqueda select{
         transition: none;
 
     }
     .barratexto{
-        margin-right: 0;
+    margin-right: 0;
+ 
     }
     .barradebusqueda .imglupa {
         display: none;
@@ -1101,6 +1120,9 @@ body.inactive .overlay {
         background-position: top;
         background-size: 50vh;
         background-repeat: no-repeat;
+    }
+    #tipoestablecimiento{
+        background-size:7vh;
     }
 }
 

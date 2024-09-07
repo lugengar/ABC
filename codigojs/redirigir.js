@@ -3,3 +3,6 @@
 function redirigir(href){
     document.getElementById(href).scrollIntoView({ behavior: 'smooth' });
 }
+function redirigircentro(href){
+    document.getElementById(href).scrollIntoView({ behavior: 'smooth' });
+}

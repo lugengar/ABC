@@ -11,17 +11,7 @@
     <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Datos de conexión a la base de datos
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $database = "abc";
-
-            // Conexión a la base de datos
-            $conn = mysqli_connect($servername, $username, $password, $database);
-
-            if (!$conn) {
-                die("Conexión fallida: " . mysqli_connect_error());
-            }
+            include "../codigophp/conexionbs.php";
 
             $nombre = $_POST["nombre"];
             $apellido = $_POST["apellido"];

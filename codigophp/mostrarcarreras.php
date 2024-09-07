@@ -39,12 +39,9 @@ if (isset($_GET['busqueda']) && isset($_GET['tipo']) && $carreras != null) {
         // Obtener resultados
         $result = $stmt->get_result();
     }else if($tipo == "carrera"){ 
-        $stmt =  $conn->prepare("SELECT * FROM carrera WHERE nombre LIKE ? AND titulo NOT LIKE ? AND id_carrera IN (".implode(", ", $carreras).")");
-        $param = "%$busqueda%";
-        $param2 = "%$tec%";
-        
+        $stmt =  $conn->prepare("SELECT * FROM carrera WHERE tipo_carrera = ? AND id_carrera IN (".implode(", ", $carreras).")");
         // Asignar parámetro y ejecutar consulta
-        $stmt->bind_param("ss", $param, $param2);
+        $stmt->bind_param("s", $busqueda);
         $stmt->execute();
 
         // Obtener resultados

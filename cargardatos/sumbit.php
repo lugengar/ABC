@@ -1,15 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "abc";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+include "../codigophp/conexionbs.php";
 
 
 $id_carrera = $_POST['id_carrera'];

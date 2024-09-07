@@ -102,6 +102,9 @@ input[type="submit"] {
     opacity: 1;
 
 }
+#volver{
+    background-size:6.5vh;
+}
 [popover]::backdrop {
     backdrop-filter: blur(1vh);
     background-color: rgba(0, 0, 0, 0.8);
@@ -126,12 +129,24 @@ input[type="submit"] {
 /*ESTILOS DE LA BARRA DE BUSQUEDA Y PARA VOLVER HACIA ARRIBA*/
 
 .barratexto{
+    text-align: end;
+    padding-right: 6vh;
+    background-image: url(../imagenes/iconos/lupa.svg);
+    background-size: 5vh;
+    background-repeat: no-repeat;
+    background-position: right;
     font-family: "Encode Sans", sans-serif;
     font-weight: 700;
     font-style: normal;
     font-size: 2.5vh;
     color: white;
     margin-right: 5vh;
+    margin-bottom: 0;
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
 }
 .barradebusqueda {
     
@@ -1025,6 +1040,11 @@ body.inactive .overlay {
         gap: 0;
         transition: none;
     }
+    .barradebusqueda.volverarriba {
+        padding-bottom: 0;
+        gap: 0;
+        transition: none;
+    }
 }
 @media (max-width: 1400px) {
     .lista4 {
@@ -1331,7 +1351,10 @@ body.inactive .overlay {
     }
     .barratexto{
         margin-right: 0;
-    }
+        margin-right: 1fr;
+        margin-left: 1fr;
+    
+        }
     .barradebusqueda .imglupa {
         display: none;
     }
@@ -1347,7 +1370,9 @@ body.inactive .overlay {
     .footer .imagenfooter {
         animation: footer 180s linear infinite;
     }
-
+    #volver{
+        background-size:8vh;
+    }
     .filtro {
         width: 100%;
         height: 100%;

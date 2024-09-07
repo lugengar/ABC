@@ -51,11 +51,17 @@ function universidad($id,$nombre ,$descripcion, $imagenes,$carreras){ //CREA EL 
     </div>
     ');
 }
+function crearmapa($coordenadas, $zoom = 15) {
+    $url = "https://www.google.com/maps?q=".$coordenadas["x"].",".$coordenadas["y"]."&z=$zoom&output=embed";
+
+    return $url;
+}
+/*
 function crearmapa($ubicacion){ //CREA EL MAPA CON LA UBICACION A TRAVEZ DE UNA URL MODIFICADA
     $url = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3287.4006114986105!2d-58.53745522416194!3d-34.51807695298058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb0946037da75%3A0x7fae4b92e6699b59!2s";
     $url2 = "!5e0!3m2!1ses-419!2sar!4v1684382444792!5m2!1ses-419!2sar";
     return $url."".urlencode($ubicacion)."".$url2;
-}
+}*/
 function nombre_url($url){ //OBTIENE EL NOMBRE DE UNA RED SOCIAL A TRAVEZ DE SU URL
     $parsed_url = parse_url($url);
 
@@ -112,6 +118,17 @@ function carreraslista($carreras){ // CREA LA LISTA DE CARRERAS Y TECNICATURAS P
         echo '<option value="'.$carrera["id_carrera"].'">'.$carrera["nombre"].'</option>';
     }
 }
+function establecimientolista($establecimientos){ // CREA LA LISTA DE CARRERAS Y TECNICATURAS PARA LA BARRA DE BUSQUEDA
+    foreach ($establecimientos as $establecimiento) {
+        echo '<option value="'.$establecimiento["tipo_establecimiento"].'">'.$establecimiento["tipo_establecimiento"].'</option>';
+    }
+}
+function carreratipolista($carreras){ // CREA LA LISTA DE CARRERAS Y TECNICATURAS PARA LA BARRA DE BUSQUEDA
+    foreach ($carreras as $carrera) {
+        echo '<option value="'.$carrera["tipo_carrera"].'">'.$carrera["tipo_carrera"].'</option>';
+    }
+}
+
 function distritolista($distritos){ // CREA LA LISTA DE LOS DISTRITOS PARA LA BARRA DE BUSQUEDA
     foreach ($distritos as $distrito) {
         echo '<option value="'.$distrito["id_distrito"].'">'.$distrito["nombre"].'</option>';
@@ -158,7 +175,7 @@ function arreglarpdf($url){ //MODIFICA EL NOMBRE DEL ARCHIVO PDF EN CASO DE QUE 
 }
 
 $haycorreo = false;
-function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contactos,$id){ // MUESTRA TODA LA INFORMACION DE LA UNIVERSIDAD
+function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contactos,$id,$coordenadas){ // MUESTRA TODA LA INFORMACION DE LA UNIVERSIDAD
     global $haycorreo;
     global $secretkey1;
     
@@ -194,7 +211,7 @@ function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contact
     echo'</div> </div> </div> ';
         echo ('
         <div class="universidad" id="mapa"> 
-            <iframe  class="imageninfo"  src="'.crearmapa($ubicacion.', '.$distrito).'" style="border:none;height: 70%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe  class="imageninfo"  src="'.crearmapa($coordenadas).'" style="border:none;height: 70%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <div class="barrauni"></div>
             <h1 class="nombreuni">UBICACIÓN</h1>
             <p class="descripcionuni">'.$ubicacion.', '.$distrito.'</p>
@@ -293,7 +310,7 @@ function carrusel($nombre,$tipo,$imagenes){ // CREA EL CARRUSEL DE IMAGENES
         }
 
         echo '</div>
-        <div class="filtro">
+        <div class="filtro" id="carrusel">
         <div class="contenidotexto">
                 <h1 class="texto1">'.$tipo.'</h1>
         </div>
