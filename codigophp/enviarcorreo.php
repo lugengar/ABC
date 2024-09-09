@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             if (mail($recipient, $subject, $body, $headers)) {
                 echo '<script>
-                    window.location.href = "../universidad.php?universidad=' . $_POST['universidad'] . '&enviado=true#redes";
+                    window.location.href = "../universidad.php?universidad=' . $_POST['universidad'] . '&enviado=true#carreraelegida";
                 </script>';
             } else {
                 echo "Error al enviar el correo.";
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "falta el captcha";
     }
     echo '<script>
-window.location.href = "../universidad.php?universidad=' . $_POST['universidad'] . '&enviado=false#redes";
+window.location.href = "../universidad.php?universidad=' . $_POST['universidad'] . '&enviado=false#carreraelegida";
 </script>';
 
 }

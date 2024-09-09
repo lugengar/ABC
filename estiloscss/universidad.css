@@ -625,7 +625,7 @@ input[type="submit"] {
 
 .universidad .nombreuni {
     padding-top: 1vh;
-    font-size: 3vh;
+    font-size: 2.5vh;
     width: 100%;
     height: max-content;
     padding-left: 2vh;
@@ -686,7 +686,22 @@ input[type="submit"] {
     transform: translateY(-3vh);
 }
 
-
+@keyframes show {
+    from {
+        scale: 25%;
+    }
+    to {
+        scale: 100%;
+    }
+}
+.universidad {
+    view-timeline-name: --image;
+    view-timeline-axis: block;
+    animation-timeline: --image;
+    animation-name: show;
+    animation-range: entry 0% cover 20%;
+    animation-fill-mode: both;
+}
 /*ESTILOS DE LOS BOTONES DE COLORES*/
 .boton {
     margin-top: 2vh;

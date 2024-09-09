@@ -130,7 +130,12 @@ var customIcon = L.icon({
     iconAnchor: [12, 25],  
     popupAnchor: [0, -25]  
 });
-
+var usuario = L.icon({
+    iconUrl: 'https://lugengar.github.io/ABC/imagenes/iconos/instagram.svg',  
+    iconSize: [25, 25],  
+    iconAnchor: [12, 25],  
+    popupAnchor: [0, -25]  
+});
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://carto.com/attributions">CartoDB</a>'
 }).addTo(map);
@@ -160,6 +165,23 @@ function zoomIn() {
 function zoomOut() {
     map.zoomOut();
 }
+/*function obtenerUbicacion() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+
+            console.log("Latitud: " + lat + ", Longitud: " + lon);
+
+            var marker = L.marker([lat,lon], {icon: usuario}).addTo(map);
+        }, function(error) {
+            console.error("Error obteniendo la ubicación: ", error.message);
+        });
+    } else {
+        console.error("La geolocalización no es soportada por este navegador.");
+    }
+}
+obtenerUbicacion()*/
 </script>
 
 </body>

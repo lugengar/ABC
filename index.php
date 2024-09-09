@@ -169,7 +169,7 @@
             <div class="botones" id="botones">
                 <button class="boton pop" >
                     <div class="imagenboton" style="background-image: url(imagenes/iconos/ubicacion.svg);"></div>
-                    <h1>Buscar universidad por distrito</h1>
+                    <h1>Buscar universidad en el mapa</h1>
                 </button>
 
                 <!-- MAPA 
@@ -188,7 +188,7 @@
                     <h1>Buscar universidad por carreras</h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('nombre')">
-                    <div class="imagenboton" style=" background-image: url(imagenes/iconos/nombre.svg);"></div>
+                    <div class="imagenboton" style=" background-image: url(imagenes/iconos/letrasabc.svg);"></div>
                     <h1>Buscar por nombre de la universidad</h1>
                 </button>
             </div>

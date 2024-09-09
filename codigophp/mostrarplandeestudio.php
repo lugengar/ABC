@@ -18,7 +18,7 @@ if (isset($_GET['carrera']) && isset($_GET['universidad'])) {
     $result = $stmt->get_result();
 
     if ($result->num_rows == 0) {
-        echo "<p class='error'>No se encontraron resultados para la búsqueda: " . htmlspecialchars($busqueda) . "</p>";
+        //echo "<p class='error'>No se encontraron resultados para la búsqueda: " . htmlspecialchars($busqueda) . "</p>";
     } else {
         $establecimientos = null;
         $sqll = "";

@@ -479,15 +479,35 @@ input[type="submit"] {
 
 .universidad .nombreuni {
     padding-top: 1vh;
-    font-size: 3vh;
+    font-size: 2.5vh; /* Comienza en 3vh y puede reducirse */
     width: 100%;
     height: max-content;
     padding-left: 2vh;
     padding-right: 2vh;
     color: #00adc1;
     text-align: center;
+    overflow: hidden;
 }
 
+
+@keyframes show {
+    from {
+        scale: 25%;
+        transform: translateY(20vh);
+    }
+    to {
+        scale: 100%;
+        transform: translateY(0vh);
+    }
+}
+.universidad {
+    view-timeline-name: --image;
+    view-timeline-axis: block;
+    animation-timeline: --image;
+    animation-name: show;
+    animation-range: entry 0% cover 20%;
+    animation-fill-mode: both;
+}
 .universidad .barrauni {
 
     border-top: #00adc1 solid 0.25vh;

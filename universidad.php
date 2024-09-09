@@ -59,14 +59,14 @@
                
                 <button class="boton" onclick="window.location.href = 'index.php'">
                     <div class="imagenboton" id="volver" style=" background-image: url(imagenes/iconos/lupa.svg);"></div>
-                    <h1>Elegir otra universidad</h1>
+                    <h1>Buscar otro establecimiento</h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('carrera')">
                     <div class="imagenboton" style=" background-image: url(imagenes/iconos/sombrero.svg);"></div>
                     <h1>Filtrar por tipo de carrera</h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('nombre')">
-                    <div class="imagenboton" style=" background-image: url(imagenes/iconos/nombre.svg);"></div>
+                    <div class="imagenboton" style=" background-image: url(imagenes/iconos/letrasabc.svg);"></div>
                     <h1>Buscar por nombre de manera general</h1>
                 </button>
             </div>

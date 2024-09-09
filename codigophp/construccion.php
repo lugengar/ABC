@@ -45,16 +45,21 @@ function universidad($id,$nombre ,$descripcion, $imagenes,$carreras){ //CREA EL 
         <p class="descripcionuni" style="height: 0vh;"></p>
         <a href="./universidad.php?universidad='.$id);
         if($carreras != null){
-            echo '&carrera='.$carreras.'#redes';
+            echo '&carrera='.$carreras.'#carreraelegida';
         }
         echo('"  class="botonuni">SABER MAS..</a>
     </div>
     ');
 }
-function crearmapa($coordenadas, $zoom = 15) {
-    $url = "https://www.google.com/maps?q=".$coordenadas["x"].",".$coordenadas["y"]."&z=$zoom&output=embed";
+function crearmapa($coordenadas,$ubicacion, $zoom = 15) {
+    if($coordenadas != null){
+        $url = "https://www.google.com/maps?q=".$coordenadas["x"].",".$coordenadas["y"]."&z=$zoom&output=embed";
+    }else{
+        $url = "https://www.google.com/maps?q=$ubicacion&z=$zoom&output=embed";
 
+    }
     return $url;
+ 
 }
 /*
 function crearmapa($ubicacion){ //CREA EL MAPA CON LA UBICACION A TRAVEZ DE UNA URL MODIFICADA
@@ -211,7 +216,7 @@ function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contact
     echo'</div> </div> </div> ';
         echo ('
         <div class="universidad" id="mapa"> 
-            <iframe  class="imageninfo"  src="'.crearmapa($coordenadas).'" style="border:none;height: 70%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe  class="imageninfo"  src="'.crearmapa($coordenadas,($ubicacion.', '.$distrito)).'" style="border:none;height: 70%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <div class="barrauni"></div>
             <h1 class="nombreuni">UBICACIÓN</h1>
             <p class="descripcionuni">'.$ubicacion.', '.$distrito.'</p>
@@ -352,7 +357,7 @@ function carrera($id,$nombre,$descripcion, $id_establecimiento,$titulo){ //CREA 
         $tipo = "carrera";
     }
     echo ('
-        <form class="universidad carrera" method="GET" action="./universidad.php#redes" style="height: 45vh; overflow-y: hidden;">
+        <form class="universidad carrera" method="GET" action="./universidad.php#carreraelegida" style="height: 45vh; overflow-y: hidden;">
             <h1 class="nombreuni" >'.$nombre.'</h1>
             <p class="descripcionuni"style="height: 20vh;">'.$descripcion.'</p>
             <input type="submit" value="SABER MAS.." class="botonuni"></button>
@@ -370,6 +375,7 @@ function info_carrera($titulo,$descripcion, $pdf, $carrera,$establecimientos){ /
         <div class="barraseparadora" id="plan" style="transform: translateY(-20vh);opacity:0%;z-index:1;"></div>');
 */
 global $establecimientoactual;
+global $haycorreo;
 
     echo('
         <div class="universidad horizontal" id="carreraelegida">  
@@ -396,7 +402,7 @@ global $establecimientoactual;
             
                 foreach($establecimientos as $key => $establecimiento) {
                     if($establecimientoactual["id_establecimiento"] != $establecimiento["id_establecimiento"]){
-                        echo '- <a href="./universidad.php?universidad='.$establecimiento["id_establecimiento"].'&carrera='.$carrera.'#redes">'.$establecimiento["nombre"].'</a> <br>';
+                        echo '- <a href="./universidad.php?universidad='.$establecimiento["id_establecimiento"].'&carrera='.$carrera.'#carreraelegida">'.$establecimiento["nombre"].'</a> <br>';
                     }
 
                 }
@@ -409,18 +415,14 @@ global $establecimientoactual;
             }
        }
 
-
+       echo '<div class="universidad" id="plan"> 
+       <div class="imageninfo"style="background-image: url(imagenes/iconos/recurso.svg);"></div>
+       <div class="barrauni"></div>
+       <h1 class="nombreuni">MODALIDAD DE CURSADA</h1>';
        if($pdf != null){ 
             if($pdf->num_rows > 0){
-            
-               echo '<div class="universidad" id="plan"> 
-                    <div class="imageninfo"style="background-image: url(imagenes/iconos/recurso.svg);"></div>
-                    <div class="barrauni"></div>
-                    <h1 class="nombreuni">MODALIDAD DE CURSADA</h1>
-                    <p class="descripcionuni"style="height: 10vh;">A continuación, se presenta el plan de estudios detallado que guía el desarrollo académico y profesional de los estudiantes en nuestra institución.</p>
-                ';
-              
                 if($pdf->num_rows > 1){
+                    echo '<p class="descripcionuni"style="height: 10vh;">A continuación, se presenta el plan de estudios detallado que guía el desarrollo académico y profesional de los estudiantes en nuestra institución.</p>';
                     foreach($pdf as $key => $pdff) {
                         echo '<button class="botonuni pop" id="pdf-containerb">VER RECURSO '.($key +1).'</button>';
                     }
@@ -433,15 +435,29 @@ global $establecimientoactual;
                     }
                 }else{
                     $row = $pdf->fetch_assoc();
-                    echo '<button class="botonuni pop" id="pdf-containerb">VER RECURSO</button></div>';
-                    echo '<div id="pdf-container" popover class="pop2">
-                            <h1>HAGA CLIC FUERA DEL CUADRO PARA SALIR</h1>
-                            <embed class="pdf-viewer" src="'.arreglarpdf($row["pdf"]).'" type="application/pdf" />
-                    </div>';
+
+                    if($row["pdf"] != null){
+                        echo '<p class="descripcionuni"style="height: 10vh;">A continuación, se presenta el plan de estudios detallado que guía el desarrollo académico y profesional de los estudiantes en nuestra institución.</p>';
+                        echo '<button class="botonuni pop" id="pdf-containerb">VER RECURSO</button></div>';
+                        echo '<div id="pdf-container" popover class="pop2">
+                                <h1>HAGA CLIC FUERA DEL CUADRO PARA SALIR</h1>
+                            <embed class="pdf-viewer" src="'.arreglarpdf($row["pdf"]).'" type="application/pdf" />';
+                    }else{
+                        echo '<p class="descripcionuni">Por el momento puede solicitar el plan de estudios contactandose con el establecimiento</p>';
+                        if($haycorreo == true){
+                            echo '<a class="botonuni" onclick="redirigircentro('."'".'formulariodecontacto'."'".')">CONTACTARME</a>';
+                        }
+                    }
                 }
             }  
+            
+       }else{
+        echo '<p class="descripcionuni">Por el momento puede solicitar el plan de estudios contactandose con el establecimiento</p>';
+        if($haycorreo == true){
+            echo '<a class="botonuni" onclick="redirigircentro('."'".'formulariodecontacto'."'".')">CONTACTARME</a>';
+        }
        }
-    global $haycorreo;
+       echo'</div>';
 /*
     if($haycorreo == true){ // EN CASO DE NO CONTAR CON UN CONTACTO NO MOSTRARA LA INSCRIPCION
        
