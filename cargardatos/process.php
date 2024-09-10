@@ -162,7 +162,7 @@ if ($tabla === "carrera") {
         mysqli_stmt_execute($stmt_imagen);
         mysqli_stmt_close($stmt_imagen);
 
-        $sql = "DELETE FROM establecimiento WHERE id_establecimiento = ?";
+        $sql = "DELETE FROM establecimiento WHERE id_establecimiento = ? ";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "i", $id_establecimiento);
         mysqli_stmt_execute($stmt);

@@ -11,7 +11,7 @@
          include "../codigophp/conexionbs.php";
 
         $distritos_result = mysqli_query($conn, "SELECT id_distrito, nombre FROM distrito");
-        $establecimientos_result = mysqli_query($conn, "SELECT id_establecimiento, nombre FROM establecimiento");
+        $establecimientos_result = mysqli_query($conn, "SELECT id_establecimiento, nombre FROM establecimiento WHERE id_establecimiento != 0");
         $carrera_result = mysqli_query($conn, "SELECT id_carrera, nombre FROM carrera");
         $tipo_contacto_result = mysqli_query($conn, "SELECT DISTINCT tipo FROM contacto");
 
