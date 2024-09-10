@@ -1,154 +1,67 @@
 <?php
+
+
 function mapa(){
-    include "./codigophp/conexionbs.php";
+    include "./conexionbs.php";
+    include "../claves.php";
 
-    $stmt = $conn->prepare("SELECT * FROM establecimiento");
-    
-    $stmt->execute();
+    $stmt = $conn->prepare("SELECT 
+    e.nombre AS establecimiento_nombre, 
+    e.ubicacion, 
+    e.id_establecimiento, 
+    d.nombre AS distrito_nombre, 
+    e.coordenadas,
+    i.url AS primera_imagen
+FROM 
+    establecimiento e
+INNER JOIN 
+    distrito d ON e.fk_distrito = d.id_distrito
+LEFT JOIN 
+    imagenes i ON i.fk_establecimiento = e.id_establecimiento
+    AND i.id_imagen = (
+        SELECT MIN(id_imagen)
+        FROM imagenes
+        WHERE fk_establecimiento = e.id_establecimiento
+    );
+");
 
-    $result2 = $stmt->get_result();
-    foreach($result2 as $key => $row4) {
-        $coordenadas = json_decode($row4["coordenadas"],true);
-        $x = $coordenadas["x"];
-        $y = $coordenadas["y"];
-        echo '<button class="puntero" onclick="window.parent.location.href=\'universidad.php?universidad='.$row4["id_establecimiento"].'\'" style="left: '.$x.'vh; top: '.$y.'vh;"><span class="nombrepuntero">'.$row4["tipo_establecimiento"].'</span></button>';       
+    if ($stmt->execute()) {
+        $result2 = $stmt->get_result();
+    } else {
+        echo "Error en la consulta: " . $stmt->error;
+        return;
     }
+    $lugares = array(); 
+    foreach($result2 as $row4) {
+        $coordenadas = json_decode($row4["coordenadas"], true); 
+
+        if ($coordenadas) {
+            $lugares[] = array(
+                'name' => $row4["establecimiento_nombre"],
+                'address' => [$coordenadas['x'], $coordenadas['y']], 
+                'url' => '../universidad.php?universidad=' . $row4["id_establecimiento"],
+                'imageUrl'=> '../imagenes/universidades/'.$row4["primera_imagen"],
+            );
+        }
+    }
+
+    echo 'var lugares = ' . json_encode($lugares, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . ';';
+
     $stmt->close();
     $conn->close();
 }
-
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa con Zoom y Scroll</title>
-    <link rel="stylesheet" href="estiloscss/styles.css">
-</head>
-<body>
-    <div class="capa">
-        <div class="mapa" id="mapa">
-        
 
-            <button class="puntero distritomapa" onclick="window.parent.location.href='index.php?busqueda=1&tipo=distrito#identificador2'"  style="left: 920vh; top: 190vh;"><span class="nombrepuntero" id="nombrepuntero"></span>Tigre</button>
-            <button class="puntero distritomapa" onclick="window.parent.location.href='index.php?busqueda=5&tipo=distrito#identificador2'" style="left: 895vh; top: 188vh;"><span class="nombrepuntero" id="nombrepuntero"></span>Escobar</button>
-            <button class="puntero distritomapa" onclick="window.parent.location.href='index.php?busqueda=31&tipo=distrito#identificador2'" style="left: 923vh; top: 207vh;"><span class="nombrepuntero" id="nombrepuntero"></span>San Fernando</button>
-            <button class="puntero distritomapa" onclick="window.parent.location.href='index.php?busqueda=2&tipo=distrito#identificador2'" style="left: 932vh; top: 215vh;"><span class="nombrepuntero" id="nombrepuntero"></span>San Isidro</button>
-            <button class="puntero distritomapa" onclick="window.parent.location.href='index.php?busqueda=4&tipo=distrito#identificador2'"  style="left: 935vh; top: 223vh;"><span class="nombrepuntero" id="nombrepuntero"></span>Vicente Lopez</button>
-            <button class="puntero distritomapa"  id="destacado" style="left: 920vh; top: 200vh;"><span class="nombrepuntero" id="nombrepuntero"></span></button>
-            <?php mapa()?>
-
-        </div>
-    </div>
-    <div class="controles">
-        
-        <button id="zoomIn"></button>
-        <button id="zoomOut"></button>
-    </div>
-</body>
-</html>
-
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+<link rel="stylesheet" href="../estiloscss/styles.css" />
 <style>
-    #zoomIn{
-    background-image: url(imagenes/otros/signomas.svg);
-    background-color: #00aec3;
-    }
-    #zoomOut{
-    background-image: url(imagenes/otros/signomenos.svg);
-    background-color: #e81f76;
-    }
-   .opacidad{
-    opacity: 50%;
-    pointer-events: none;
-   }
-body, html {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-.capa {
+#map {
+    position: absolute;
+    left: 0%;
+    top:0%;
+    height:100%;
     width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    overflow: auto;
 }
-
-.mapa {
-    width: 1400vh;
-    height: 1400vh;
-    background-image: url(imagenes/otros/mapacompleto2.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: transparent;
-    transform: scale(1);
-    transform-origin: 0 0;
-    transition: transform 0.3s ease-in-out;
-    position: relative;
-}
-
-.nombrepuntero{
-    font-family: "Encode Sans", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    color:#e81f76;
-    position: absolute;
-    left: -2.75vh;
-    bottom: -4.1vh;
-    width: 10vh;
-    height: 5vh;
-    display: flex;
-    pointer-events: none;
-    justify-content: center;
-    font-size: 0;
-}
-
-.puntero {
-    position: absolute;
-    height: 6vh;
-    width: 4vh;
-    background-image: url(imagenes/otros/puntero.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center ;
-    background-color: transparent;
-    border: none;
-    transition: transform 0.3s ease-in-out; 
-}
-/*
-.puntero {
-    position: absolute;
-    height: 6vh;
-    width: 4vh;
-    background-image: url(imagenes/otros/puntero.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center ;
-    background-color: transparent;
-    border: none;
-    transition: transform 0.3s ease-in-out; 
-}*/
-.distritomapa .nombrepuntero{
-    text-decoration: underline;
-}
-.distritomapa{
-    background-image: none;
-    background-color: transparent;
-    border: none;
-}
-#descatado {
-
-    pointer-events: none;
-    background-image: none;
-    background-color: transparent;
-    border: none;
-}
-
-/* Estilo de los botones de control */
 .controles {
     position: fixed;
     top: 2vh;
@@ -165,132 +78,114 @@ body, html {
     cursor: pointer;
     border: none;
     border-radius: 0.5vh;
+   position:absolute;
 
+}
+#zoomIn{
+    top: 0;
+    right: 0;
+    background-image: url(../imagenes/otros/signomas.svg);
+    background-color: #00aec3;
+}
+#zoomOut{
+    top: 6vh;
+    right: 0;
+    background-image: url(../imagenes/otros/signomenos.svg);
+    background-color: #e81f76;
+}
+.botonuni {
+    font-size: 2vh;
+    border: none;
+    border-radius: 1vh;
+    height: 5vh;
+    width: 100%;
+    background-color: #e81f76;
+    color: white;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    margin-top: 1vh;
 }
 </style>
 
+<div class="controles">
+    <button id="zoomIn"onclick="zoomIn()"></button>
+    <button id="zoomOut" onclick="zoomOut()"></button>
+</div>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 <script>
-let scale = 1;
-const scaleMin = 0.5;
-const scaleMax = 6;
-const mapa = document.getElementById('mapa');
-const capa = document.querySelector('.capa');  // La capa que contiene el mapa
-const punteroDestacado = document.querySelector('#destacado');
-// Convertir coordenadas geográficas a coordenadas en vh
-function convertirCoordenadas(lat, lng) {
-    const vhMax = 1400;  // Tamaño del mapa en vh
-    
-    // Definir los límites del mapa en coordenadas geográficas
-    const LAT_MIN = -34.6;  
-    const LAT_MAX = -34.3;
-    const LNG_MIN = -58.8;  
-    const LNG_MAX = -58.7;
 
-    // Convertir las coordenadas a vh
-    const x = ((lng - LNG_MIN) / (LNG_MAX - LNG_MIN)) * vhMax;
-    const y = ((LAT_MAX - lat) / (LAT_MAX - LAT_MIN)) * vhMax;
+<?php mapa(); ?>
 
-    return { x, y };
-}
+var map = L.map('map', {
+    zoomControl: false  ,
+    attributionControl: false 
+}).setView([-34.6037, -58.3816], 13);
 
-// Convertir coordenadas geográficas a coordenadas en vh
-function convertirCoordenadas(lat, lng) {
-    const vhMax = 1400;  // Tamaño del mapa en vh
+var customIcon = L.icon({
+    iconUrl: '../imagenes/otros/puntero.svg',  
+    iconSize: [25, 25],  
+    iconAnchor: [12, 25],  
+    popupAnchor: [0, -25]  
+});
+var usuario = L.icon({
+    iconUrl: '../imagenes/iconos/instagram.svg',  
+    iconSize: [25, 25],  
+    iconAnchor: [12, 25],  
+    popupAnchor: [0, -25]  
+});
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://carto.com/attributions">CartoDB</a>'
+}).addTo(map);
 
-    // Definir los límites del mapa en coordenadas geográficas
-    const LAT_MIN = -34.6;  
-    const LAT_MAX = -34.3;
-    const LNG_MIN = -58.8;  
-    const LNG_MAX = -58.6;
+var bounds = L.latLngBounds();
 
-    // Convertir las coordenadas a vh
-    const x = ((lng - LNG_MIN) / (LNG_MAX - LNG_MIN)) * vhMax;
-    const y = ((LAT_MAX - lat) / (LAT_MAX - LAT_MIN)) * vhMax;
-
-    return { x, y };
-}
-
-// Crear un nuevo puntero en el mapa
-
-
-function actualizarTransform() {
-  
-
-    mapa.style.transform = `scale(${scale})`;
-    const punteros = document.querySelectorAll('.puntero');
-    punteros.forEach(puntero => {
-        puntero.style.transform = `scale(${1 / scale})`;
-    
-        const nombrePuntero = puntero.querySelector(".nombrepuntero");
-        if (scale >= 1) {
-            nombrePuntero.style.fontSize = "1.5vh";
-        } else {
-            nombrePuntero.style.fontSize = "0";
-        }
-    });
-    centrarPuntero();
-
-   
-}
-
-function centrarPuntero() {
-    const rect = punteroDestacado.getBoundingClientRect();
-    const mapaRect = mapa.getBoundingClientRect();
-    
-    const offsetX = (rect.left - mapaRect.left) / scale;
-    const offsetY = (rect.top - mapaRect.top) / scale;
-
-    capa.scrollLeft = offsetX - (capa.clientWidth / 2);
-    capa.scrollTop = offsetY - (capa.clientHeight / 2);
-}
-
-document.getElementById('zoomIn').addEventListener('click', function() {
-    if (scale < scaleMax) {
-        scale += 0.1;
-        actualizarTransform();
+lugares.forEach(function(lugar) {
+    if (lugar.address) {
+        var marker = L.marker(lugar.address, {icon: customIcon}).addTo(map)
+            .bindPopup('<b> <h1>' + lugar.name + '<h1></b><img src="' + lugar.imageUrl + '" alt="Imagen del lugar" style="width:100%;height:auto; border-radius: 1vh;"><button onclick="redirectTo(\''+lugar.url+'\')" class="botonuni">Saber más</button>');
+        bounds.extend(lugar.address);
     }
 });
 
-document.getElementById('zoomOut').addEventListener('click', function() {
-    if (scale > scaleMin) {
-        scale -= 0.1;
-        actualizarTransform();
+function redirectTo(url) {
+    window.parent.location.href = url;
+}
+
+if (bounds.isValid()) {
+    map.fitBounds(bounds);
+}
+
+function zoomIn() {
+    map.zoomIn();
+}
+
+function zoomOut() {
+    map.zoomOut();
+}
+/*function obtenerUbicacion() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+
+            console.log("Latitud: " + lat + ", Longitud: " + lon);
+
+            var marker = L.marker([lat,lon], {icon: usuario}).addTo(map);
+        }, function(error) {
+            console.error("Error obteniendo la ubicación: ", error.message);
+        });
+    } else {
+        console.error("La geolocalización no es soportada por este navegador.");
     }
-});
-
-window.addEventListener('load', function() {
-    if (punteroDestacado) {
-        // Aplicar la transformación inicial
-        actualizarTransform();
-    }
-
-
-});
-/*
-document.getElementById('mapa').addEventListener('click', function(event) {
-    // Obtener las coordenadas del click relativo al mapa
-    const rect = this.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    // Convertir las coordenadas del clic en vh
-    const xVH = ((x / rect.width) * 1400) -2; // 1400vh es el tamaño del mapa en vh
-    const yVH = ((y / rect.height) * 1400) -6;
-
-    // Crear el nuevo puntero en la posición clickeada
-    const nuevoPuntero = document.createElement('button');
-    nuevoPuntero.classList.add('puntero');
-    nuevoPuntero.style.left = `${xVH}vh`;
-    nuevoPuntero.style.top = `${yVH}vh`;
-
-    // Crear y agregar el texto al puntero
-    const textoPuntero = document.createElement('span');
-    textoPuntero.classList.add('nombrepuntero');
-    textoPuntero.textContent = "Nuevo Puntero"; // Puedes personalizar el texto
-    nuevoPuntero.appendChild(textoPuntero);
-
-    // Agregar el nuevo puntero al mapa
-    this.appendChild(nuevoPuntero);
-});
-*/
+}
+obtenerUbicacion()*/
 </script>
+
+</body>
+</html>

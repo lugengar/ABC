@@ -8,6 +8,7 @@
 //$direccionimagen = "https://lugengar.github.io/ABCDinamico/imagenes/universidades/";
 //$direccionpdf = "https://lugengar.github.io/ABCDinamico/pdf/";
 $direccionimagen = "./imagenes/universidades/";
+$direccionimagen2 = "./imagenes/otros/";
 $direccionpdf = "./pdf/";
 
 function universidad($id,$nombre ,$descripcion, $imagenes,$carreras){ //CREA EL CUADRO DE UNIVERSIDAD
@@ -301,15 +302,22 @@ function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contact
     
 
 }
-function carrusel($nombre,$tipo,$imagenes){ // CREA EL CARRUSEL DE IMAGENES
+function carrusel($nombre,$tipo,$imagenes,$esinicio){ // CREA EL CARRUSEL DE IMAGENES
     global $direccionimagen;
+    global $direccionimagen2;
+    $dirreccion = "";
+    if($esinicio == true){
+        $dirreccion = $direccionimagen2;
+    }else{
+        $dirreccion = $direccionimagen;
+    }
     if($imagenes->num_rows > 0){
         echo '<div class="imagenes">';
         foreach($imagenes as $key => $imagen) {
             if($key == 0){
-                echo '<div class="imagen activo" style="background-image: url('.$direccionimagen."".$imagen["url"].');"></div>';
+                echo '<div class="imagen activo" style="background-image: url('.$dirreccion."".$imagen["url"].');"></div>';
             }else{
-                echo '<div class="imagen" style="background-image: url('.$direccionimagen."".$imagen["url"].');"></div>';
+                echo '<div class="imagen" style="background-image: url('.$dirreccion."".$imagen["url"].');"></div>';
             }
             
         }
@@ -345,17 +353,17 @@ function carrusel($nombre,$tipo,$imagenes){ // CREA EL CARRUSEL DE IMAGENES
         </div>';
         
     }
+    if($esinicio){
+        echo'<div class="logo_pba_vertical"></div> 
+        <a onclick="redirigir('."'".'identificador1'."'".')" class="casita_superior botonsuperior"></a>';
+    }else{
     echo'<div class="logo_pba_vertical"></div> 
-    <a href="index.php" class="casita_superior"></a>
-    <a onclick="redirigir('."'".'identificador1'."'".')" class="informacion_superior"></a>';
+    <a href="index.php" class="casita_superior botonsuperior"></a>
+    <a onclick="redirigir('."'".'identificador1'."'".')" class="informacion_superior botonsuperior"></a>';
+    }
 }
 function carrera($id,$nombre,$descripcion, $id_establecimiento,$titulo){ //CREA EL CUADRO DE LAS CARRERAS
-    $tipo = "";
-    if($titulo[0] == "T"){
-        $tipo = "tecnicatura";
-    }else{
-        $tipo = "carrera";
-    }
+    
     echo ('
         <form class="universidad carrera" method="GET" action="./universidad.php#carreraelegida" style="height: 45vh; overflow-y: hidden;">
             <h1 class="nombreuni" >'.$nombre.'</h1>
@@ -363,11 +371,15 @@ function carrera($id,$nombre,$descripcion, $id_establecimiento,$titulo){ //CREA 
             <input type="submit" value="SABER MAS.." class="botonuni"></button>
             <input type="hidden" name="universidad" value="'.$id_establecimiento.'" required>
             <input type="hidden" name="carrera" value="'.$id.'" required>
-            <input type="hidden" class="'.$tipo.'indice" name="titulo" value="'.$titulo.'" required>
         </form>
     ');
 }
-$establecimientoactual = $row;
+if(isset($row)){
+    $establecimientoactual = $row;
+}else{
+    $establecimientoactual = null;
+
+}
 
 function info_carrera($titulo,$descripcion, $pdf, $carrera,$establecimientos){ //MUESTRA EL PLAN DE ESTUDIO Y LA INFO DE LA CARRERA
     /* echo ('
@@ -375,6 +387,8 @@ function info_carrera($titulo,$descripcion, $pdf, $carrera,$establecimientos){ /
         <div class="barraseparadora" id="plan" style="transform: translateY(-20vh);opacity:0%;z-index:1;"></div>');
 */
 global $establecimientoactual;
+
+
 global $haycorreo;
 
     echo('

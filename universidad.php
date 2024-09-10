@@ -19,6 +19,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estiloscss/universidad.css">
+    <link rel="stylesheet" href="estiloscss/animaciones.css">
     <link rel="icon" href="https://abc.gob.ar/core/themes/abc/favicon.ico" type="image/vnd.microsoft.icon">
     <?php 
     echo '<title>'.$row["nombre_universidad"].'</title>';
@@ -34,7 +35,7 @@
     <div class="container" id="container">
         <main class="carrusel">
             <?php
-                carrusel($row["nombre_universidad"], $row["tipo_establecimiento"], $imagenes);
+                carrusel($row["nombre_universidad"], $row["tipo_establecimiento"], $imagenes,false);
             ?>
         </main>
         <header class="header" id="header">
@@ -71,7 +72,7 @@
                 </button>
             </div>
             <form class="barradebusqueda <?php if($tipo == "nombre"){echo 'activo';} ?>" id="nombre" method="GET" action="./universidad.php#identificador2">
-            <p class="barratexto">Nombre de la carrera</p>
+            <p class="barratexto">Nombre de la carrera <img src="imagenes/iconos/lupa.svg" class="imglupa" alt=""></p>
                 
             <div style="gap: 2vh;">
 
@@ -82,7 +83,7 @@
                 </div>
             </form>
             <form class="barradebusqueda <?php if($tipo == "tecnicatura"){echo 'activo';} ?>" id="tecnicatura" method="GET" action="./universidad.php#identificador2">
-            <p class="barratexto">Nombre de la tecnicatura</p>
+            <p class="barratexto">Nombre de la tecnicatura <img src="imagenes/iconos/lupa.svg" class="imglupa" alt=""></p>
                 
                 <?php echo '<input type="hidden" name="universidad" value="'.$row["id_establecimiento"].'" required>';?>
                 <input type="hidden" name="tipo" value="tecnicatura" required>
@@ -92,9 +93,9 @@
                 </div>
             </form>
             <form class="barradebusqueda <?php if($tipo == "carrera"){echo 'activo';} ?>" id="carrera" method="GET" action="./universidad.php#identificador2">
-            <p class="barratexto">Elija un tipo de carrera</p>
+            <p class="barratexto">Elija un tipo de carrera <img src="imagenes/iconos/lupa.svg" class="imglupa" alt=""></p>
                
-           <!-- <img src="imagenes/iconos/lupa.svg" class="imglupa" alt="">-->
+           
                 <?php echo '<input type="hidden" name="universidad" value="'.$row["id_establecimiento"].'" required>';?>
                 <input type="hidden" name="tipo" value="carrera" required>
             <div style="gap: 2vh;">
@@ -119,8 +120,8 @@
             <p class='error' style="display:none;" >No se encontraron resultados</p>
             </div>
              <div class="barradebusqueda volverarriba">
-                <img src="imagenes/iconos/flecha.svg" alt="">
-                <button onclick="redirigir('botones')" >Volver arriba</button>
+                <img src="imagenes/iconos/flecha.svg" alt="" class="flecha">
+                <button onclick="redirigircentro('botones')" >Volver arriba</button>
             </div>
         </main>
        

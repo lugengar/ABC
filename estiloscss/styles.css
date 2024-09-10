@@ -38,7 +38,7 @@ a {
 
 input,
 select,
-option {
+option, textarea{
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -84,7 +84,7 @@ input[type="submit"] {
     position: absolute;
     left: 0;
     height: 20vh;
-}
+}/*
 .barratexto{
     padding-right: 6vh;
     background-image: url(../imagenes/iconos/lupa.svg);
@@ -103,6 +103,25 @@ input[type="submit"] {
     justify-content: center;
     align-items: center;
     height: 8vh;
+}*/
+
+.barratexto{
+    font-family: "Encode Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2.5vh;
+    color: white;
+    margin-right: 5vh;
+    margin-bottom: 0;
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+}
+.barratexto .imglupa{
+    float: right;
+    margin-left: 1vh;
 }
 .barradebusqueda {
     
@@ -139,12 +158,12 @@ input[type="submit"] {
     height: 5vh;
 }
 
-.barradebusqueda input,
+.barradebusqueda input,.barradebusqueda textarea,
 .barradebusquedaselect {
     box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.2);
 }
 
-.barradebusqueda input[type="text"],
+.barradebusqueda input[type="text"],.barradebusqueda textarea,
 .barradebusqueda select {
     border: none;
     border-radius: 1.5vh;
@@ -155,7 +174,10 @@ input[type="submit"] {
     transition: width 2s;
 
 }
-.barradebusqueda.activo input[type="text"],
+.barradebusqueda textarea{
+    display: inline;
+}
+.barradebusqueda.activo input[type="text"],.barradebusqueda.activo textarea,
 .barradebusqueda.activo select {
     width: 30vh;
 }
@@ -490,24 +512,7 @@ input[type="submit"] {
 }
 
 
-@keyframes show {
-    from {
-        scale: 25%;
-        transform: translateY(20vh);
-    }
-    to {
-        scale: 100%;
-        transform: translateY(0vh);
-    }
-}
-.universidad {
-    view-timeline-name: --image;
-    view-timeline-axis: block;
-    animation-timeline: --image;
-    animation-name: show;
-    animation-range: entry 0% cover 20%;
-    animation-fill-mode: both;
-}
+
 .universidad .barrauni {
 
     border-top: #00adc1 solid 0.25vh;
@@ -641,9 +646,9 @@ input[type="submit"] {
 }
 .footer .logodte {
     grid-area: LOG2;
-    background-image: url(../imagenes/iconos/dteregion6.svg);
+    background-image: url(../imagenes/iconos/dte_r6_logo.png);
     background-repeat: no-repeat;
-    background-size: 8vh;
+    background-size: 13vh;
     background-position: right center;
 }
 
@@ -817,10 +822,8 @@ body.inactive .overlay {
         margin-left: 1vh;
     }
   
-    .barradebusqueda .imglupa {
-        display: none;
-    }
-    .barradebusqueda  input{
+  
+    .barradebusqueda  input,.barradebusqueda textarea{
         transition: none;
 
     }
@@ -983,7 +986,7 @@ body.inactive .overlay {
     .barradebusqueda  input[type="submit"] {
         margin-left: 1vh;
     }
-    .barradebusqueda  input[type="text"],
+    .barradebusqueda  input[type="text"],.barradebusqueda textarea,
     .barradebusqueda select{
         transition: none;
 
@@ -992,9 +995,7 @@ body.inactive .overlay {
     margin-right: 0;
  
     }
-    .barradebusqueda .imglupa {
-        display: none;
-    }
+   
     .barradebusqueda {
         padding-bottom: 2vh;
         gap: 0;
@@ -1166,25 +1167,4 @@ body.inactive .overlay {
     opacity: 0;
     animation: confettiFall linear infinite;
 
-}
-
-@keyframes confettiFall {
-    0% {
-        opacity: 100%;
-        transform: translateY(0) rotate(0deg);
-    }
-
-    100% {
-        opacity: 0%;
-        transform: translateY(100vh) rotate(360deg);
-    }
-}
-
-@keyframes footer {
-    0% {
-        background-position-x: -100vh;
-    }
-    100% {
-        background-position-x: 100vh;
-    }
 }

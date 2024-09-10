@@ -36,8 +36,9 @@ function actualizarcoordenadas(){
     include "./conexionbs.php"; 
 
     $stmt = $conn->prepare("SELECT e.nombre AS establecimiento_nombre, e.ubicacion, e.id_establecimiento, d.nombre AS distrito_nombre 
-                            FROM establecimiento e
-                            INNER JOIN distrito d ON e.fk_distrito = d.id_distrito");
+                            FROM establecimiento e 
+                            INNER JOIN distrito d ON e.fk_distrito = d.id_distrito
+                            WHERE e.id_establecimiento != 0");
 
     if ($stmt->execute()) {
         $result2 = $stmt->get_result(); 

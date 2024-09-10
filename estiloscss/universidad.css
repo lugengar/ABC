@@ -129,12 +129,6 @@ input[type="submit"] {
 /*ESTILOS DE LA BARRA DE BUSQUEDA Y PARA VOLVER HACIA ARRIBA*/
 
 .barratexto{
-    text-align: end;
-    padding-right: 6vh;
-    background-image: url(../imagenes/iconos/lupa.svg);
-    background-size: 5vh;
-    background-repeat: no-repeat;
-    background-position: right;
     font-family: "Encode Sans", sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -147,6 +141,10 @@ input[type="submit"] {
     justify-content: center;
     align-items: center;
     height: 8vh;
+}
+.barratexto .imglupa{
+    float: right;
+    margin-left: 1vh;
 }
 .barradebusqueda {
     
@@ -182,7 +180,7 @@ input[type="submit"] {
     height: 5vh;
 }
 
-.barradebusqueda input,
+.barradebusqueda input, .barradebusqueda textarea,
 .barradebusquedaselect {
     box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.2);
 }
@@ -198,7 +196,7 @@ input[type="submit"] {
     transition: width 2s;
 
 }
-.barradebusqueda.activo input[type="text"],
+.barradebusqueda.activo input[type="text"],.barradebusqueda textarea,
 .barradebusqueda.activo select {
     width: 30vh;
 }
@@ -686,22 +684,7 @@ input[type="submit"] {
     transform: translateY(-3vh);
 }
 
-@keyframes show {
-    from {
-        scale: 25%;
-    }
-    to {
-        scale: 100%;
-    }
-}
-.universidad {
-    view-timeline-name: --image;
-    view-timeline-axis: block;
-    animation-timeline: --image;
-    animation-name: show;
-    animation-range: entry 0% cover 20%;
-    animation-fill-mode: both;
-}
+
 /*ESTILOS DE LOS BOTONES DE COLORES*/
 .boton {
     margin-top: 2vh;
@@ -807,9 +790,9 @@ input[type="submit"] {
 }
 .footer .logodte {
     grid-area: LOG2;
-    background-image: url(../imagenes/iconos/dteregion6.svg);
+    background-image: url(../imagenes/iconos/dte_r6_logo.png);
     background-repeat: no-repeat;
-    background-size: 8vh;
+    background-size: 13vh;
     background-position: right center;
 }
 
@@ -1043,9 +1026,7 @@ body.inactive .overlay {
         margin-left: 1vh;
     }
     
-    .barradebusqueda .imglupa {
-        display: none;
-    }
+   
     .barradebusqueda  input{
         transition: none;
 
@@ -1139,20 +1120,7 @@ body.inactive .overlay {
 .pop2  :nth-child(2)  {
     pointer-events: auto;
 }
-@keyframes error {
-    0%{
-        box-shadow: 0 0 10px red;
 
-    }
-    50%{
-        box-shadow: 0 0 10px transparent;
-
-    }
-    100%{
-        box-shadow: 0 0 10px red;
-
-    }
-}
 /*ESTILOS PARA LA VERSION DE MOBILES*/
 @media (max-width: 768px) {
     .masarriba{
@@ -1370,10 +1338,8 @@ body.inactive .overlay {
         margin-left: 1fr;
     
         }
-    .barradebusqueda .imglupa {
-        display: none;
-    }
-    .barradebusqueda  input{
+  
+    .barradebusqueda  input,.barradebusqueda textarea{
         transition: none;
 
     }
@@ -1557,24 +1523,3 @@ body.inactive .overlay {
 
 }
 
-@keyframes confettiFall {
-    0% {
-        opacity: 100%;
-        transform: translateY(0) rotate(0deg);
-    }
-
-    100% {
-        opacity: 0%;
-        transform: translateY(100vh) rotate(360deg);
-    }
-}
-
-@keyframes footer {
-    0% {
-        background-position-x: -100vh;
-    }
-
-    100% {
-        background-position-x: 100vh;
-    }
-}

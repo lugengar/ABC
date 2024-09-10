@@ -35,7 +35,7 @@ if (isset($_GET['carrera']) && isset($_GET['universidad'])) {
             }
 
             $in_query = implode(',', array_fill(0, count($ids), '?'));
-            $stmt3 = $conn->prepare("SELECT DISTINCT * FROM establecimiento WHERE id_establecimiento IN ($in_query) AND id_establecimiento != $universidad");
+            $stmt3 = $conn->prepare("SELECT DISTINCT * FROM establecimiento WHERE id_establecimiento  IN ($in_query) AND id_establecimiento != $universidad AND id_establecimiento != 0");
             $stmt3->bind_param(str_repeat('s', count($ids)), ...$ids);
             $stmt3->execute();
             $establecimientos = $stmt3->get_result();

@@ -1,0 +1,133 @@
+
+@keyframes confettiFall {
+    0% {
+        opacity: 100%;
+        transform: translateY(0) rotate(0deg);
+    }
+
+    100% {
+        opacity: 0%;
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+@keyframes footer {
+    0% {
+        background-position-x: -100vh;
+    }
+    100% {
+        background-position-x: 100vh;
+    }
+}
+@keyframes error {
+    0%{
+        box-shadow: 0 0 10px red;
+
+    }
+    50%{
+        box-shadow: 0 0 10px transparent;
+
+    }
+    100%{
+        box-shadow: 0 0 10px red;
+
+    }
+}
+@keyframes show {
+    from {
+        scale: 25%;
+        transform: translateY(20vh);
+    }
+    to {
+        scale: 100%;
+        transform: translateY(0vh);
+    }
+}
+.universidad {
+    view-timeline-name: --image;
+    view-timeline-axis: block;
+    animation-timeline: --image;
+    animation-name: show;
+    animation-range: entry 0% cover 20%;
+    animation-fill-mode: both;
+}
+@keyframes botones {
+    0% {
+        transform: scale(1) translateY(0);
+    }
+25%{
+    transform: scale(1.1) translateY(-0.5vh);
+}
+50%{
+    transform: scale(1) translateY(0vh);
+}
+    100% {
+        transform: scale(1) translateY(0);
+    }
+}
+@keyframes lupa {
+    0% {
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(-30deg);
+    }
+    50%{
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+@keyframes flecha {
+    0% {
+        transform: scale(1) translateY(0vh);
+    }
+    45%{
+        transform: scale(0.8) scaley(0.85) translateY(0.8vh);
+
+    }
+    50%{
+        transform: scale(1.1) translateY(-1vh);
+
+    }
+    60%{
+        transform: scale(1) translateY(0vh);
+
+    }
+    100% {
+        transform: scale(1) translateY(0vh);
+
+    }
+}
+.botones :nth-child(1) :nth-child(1){
+    animation: botones 5s both 0s infinite;
+}
+.botones :nth-child(2) :nth-child(1){
+    animation: botones 5s both 0.5s infinite;
+}
+
+.botones :nth-child(3) :nth-child(1){
+    animation: botones 5s both 1s infinite;
+}
+
+.botones :nth-child(4) :nth-child(1){
+    animation: botones 5s both 1.5s infinite;
+}
+
+.barratexto .imglupa{
+    animation: lupa 5s both infinite;
+
+}
+.flecha{
+    animation: flecha 4s both infinite;
+
+}
+.botonsuperior{
+    animation: botones 5s both infinite;
+
+}
+/*
+.imagenuni:hover{
+    background-size: contain;
+}*/
