@@ -185,11 +185,11 @@
                     <h1>Filtrar por tipo de establecimiento</h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('carrera')"><div class="imagenboton" style=" background-image: url(imagenes/iconos/sombrero.svg);"></div>
-                    <h1>Buscar universidad por carreras</h1>
+                    <h1>Buscar establecimiento por carrera</h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('nombre')">
                     <div class="imagenboton" style=" background-image: url(imagenes/iconos/letrasabc.svg);"></div>
-                    <h1>Buscar por nombre de la universidad</h1>
+                    <h1>Buscar por nombre del establecimiento</h1>
                 </button>
             </div>
             <form class="barradebusqueda <?php if($tipo == "nombre" || $haytipo == false){echo 'activo';} ?>" id="nombre" method="GET" action="./index.php#identificador2">
