@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-09-2024 a las 22:01:59
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Tiempo de generación: 11-09-2024 a las 01:10:12
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `carrera` (
   `descripcion` varchar(1000) NOT NULL,
   `titulo` varchar(100) NOT NULL,
   `tipo_carrera` enum('Licenciatura','Tecnicatura','Profesorado','Ingeniería','otros') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `carrera`
@@ -123,7 +123,7 @@ CREATE TABLE `contacto` (
   `tipo` enum('telefono','correo','tiktok','instagram','facebook','youtube','whatsapp','twitter') NOT NULL,
   `contacto` varchar(100) NOT NULL,
   `fk_establecimiento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `contacto`
@@ -181,7 +181,7 @@ INSERT INTO `contacto` (`id_contacto`, `descripcion`, `tipo`, `contacto`, `fk_es
 CREATE TABLE `distrito` (
   `id_distrito` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `distrito`
@@ -209,7 +209,7 @@ CREATE TABLE `establecimiento` (
   `servicios` varchar(4) NOT NULL,
   `coordenadas` longtext NOT NULL,
   `fk_distrito` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `establecimiento`
@@ -218,8 +218,8 @@ CREATE TABLE `establecimiento` (
 INSERT INTO `establecimiento` (`id_establecimiento`, `nombre`, `ubicacion`, `descripcion`, `tipo_establecimiento`, `servicios`, `coordenadas`, `fk_distrito`) VALUES
 (0, 'Ofertas de Educación Superior Región 6', '', 'Ahora es más fácil encontrar la universidad adecuada.', '', '', '', 1),
 (1, 'Universidad Nacional Raúl Scalabrini Ortiz', 'Juan Bautista de LaSalle 600', 'La Universidad Nacional Raúl Scalabrini Ortiz (UNSO) en San Isidro se destaca por su oferta académica innovadora en herramientas tecnológicas para comunicación, diseño y seguridad informática. Estas propuestas se suman a una oferta de carreras tradicionales en las áreas de Salud, Económicas y Humanidades. Como universidad pública, gratuita y de calidad en la región norte, ofrece carreras terciarias de tres años y de grado de cuatro a cinco años, nuestros estudiantes se forman en grupos reducidos y  de cercanía con los docentes. Todas las carreras están aprobadas por el Ministerio de Educación, garantizando un título oficial al graduarse.', 'Universidad', '1110', '{\"x\":\"-34.4659501\",\"y\":\"-58.5089068\"}', 3),
-(2, 'Instituto Superior de Formación Técnica 220', 'Virrey Loreto 2564', 'Actualmente, el ISFT Nº 220 brinda tres carreras técnicas del Nivel Superior gratuitas: Software, Alimentos, Higiene y Seguridad. Procuramos generar vínculos con establecimientos educativos de nivel secundario para que todos/as los jóvenes conozcan nuestra oferta formativa así como también vincularnos con el entorno socioproductivo. Poseemos un fuerte compromiso con la Educación Técnico Profesional.', 'Instituto', '0000', '{\"x\":\"-34.5281097\",\"y\":\"-58.5473953\"}', 4),
-(3, 'Instituto Superior de Formación Docente 229', 'Virrey Loreto 2564', 'El Instituto Superior de Formación Docente n°229 es una institución educativa que se centra en la formación de docentes, siendo de gestión estatal, el mismo tiene como objetivo principal brindar una educación de calidad a sus estudiantes para que puedan desempeñarse de manera efectiva en su rol como docentes. Además de la formación académica, también tienen la responsabilidad de fomentar la investigación y la innovación en el campo de la educación, y de ofrecer programas de capacitación continua para los docentes que ya se encuentran en ejercicio.', 'Instituto', '0000', '{\"x\":\"-34.5281097\",\"y\":\"-58.5473953\"}', 4),
+(2, 'Instituto Superior de Formación Técnica 220', 'Virrey Loreto 2564', 'Actualmente, el ISFT Nº 220 brinda tres carreras técnicas del Nivel Superior gratuitas: Software, Alimentos, Higiene y Seguridad. Procuramos generar vínculos con establecimientos educativos de nivel secundario para que todos/as los jóvenes conozcan nuestra oferta formativa así como también vincularnos con el entorno socioproductivo. Poseemos un fuerte compromiso con la Educación Técnico Profesional.', 'Instituto', '0000', '{\"x\":\"-34.53948545659454\",\"y\":\"-58.5372086894925\"} ', 4),
+(3, 'Instituto Superior de Formación Docente 229', 'Virrey Loreto 2564', 'El Instituto Superior de Formación Docente n°229 es una institución educativa que se centra en la formación de docentes, siendo de gestión estatal, el mismo tiene como objetivo principal brindar una educación de calidad a sus estudiantes para que puedan desempeñarse de manera efectiva en su rol como docentes. Además de la formación académica, también tienen la responsabilidad de fomentar la investigación y la innovación en el campo de la educación, y de ofrecer programas de capacitación continua para los docentes que ya se encuentran en ejercicio.', 'Instituto', '0000', '{\"x\":\"-34.53956517424479\",\"y\":\"-58.53730879589805\"}', 4),
 (4, 'Instituto Superior de Formación Docente N° 39  \"Jean Piaget\"', 'Agustín Álvarez 1459, B1638', 'El Instituto Superior de Formación Docente N°39, cuenta hoy con una trayectoria de casi 50 años de vida institucional, social y cultural. Localizado en la ciudad de Vicente López, cuenta con una trayectoria como espacio formador mucho más amplia en toda la región. Las carreras que brinda la institución son las siguientes: Lengua y Literatura, Profesorado de Historia, Biología, Matemáticas, Inicial, Primaria y Educación Física, además de cursos,  capacitaciones, otras ofertas de formación permanente y postítulos.', 'Instituto', '1000', '{\"x\":\"-34.533209018367344\",\"y\":\"-58.47785332857143\"}', 4),
 (5, 'Escuela Normal Superior N° 117 \"Gral. José Gervasio Artigas\"', '3 de Febrero 1810, San Fernando', 'El instituto cuenta con una Planta Baja y dos pisos, en los cuales hay cincuenta aulas, un Gabinete de Física, un Gabinete de Química, un Gabinete de Biología, un Aula de Música, dos Bibliotecas, un microcine, un SUM, un amplio patio descubierto y dos salas de computación.', 'Instituto', '1000', '{\"x\":\"-34.4461581\",\"y\":\"-58.5510041\"}', 2),
 (6, 'Universidad Tecnológica Nacional de Pacheco', 'Av. Hipólito Yrigoyen 288', 'Ubicada en el corazón de la ciudad de General Pacheco, la FRGP es una Facultad pública e inclusiva, comprometida con la generación y promoción del conocimiento, la formación de profesionales de excelencia capaces de dar respuestas ante las demandas propias del desarrollo socioeconómico de nuestro país, teniendo como eje a la Innovación y el Desarrollo tecnológico al servicio de la comunidad, y específicamente de la Industria.', 'Universidad', '1110', '{\"x\":\"-34.456507093877555\",\"y\":\"-58.627104334693875\"}', 1),
@@ -245,7 +245,7 @@ CREATE TABLE `imagenes` (
   `id_imagen` int(11) NOT NULL,
   `url` varchar(20) NOT NULL,
   `fk_establecimiento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `imagenes`
@@ -281,7 +281,7 @@ CREATE TABLE `planestudio` (
   `pdf` varchar(50) NOT NULL,
   `fk_carrera` int(11) DEFAULT NULL,
   `fk_establecimiento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `planestudio`
@@ -377,7 +377,7 @@ CREATE TABLE `usuarios` (
   `apellido` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `contrasena` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
