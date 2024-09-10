@@ -67,7 +67,7 @@
                 </button>
                 <button class="boton" onclick="barradebusqueda('nombre')">
                     <div class="imagenboton" style=" background-image: url(imagenes/iconos/letrasabc.svg);"></div>
-                    <h1>Buscar por nombre de manera general</h1>
+                    <h1>Buscar por nombre de la carrera</h1>
                 </button>
             </div>
             <form class="barradebusqueda <?php if($tipo == "nombre"){echo 'activo';} ?>" id="nombre" method="GET" action="./universidad.php#identificador2">
