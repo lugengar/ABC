@@ -402,7 +402,7 @@ global $haycorreo;
             
                 foreach($establecimientos as $key => $establecimiento) {
                     if($establecimientoactual["id_establecimiento"] != $establecimiento["id_establecimiento"]){
-                        echo '- <a href="./universidad.php?universidad='.$establecimiento["id_establecimiento"].'&carrera='.$carrera.'#carreraelegida">'.$establecimiento["nombre"].'</a> <br>';
+                        echo '- <a href="./universidad.php?universidad='.$establecimiento["id_establecimiento"].'&carrera='.$carrera.'#carreraelegida2">'.$establecimiento["nombre"].'</a> <br>';
                     }
 
                 }

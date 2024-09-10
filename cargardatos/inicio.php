@@ -60,15 +60,24 @@
 
 
             if (accion === "agregar") {
-                if (tabla === "carrera") {
-                    formFields.innerHTML = `
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                        <label for="descripcion">Descripción:</label>
-                        <input type="text" id="descripcion" name="descripcion" required>
-                        <label for="titulo">Título:</label>
-                        <input type="text" id="titulo" name="titulo" required>
-                    `;
+            if (tabla === "carrera") {
+                formFields.innerHTML = `
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                    <label for="descripcion">Descripción:</label>
+                    <input type="text" id="descripcion" name="descripcion" required>
+                    <label for="titulo">Título:</label>
+                    <input type="text" id="titulo" name="titulo" required>
+                    <label for="tipo_carrera">Tipo de Carrera:</label>
+                    <select id="tipo_carrera" name="tipo_carrera" required>
+                        <option value="" disabled selected>Seleccionar tipo</option>
+                        <option value="Tecnicatura">Técnica</option>
+                        <option value="Profesorado">Profesorado</option>
+                        <option value="Licenciatura">Licenciatura</option>
+                        <option value="Ingeniería">Ingeniería</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                `;
                 } else if (tabla === "contacto") {
                     formFields.innerHTML = `
                         <label for="descripcion">Descripción:</label>
@@ -107,7 +116,8 @@
                             <option value="">--Selecciona un tipo--</option>
                             <option value="Universidad">Universidad</option>
                             <option value="Instituto">Instituto</option>
-                            <option value="Colegio">Colegio</option>
+                            <option value="Polo educativo">Polo educativo</option>
+                            <option value="Centro universitario">Centro universitario</option>
                         </select>
                         <label for="servicios">Servicios:</label>
                         <input type="text" id="servicios" name="servicios" required>

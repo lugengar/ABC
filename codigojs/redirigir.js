@@ -12,9 +12,14 @@ function redirigircentro(href) {
 }
 
 window.onload = function() {
-    if (window.location.hash == "#carreraelegida") {
-        // Extraer el valor del hash, sin el símbolo '#'
+    if (window.location.hash == "#carreraelegida" || window.location.hash == "#carreraelegida2") {
         var hash = window.location.hash.substring(1);
-        redirigircentro(hash);
+        // Extraer el valor del hash, sin el símbolo '#'
+        if(window.location.hash == "#carreraelegida2"){
+            redirigircentro("carreraelegida");
+        }else{
+            redirigircentro(hash);
+        }
+        
     }
 }
