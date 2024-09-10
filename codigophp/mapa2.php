@@ -13,6 +13,8 @@ function obtenerNombreCarpeta() {
 
 function mapa(){
     include "./conexionbs.php";
+    include "../claves.php";
+
     $stmt = $conn->prepare("SELECT 
     e.nombre AS establecimiento_nombre, 
     e.ubicacion, 
@@ -49,7 +51,7 @@ LEFT JOIN
                 'name' => $row4["establecimiento_nombre"],
                 'address' => [$coordenadas['x'], $coordenadas['y']], 
                 'url' => '/'.$ruta.'/universidad.php?universidad=' . $row4["id_establecimiento"],
-                'imageUrl'=> "https://lugengar.github.io/ABC/imagenes/universidades/".$row4["primera_imagen"],
+                'imageUrl'=> '../imagenes/universidades/'.$row4["primera_imagen"],
             );
         }
     }
@@ -137,13 +139,13 @@ var map = L.map('map', {
 }).setView([-34.6037, -58.3816], 13);
 
 var customIcon = L.icon({
-    iconUrl: 'https://lugengar.github.io/ABC/imagenes/otros/puntero.svg',  
+    iconUrl: '../imagenes/otros/puntero.svg',  
     iconSize: [25, 25],  
     iconAnchor: [12, 25],  
     popupAnchor: [0, -25]  
 });
 var usuario = L.icon({
-    iconUrl: 'https://lugengar.github.io/ABC/imagenes/iconos/instagram.svg',  
+    iconUrl: '../imagenes/iconos/instagram.svg',  
     iconSize: [25, 25],  
     iconAnchor: [12, 25],  
     popupAnchor: [0, -25]  
