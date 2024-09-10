@@ -1,15 +1,4 @@
 <?php
-function obtenerNombreCarpeta() {
-    // Obtener la ruta completa del script actual
-    $rutaCompleta = $_SERVER['SCRIPT_NAME'];
-    
-    // Dividir la ruta por "/"
-    $partesRuta = explode('/', $rutaCompleta);
-    
-    // Devolver la segunda parte, que sería el nombre de la carpeta después de localhost
-    return isset($partesRuta[1]) ? $partesRuta[1] : '';
-}
-
 
 function mapa(){
     include "./conexionbs.php";
@@ -41,7 +30,6 @@ LEFT JOIN
         echo "Error en la consulta: " . $stmt->error;
         return;
     }
-    $ruta = obtenerNombreCarpeta();
     $lugares = array(); 
     foreach($result2 as $row4) {
         $coordenadas = json_decode($row4["coordenadas"], true); 
@@ -50,7 +38,7 @@ LEFT JOIN
             $lugares[] = array(
                 'name' => $row4["establecimiento_nombre"],
                 'address' => [$coordenadas['x'], $coordenadas['y']], 
-                'url' => '/'.$ruta.'/universidad.php?universidad=' . $row4["id_establecimiento"],
+                'url' => '../universidad.php?universidad=' . $row4["id_establecimiento"],
                 'imageUrl'=> '../imagenes/universidades/'.$row4["primera_imagen"],
             );
         }
