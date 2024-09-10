@@ -185,7 +185,7 @@
                     <h1>Filtrar por tipo de establecimiento</h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('carrera')"><div class="imagenboton" style=" background-image: url(imagenes/iconos/sombrero.svg);"></div>
-                    <h1>Buscar establecimiento por carrera</h1>
+                    <h1>Filtrar establecimiento por carrera</h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('nombre')">
                     <div class="imagenboton" style=" background-image: url(imagenes/iconos/letrasabc.svg);"></div>
