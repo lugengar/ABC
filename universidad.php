@@ -2,19 +2,42 @@
 <html lang="en-es">
 <head>
 <?php
-    try {
+session_start();
+$admin = "AND habilitado = 0";
+$admin2 = "AND e.habilitado = 0";
+if(isset($_SESSION["id_usuario"])){
+    $admin = "";
+    $admin2 = "";
+}
+
+   // try {
+        //OBTIENE TODOS LOS CODIGOS NECESARIOS PARA MOSTRAR LA INFORMACION DEL ESTABLECIMIENTO
         include "./codigophp/mostrar_universidad.php";
-        include "claves.php";
+
         include "./codigophp/construccion.php";
+
+        include "claves.php";
+        //LA BARRA DE BUSQUEDA PREDETERMINADA ES LA DE NOMBRE
         $tipo = "nombre";
+        //EVITA QUE PUEDAN INSERTAR OTRO TIPO DE BARRA QUE NO EXISTE
+        $haytipo = false;
+
+        //VARIABLES PARA SABER QUE TIPO DE BARRA DEBE MOSTRARSE SEGUN LA BARRA UTILIZADA ANTERIORMENTE
         if(isset($_GET["tipo"])){
             if(isset($_GET["tipo"])){
                 $tipo = $_GET["tipo"];
+                if($tipo == "nombre" || $tipo == "carrera"){
+                    $haytipo = true;
+                }
             }
         }
-    } catch (Exception $e) {
-        header("Location: index.php");
-    }
+        if($row["habilitado"] == 1 && !isset($_SESSION["id_usuario"])){
+            header("Location: index.php");
+        }
+    //} catch (Exception $e) {
+        //EN CASO DE ENCONTRAR UN ERROR AL CARGAR TE ENVIA AL INDEX.PHP
+     //   header("Location: index.php");
+    //}
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,7 +94,7 @@
                     <h1>Buscar por nombre de la carrera</h1>
                 </button>
             </div>
-            <form class="barradebusqueda <?php if($tipo == "nombre"){echo 'activo';} ?>" id="nombre" method="GET" action="./universidad.php#identificador2">
+            <form class="barradebusqueda <?php if($tipo == "nombre" || $haytipo == false){echo 'activo';} ?>" id="nombre" method="GET" action="./universidad.php#identificador2">
             <p class="barratexto">Nombre de la carrera <img src="imagenes/iconos/lupa.svg" class="imglupa" alt=""></p>
                 
             <div style="gap: 2vh;">

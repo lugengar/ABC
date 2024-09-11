@@ -62,12 +62,8 @@ function crearmapa($coordenadas,$ubicacion, $zoom = 15) {
     return $url;
  
 }
-/*
-function crearmapa($ubicacion){ //CREA EL MAPA CON LA UBICACION A TRAVEZ DE UNA URL MODIFICADA
-    $url = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3287.4006114986105!2d-58.53745522416194!3d-34.51807695298058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb0946037da75%3A0x7fae4b92e6699b59!2s";
-    $url2 = "!5e0!3m2!1ses-419!2sar!4v1684382444792!5m2!1ses-419!2sar";
-    return $url."".urlencode($ubicacion)."".$url2;
-}*/
+
+
 function nombre_url($url){ //OBTIENE EL NOMBRE DE UNA RED SOCIAL A TRAVEZ DE SU URL
     $parsed_url = parse_url($url);
 
@@ -190,12 +186,7 @@ function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contact
     '<p class="redsocial2" style="background-image: url(imagenes/iconos/calefaccion.svg);">Cuenta con calefacción</p>',
     '<p class="redsocial2" style="background-image: url(imagenes/iconos/wifi.svg);">Cuenta con WIFI</p>',
     '<p class="redsocial2" style="background-image: url(imagenes/iconos/comedor.svg);">Cuenta con comedor</p>'];
-   /* if($haycorreo == true){
-        echo '<div class="informacion lista3" style="padding-top: 5vh;">';
 
-    }else{
-        echo '<div class="informacion lista4" style="padding-top: 5vh;">';
-    }*/
         echo (' 
        
     <div class="identificador" id="identificador1" style="top: 100vh;"></div>
@@ -221,14 +212,8 @@ function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contact
             <div class="barrauni"></div>
             <h1 class="nombreuni">UBICACIÓN</h1>
             <p class="descripcionuni">'.$ubicacion.', '.$distrito.'</p>
-            './/<button class="botonuni pop" id="googlemapsb">ABRIR MAPA</button>
-        '</div>
-            './*
-        <div id="googlemaps" popover class="pop2">
-            <h1>HAGA CLIC FUERA DEL CUADRO PARA SALIR</h1>
-            <iframe src="'.crearmapa($ubicacion.', '.$distrito).'" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>*/
-        '<div class="universidad horizontal" id="redes"> 
+            </div>
+        <div class="universidad horizontal" id="redes"> 
            <div class="imageninfo2" style="background-image: url(imagenes/iconos/correo.svg);"></div>
             <div class="barrauni3"></div>
             <div class="lista5" style="gap: 0vh;">
@@ -238,19 +223,7 @@ function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contact
             
        
             if($contactos->num_rows > 0){
-                /*
-                foreach($contactos as $key => $contacto) {
-                    if($contacto["tipo"] == "correo"){
-                        $inscripcion = $contacto["contacto"];
-                        echo '<p class="descripcionuni" style="margin-bottom:0vh;">'.$contacto["tipo"].': <a href="mailto:inscripcion@'.$contacto["contacto"].'">'.$contacto["contacto"].'</a></p>';
-                        $haycorreo = true;
-                    }else if($contacto["tipo"] == "telefono"){
-                        
-                        echo '<p class="descripcionuni" style="margin-bottom:0vh;">'.$contacto["tipo"].': <a href="tel:'.arreglar_telefono($contacto["contacto"]).'">'.arreglar_telefono($contacto["contacto"]).'</a></p>';
-                    }else{
-                        echo '<p class="descripcionuni" style="margin-bottom:0vh;">'.$contacto["tipo"].': <a href="'.arreglar_url($contacto["contacto"]).'">'.arreglar_url($contacto["contacto"]).'</a></p>';
-                    }
-                }*/
+              
                 echo ' <p class="descripcionuni">'.$textocontacto.'</p>';
                 echo '<div class="redesociales">';
                 foreach($contactos as $key => $contacto) {
@@ -297,7 +270,6 @@ function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contact
                 ');
                 
             }
-            //echo'</div>';   
 
     
 
@@ -382,10 +354,7 @@ if(isset($row)){
 }
 
 function info_carrera($titulo,$descripcion, $pdf, $carrera,$establecimientos){ //MUESTRA EL PLAN DE ESTUDIO Y LA INFO DE LA CARRERA
-    /* echo ('
-        <div class="barraseparadora"></div>
-        <div class="barraseparadora" id="plan" style="transform: translateY(-20vh);opacity:0%;z-index:1;"></div>');
-*/
+    
 global $establecimientoactual;
 
 
@@ -472,20 +441,7 @@ global $haycorreo;
         }
        }
        echo'</div>';
-/*
-    if($haycorreo == true){ // EN CASO DE NO CONTAR CON UN CONTACTO NO MOSTRARA LA INSCRIPCION
-       
-         echo ('
-        <div class="universidad" id="establecimiento"> 
-            <div class="imageninfo"style="background-image: url(imagenes/iconos/inscripcion.svg);"></div>
-            <div class="barrauni"></div>
-            <h1 class="nombreuni">CONSULTAR INSCRIPCIÓN</h1>
-            <p class="descripcionuni" style="height: 10vh;">El siguiente botón nos enviará a un formulario donde podremos consultar la inscripción a travez del correo oficial del establecimiento.</p>
-            <a class="botonuni" onclick="redirigir('."'".'identificador1'."'".')">INSCRIBIRME</a>
-        </div>   
 
-    ');
-    }*/
 }
 ?>
 

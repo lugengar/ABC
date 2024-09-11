@@ -11,10 +11,23 @@
 </head>
 <body>
     <?php
+   session_start();
+   session_destroy();
+   $admin = "AND habilitado = 0";
+   $admin2 = "AND e.habilitado = 0";
+   if(isset($_SESSION["id_usuario"])){
+       $admin = "";
+       $admin2 = "";
+   }
+        //INSERTA EN EL CODIGO EL CODIGO PARA MOSTRAR LOS RESULTADOS DE LA BARRA DE BUSQUEDA
         include "./codigophp/buscar_universidades.php";
+
+        //LA BARRA DE BUSQUEDA PREDETERMINADA ES LA DE NOMBRE
         $tipo = "nombre";
+        //EVITA QUE PUEDAN INSERTAR OTRO TIPO DE BARRA QUE NO EXISTE
         $haytipo = false;
-       
+
+        //VARIABLES PARA SABER QUE TIPO DE BARRA DEBE MOSTRARSE SEGUN LA BARRA UTILIZADA ANTERIORMENTE
         if(isset($_GET["tipo"])){
             if(isset($_GET["tipo"])){
                 $tipo = $_GET["tipo"];
@@ -24,11 +37,13 @@
             }
         }
     ?>
-        <div class="overlay" id="overlay"></div>
+    <!-- FONDO INVISIBLE QUE SE ENCARGA DE QUE NO SE PUEDA DAR CLICK AL FONDO CUANDO ABRIMOS POR EJEMPLO LA VENTADA DEL MAPA -->
+    <div class="overlay" id="overlay"></div>
     
     <div class="container">
         <main class="carrusel" >
             <?php
+            //FUNCION QUE OBTIENE LOS DATOS QUE DEBERIAN IR EN EL INICIO Y MUESTRA EL CARRUSEL
                 carruselinicio();
             ?>
         </main>
@@ -54,7 +69,7 @@
                     <h1>Buscar universidad en el mapa</h1>
                 </button>
 
-                <!-- MAPA 
+                <!-- BOTON BUSCAR POR DISTRITO 
 
                 <button class="boton" onclick="barradebusqueda('distrito')">
                     <div class="imagenboton" style="background-image: url(imagenes/iconos/ubicacion.svg);"></div>
@@ -89,7 +104,7 @@
                 <select name="busqueda"id="" required>
                     <option value="">Ninguno</option >
                     <?php
-                    //ESCRIBE LAS OPCIONES PARA LA BARRA DE BUSQUEDA
+                        //ESCRIBE LOS DISTRITOS PARA LA BARRA DE BUSQUEDA
                         buscardistritos();
                     ?>
                 </select>
@@ -103,7 +118,7 @@
             <select name="busqueda" id="" required>
                     <option value="">Ninguno</option>
                     <?php
-                        //ESCRIBE LAS OPCIONES PARA LA BARRA DE BUSQUEDA
+                        //ESCRIBE LOS TIPO DE ESTABLECIMIENTOS PARA LA BARRA DE BUSQUEDA
                         buscarestablecimientos();
                     ?>
                 </select>
@@ -118,7 +133,7 @@
                 <select name="busqueda" id="" required>
                     <option value="">Ninguno</option>
                     <?php
-                        //ESCRIBE LAS OPCIONES PARA LA BARRA DE BUSQUEDA
+                        //ESCRIBE LAS CARRERAS PARA LA BARRA DE BUSQUEDA
                         buscarcarreras();
                     ?>
                 </select>

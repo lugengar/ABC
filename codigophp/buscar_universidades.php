@@ -6,6 +6,7 @@ include "./codigophp/construccion.php";
 function buscarcarrera(){ //BUSCA CARRERAS/LICENCIATURAS CON EL TITULO NO TECNICO PARA MOSTRARLOS
     global $conn;
     global $stmt;
+   
     $tec = "Técnico";
     $stmt =  $conn->prepare("SELECT * FROM carrera WHERE titulo NOT LIKE ? ");
     $param = "%$tec%";
@@ -39,9 +40,10 @@ function buscarcarreras(){ //BUSCA CARRERAS/LICENCIATURAS CON EL TITULO NO TECNI
     $stmt->close();
 }
 function buscarestablecimientos(){
+    global $admin;
     global $conn;
     global $stmt;
-    $stmt =  $conn->prepare("SELECT DISTINCT tipo_establecimiento FROM establecimiento WHERE id_establecimiento != 0");
+    $stmt =  $conn->prepare("SELECT DISTINCT tipo_establecimiento FROM establecimiento WHERE id_establecimiento != 0 ".$admin);
     $stmt->execute();
     $result = $stmt->get_result();
     establecimientolista($result);
@@ -83,6 +85,7 @@ function buscar(){ //BUSCA EN GENERAL POR LOS 4 MEDIOS DISTRITO, TECNICO,LICENCI
     global $conn;
     global $carrera;
     global $stmt;
+    global $admin;
     global $result;
 // Validar y limpiar el parámetro de búsqueda
 if (isset($_GET['busqueda']) & isset($_GET['tipo'])) {
@@ -95,7 +98,7 @@ if($tipo == "nombre"){
         $stmt = $conn->prepare("SELECT * 
 FROM establecimiento 
 WHERE nombre LIKE ? 
-AND id_establecimiento != 0 
+AND id_establecimiento != 0 ".$admin."
 ORDER BY 
     CASE 
         WHEN tipo_establecimiento LIKE 'Instituto%' THEN 0
@@ -110,6 +113,7 @@ ORDER BY
 
     $result = $stmt->get_result();
 }else if($tipo == "carrera"){ 
+  
     $sql2 = "SELECT * FROM planestudio WHERE fk_carrera = ".$busqueda;
     $carrera = $busqueda;
     $planestudio = $conn->query($sql2);
@@ -120,7 +124,7 @@ ORDER BY
 
     if (!empty($establecimientos)) {
         $placeholders = implode(', ', array_fill(0, count($establecimientos), '?'));
-        $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento IN ($placeholders) AND id_establecimiento != 0 
+        $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento IN ($placeholders) AND id_establecimiento != 0 ".$admin."
         ORDER BY 
             CASE 
                 WHEN tipo_establecimiento LIKE 'Instituto%' THEN 0
@@ -137,13 +141,15 @@ ORDER BY
         $result = $stmt->get_result();
     }
 }else if($tipo == "establecimiento"){ 
-    $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE tipo_establecimiento LIKE ? AND id_establecimiento != 0 ORDER BY nombre");
+  
+    $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE tipo_establecimiento LIKE ? AND id_establecimiento != 0 ".$admin." ORDER BY nombre");
         $stmt->bind_param("s", $param);
         $stmt->execute();
 
         $result = $stmt->get_result();
 }else if($tipo == "distrito"){ 
-        $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE fk_distrito LIKE ? AND id_establecimiento != 0 
+ 
+        $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE fk_distrito LIKE ? AND id_establecimiento != 0 ".$admin."
         ORDER BY 
             CASE 
                 WHEN tipo_establecimiento LIKE 'Instituto%' THEN 0
@@ -157,7 +163,8 @@ ORDER BY
 
     $result = $stmt->get_result();
 }else{
-    $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento != 0 
+   
+    $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento != 0 ".$admin."
         ORDER BY 
             CASE 
                 WHEN tipo_establecimiento LIKE 'Instituto%' THEN 0
@@ -172,7 +179,7 @@ ORDER BY
 }
     
 }else{
-    $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento != 0 
+    $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE id_establecimiento != 0 ".$admin."
         ORDER BY 
             CASE 
                 WHEN tipo_establecimiento LIKE 'Instituto%' THEN 0

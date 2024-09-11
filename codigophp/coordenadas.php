@@ -1,4 +1,5 @@
 <?php
+
 function obtenercoordenadas($address) {
     $url = "https://nominatim.openstreetmap.org/search?q=" . urlencode($address) . "&format=json&limit=1";
 
@@ -33,12 +34,13 @@ function obtenercoordenadas($address) {
 }
 
 function actualizarcoordenadas(){
+
     include "./conexionbs.php"; 
 
     $stmt = $conn->prepare("SELECT e.nombre AS establecimiento_nombre, e.ubicacion, e.id_establecimiento, d.nombre AS distrito_nombre 
                             FROM establecimiento e 
                             INNER JOIN distrito d ON e.fk_distrito = d.id_distrito
-                            WHERE e.id_establecimiento != 0");
+                            WHERE e.id_establecimiento != 0 ".$admin2);
 
     if ($stmt->execute()) {
         $result2 = $stmt->get_result(); 

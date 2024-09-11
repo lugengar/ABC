@@ -5,7 +5,7 @@ include "./codigophp/conexionbs.php";
 
 // Validar y limpiar el parámetro de búsqueda
 if (isset($_GET['carrera']) && isset($_GET['universidad'])) {
-
+    global $admin;
     $busqueda = filter_var($_GET['carrera'], FILTER_SANITIZE_SPECIAL_CHARS);
     $universidad = filter_var($_GET['universidad'], FILTER_SANITIZE_SPECIAL_CHARS);
 
@@ -35,7 +35,7 @@ if (isset($_GET['carrera']) && isset($_GET['universidad'])) {
             }
 
             $in_query = implode(',', array_fill(0, count($ids), '?'));
-            $stmt3 = $conn->prepare("SELECT DISTINCT * FROM establecimiento WHERE id_establecimiento  IN ($in_query) AND id_establecimiento != $universidad AND id_establecimiento != 0");
+            $stmt3 = $conn->prepare("SELECT DISTINCT * FROM establecimiento WHERE id_establecimiento  IN ($in_query) AND id_establecimiento != $universidad AND id_establecimiento != 0 ".$admin);
             $stmt3->bind_param(str_repeat('s', count($ids)), ...$ids);
             $stmt3->execute();
             $establecimientos = $stmt3->get_result();

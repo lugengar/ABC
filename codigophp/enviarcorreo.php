@@ -33,9 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }else {
         echo "falta el captcha";
     }
-    echo '<script>
-window.location.href = "../universidad.php?universidad=' . $_POST['universidad'] . '&enviado=false#carreraelegida";
-</script>';
+    header("Location: ../universidad.php?universidad=" . $_POST['universidad'] . '&enviado=false#carreraelegida');
 
 }
 ?>
