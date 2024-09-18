@@ -62,7 +62,7 @@ if (isset($_GET['busqueda']) && isset($_GET['tipo']) && $carreras != null) {
     
 }else{
     if($carreras != null){
-        $stmt = $conn->prepare("SELECT * FROM carrera WHERE id_carrera IN (".implode(", ", $carreras).")");
+        $stmt = $conn->prepare("SELECT * FROM carrera WHERE id_carrera IN (".implode(", ", $carreras).") ORDER BY RAND()");
         $stmt->execute();
         $result = $stmt->get_result();
     }else{

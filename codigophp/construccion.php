@@ -432,10 +432,12 @@ global $haycorreo;
                     echo '<div class="redesociales">';
                     foreach($pdf as $key => $pdff) {
                         if($pdff["pdf"] != null){
-                            if($pdff["tipo_recurso"] == "plan de estudio"){
-                                echo '<button class="botonuni2 pop" id="pdf-containerb">PLAN DE ESTUDIO '.($key +1).'</button>';   
-                            }else{
-                                echo '<button class="botonuni2 pop" id="pdf-containerb">DISEÑO CURRICULAR '.($key +1).'</button>';   
+                            if(file_exists(arreglarpdf($pdff["pdf"]))){
+                                if($pdff["tipo_recurso"] == "plan de estudio"){
+                                    echo '<button class="botonuni2 pop" id="pdf-containerb">PLAN DE ESTUDIO '.($key +1).'</button>';   
+                                }else{
+                                    echo '<button class="botonuni2 pop" id="pdf-containerb">DISEÑO CURRICULAR '.($key +1).'</button>';   
+                                }
                             }
                         }
                     }

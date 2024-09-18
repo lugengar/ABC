@@ -101,7 +101,7 @@ function carrerasestablecimiento($id,$tipo){
         while ($row3 = $idcarreras->fetch_assoc()) {
             array_push($carreras, $row3["fk_carrera"]);
         }
-        $stmt = $conn->prepare("SELECT * FROM carrera WHERE tipo_carrera = ? AND id_carrera IN (".implode(", ", $carreras).")");
+        $stmt = $conn->prepare("SELECT * FROM carrera WHERE tipo_carrera = ? AND id_carrera IN (".implode(", ", $carreras).") ORDER BY nombre");
         $stmt->bind_param("s", $tipo);
         $stmt->execute();
         $result4 = $stmt->get_result();

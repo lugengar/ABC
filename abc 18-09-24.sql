@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-09-2024 a las 21:02:52
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Tiempo de generación: 18-09-2024 a las 21:43:02
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `carrera` (
   `descripcion` varchar(1000) NOT NULL,
   `titulo` varchar(100) NOT NULL,
   `tipo_carrera` enum('Licenciatura','Tecnicatura','Profesorado','Ingeniería','Diplomatura','Otros') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `carrera`
@@ -351,7 +351,7 @@ CREATE TABLE `contacto` (
   `tipo` enum('telefono','correo','tiktok','instagram','facebook','youtube','whatsapp','twitter') NOT NULL,
   `contacto` varchar(100) NOT NULL,
   `fk_establecimiento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `contacto`
@@ -410,7 +410,7 @@ INSERT INTO `contacto` (`id_contacto`, `descripcion`, `tipo`, `contacto`, `fk_es
 CREATE TABLE `distrito` (
   `id_distrito` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `distrito`
@@ -439,7 +439,7 @@ CREATE TABLE `establecimiento` (
   `coordenadas` longtext NOT NULL,
   `fk_distrito` int(11) NOT NULL,
   `habilitado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `establecimiento`
@@ -477,7 +477,7 @@ CREATE TABLE `imagenes` (
   `id_imagen` int(11) NOT NULL,
   `url` varchar(20) NOT NULL,
   `fk_establecimiento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `imagenes`
@@ -519,7 +519,7 @@ CREATE TABLE `recursos` (
   `fk_carrera` int(11) DEFAULT NULL,
   `fk_establecimiento` int(11) NOT NULL,
   `tipo_recurso` enum('plan de estudio','diseño curricular','','') DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `recursos`
@@ -810,16 +810,14 @@ CREATE TABLE `usuarios` (
   `apellido` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `contrasena` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `email`, `contrasena`) VALUES
-(1, 'Santiago Benjamín', 'hola', 'hola@gmail.com', 'hola123'),
-(3, 'hola', 'hola', 'hola18@gmail.com', 'hola123'),
-(4, 'cristobal', 'maier', 'cristobalmaier@gmail.com', 'hola123');
+(5, 'prueba', 'prueba', 'prueba@gmail.com', '$2y$10$0JH78446yZlEOvN0aUrwt.1TdQdcOQXkK85ykRXTP9GtR1yabrfHO');
 
 --
 -- Índices para tablas volcadas
@@ -917,7 +915,7 @@ ALTER TABLE `recursos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
