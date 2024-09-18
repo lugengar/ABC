@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if((isset($_POST['tabla']) || isset($_GET['tabla'])) && isset($_SESSION['id_usuario'])){
 
 include "../codigophp/conexionbs.php";
