@@ -46,6 +46,11 @@
         </main>
         <header class="header" id="header">
             <a href="index.php" class="logo_pba_horizontal " ></a>
+            <?php
+            if(isset($_SESSION["id_usuario"])){
+            echo '    <a href="cargardatos/index.php" class="boton_nose_que_estudiar">Panel<div class="circulopregunta" style="background-image: url(imagenes/iconos/candado_desbloqueado.svg); background-size: 2.5vh;"></div></a>';
+            }
+            ?>
         </header>
         <main class="main">
 

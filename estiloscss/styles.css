@@ -232,8 +232,10 @@ input[type="submit"] {
     text-decoration: none;
     font-size: 2vh;
     text-align: left;
-    padding-top: 0.4vh;
     position: relative;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
 .circulopregunta {
