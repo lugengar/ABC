@@ -35,7 +35,7 @@
                 // Verificar la contraseña hasheada
                 if (password_verify($contrasena, $row['contrasena'])) {
                     $_SESSION['email'] = $email;
-                    $_SESSION['user_id'] = $row['id'];
+                    $_SESSION['id_usuario'] = $row['id'];
                     $_SESSION['nombre'] = $row['nombre'];
                     $_SESSION['apellido'] = $row['apellido'];
 
