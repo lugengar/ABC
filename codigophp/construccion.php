@@ -11,11 +11,16 @@ $direccionimagen = "./imagenes/universidades/";
 $direccionimagen2 = "./imagenes/otros/";
 $direccionpdf = "./pdf/";
 
-function universidad($id,$nombre ,$descripcion, $imagenes,$carreras){ //CREA EL CUADRO DE UNIVERSIDAD
+function universidad($id,$nombre ,$descripcion, $imagenes,$carreras,$habilitado){ //CREA EL CUADRO DE UNIVERSIDAD
     global $direccionimagen;
     echo '<div class="universidad">';
+        if($habilitado == "1"){
+            echo '<div class="imagenesuni" style="position:relative;">';
+            echo '<div class="privado"></div> ';
+        }else{
+            echo '<div class="imagenesuni">';
+        }
     if($imagenes->num_rows > 0){
-        echo '<div class="imagenesuni">';
         foreach($imagenes as $key => $imagen) {
             echo '<div class="imagenuni activo" style="background-image: url('.$direccionimagen."".$imagen["url"].');"></div>';
         }
@@ -33,7 +38,6 @@ function universidad($id,$nombre ,$descripcion, $imagenes,$carreras){ //CREA EL 
             echo '</div> <div class="barrauni"></div>';
         }
     }else{
-        echo '<div class="imagenesuni">';
 
         echo'<h1 class=" imagenuni activo errorimg"></h1>';
         echo '</div> <div class="barrauni"></div>';
@@ -42,15 +46,17 @@ function universidad($id,$nombre ,$descripcion, $imagenes,$carreras){ //CREA EL 
     echo('
         <h1 class="nombreuni">'.$nombre.'</h1>
         ');//<p class="descripcionuni">'.$descripcion.'</p>
-    echo('
-        <p class="descripcionuni" style="height: 0vh;"></p>
-        <a href="./universidad.php?universidad='.$id);
-        if($carreras != null){
-            echo '&carrera='.$carreras.'#carreraelegida';
+    if($carreras != null){
+        echo('<p class="descripcionuni" >');
+
+        foreach($carreras as $key => $carrera) {
+            echo '- <a href="./universidad.php?universidad='.$id.'&carrera='.$carrera["id_carrera"].'#carreraelegida2">'.$carrera["nombre"].'</a><br>';
         }
-        echo('"  class="botonuni">SABER MAS..</a>
-    </div>
-    ');
+        echo '</p>';
+    }else{
+        echo('<p class="descripcionuni" style="height:0vh;padding-top:0;"></p><a href="./universidad.php?universidad='.$id.'" class="botonuni">SABER MAS..</a>');
+    }
+        echo'</div>';
 }
 function crearmapa($coordenadas,$ubicacion, $zoom = 15) {
     if($coordenadas != null){
@@ -114,26 +120,43 @@ function generarTextoRedesSociales($contactos) { //CREA UN TEXTO COOHERENTE DOND
 
     return $texto;
 }
-
+function cortarTexto($texto, $longitud = 70) {
+    if (strlen($texto) > $longitud) {
+        return substr($texto, 0, $longitud) . '...';
+    } else {
+        return $texto;
+    }
+}
 function carreraslista($carreras){ // CREA LA LISTA DE CARRERAS Y TECNICATURAS PARA LA BARRA DE BUSQUEDA
     foreach ($carreras as $carrera) {
-        echo '<option value="'.$carrera["id_carrera"].'">'.$carrera["nombre"].'</option>';
+        if($carrera["nombre"] != ""){
+        echo '<option value="'.$carrera["id_carrera"].'">'.cortarTexto($carrera["nombre"]).'</option>';
+        }
     }
 }
 function establecimientolista($establecimientos){ // CREA LA LISTA DE CARRERAS Y TECNICATURAS PARA LA BARRA DE BUSQUEDA
     foreach ($establecimientos as $establecimiento) {
-        echo '<option value="'.$establecimiento["tipo_establecimiento"].'">'.$establecimiento["tipo_establecimiento"].'</option>';
+        if($establecimiento["tipo_establecimiento"] != ""){
+
+        echo '<option value="'.$establecimiento["tipo_establecimiento"].'">'.cortarTexto($establecimiento["tipo_establecimiento"]).'</option>';
+        }
     }
 }
 function carreratipolista($carreras){ // CREA LA LISTA DE CARRERAS Y TECNICATURAS PARA LA BARRA DE BUSQUEDA
     foreach ($carreras as $carrera) {
-        echo '<option value="'.$carrera["tipo_carrera"].'">'.$carrera["tipo_carrera"].'</option>';
+        if($carrera["tipo_carrera"] != ""){
+
+        echo '<option value="'.$carrera["tipo_carrera"].'">'.cortarTexto($carrera["tipo_carrera"]).'</option>';
+        }
     }
 }
 
 function distritolista($distritos){ // CREA LA LISTA DE LOS DISTRITOS PARA LA BARRA DE BUSQUEDA
     foreach ($distritos as $distrito) {
-        echo '<option value="'.$distrito["id_distrito"].'">'.$distrito["nombre"].'</option>';
+        if($distrito["nombre"] != ""){
+
+        echo '<option value="'.$distrito["id_distrito"].'">'.cortarTexto($distrito["nombre"]).'</option>';
+        }
     }
 }
 function arreglar_telefono($tel){ // MODIFICA EL NUMERO DE TELEFONO EN CASO DE FALTAR EL +54 O EL 11
@@ -238,7 +261,7 @@ function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contact
                 }
                 echo'</div>';
             }else{
-                echo '<p class="descripcionuni" >Ningun contacto disponible</p>';
+                echo '<p class="descripcionuni" >Por el momento no se encuentran contactos disponibles.</p>';
             }
             echo'</div> </div>';
             if($haycorreo == true){// EN CASO DE NO CONTAR CON UN CONTACTO NO MOSTRARA LA INSCRIPCION
@@ -381,7 +404,7 @@ global $haycorreo;
         
                 
                 <h1 class="nombreuni">TAMBIEN SE CURSA EN</h1><p class="descripcionuni" style="height: 25dvh;">
-                Podes cursar "'.$titulo.'" en los siguientes establecimientos:<br>';
+                Podes estudiar "'.$titulo.'" en los siguientes establecimientos:<br>';
             
                 foreach($establecimientos as $key => $establecimiento) {
                     if($establecimientoactual["id_establecimiento"] != $establecimiento["id_establecimiento"]){
@@ -401,46 +424,50 @@ global $haycorreo;
        echo '<div class="universidad" id="plan"> 
        <div class="imageninfo"style="background-image: url(imagenes/iconos/recurso.svg);"></div>
        <div class="barrauni"></div>
-       <h1 class="nombreuni">MODALIDAD DE CURSADA</h1>';
+       <h1 class="nombreuni">RECURSOS</h1>';
        if($pdf != null){ 
             if($pdf->num_rows > 0){
-                if($pdf->num_rows > 1){
-                    echo '<p class="descripcionuni"style="height: 10vh;">A continuación, se presenta el plan de estudios detallado que guía el desarrollo académico y profesional de los estudiantes en nuestra institución.</p>';
+              
+                    echo '<p class="descripcionuni"style="height: 10vh;">A continuación, se presenta el material detallado que guía el desarrollo académico y profesional de los estudiantes en nuestra institución.</p>';
+                    echo '<div class="redesociales">';
                     foreach($pdf as $key => $pdff) {
-                        echo '<button class="botonuni pop" id="pdf-containerb">VER RECURSO '.($key +1).'</button>';
-                    }
-                    echo '</div>';
-                    foreach($pdf as $key => $pdff) {
-                        echo '<div id="pdf-container" popover class="pop2">
-                            <h1>HAGA CLIC FUERA DEL CUADRO PARA SALIR</h1>
-                            <embed class="pdf-viewer" src="'.arreglarpdf($pdff["pdf"]).'" type="application/pdf" />
-                        </div>';
-                    }
-                }else{
-                    $row = $pdf->fetch_assoc();
-
-                    if($row["pdf"] != null){
-                        echo '<p class="descripcionuni"style="height: 10vh;">A continuación, se presenta el plan de estudios detallado que guía el desarrollo académico y profesional de los estudiantes en nuestra institución.</p>';
-                        echo '<button class="botonuni pop" id="pdf-containerb">VER RECURSO</button></div>';
-                        echo '<div id="pdf-container" popover class="pop2">
-                                <h1>HAGA CLIC FUERA DEL CUADRO PARA SALIR</h1>
-                            <embed class="pdf-viewer" src="'.arreglarpdf($row["pdf"]).'" type="application/pdf" />';
-                    }else{
-                        echo '<p class="descripcionuni">Por el momento puede solicitar el plan de estudios contactandose con el establecimiento</p>';
-                        if($haycorreo == true){
-                            echo '<a class="botonuni" onclick="redirigircentro('."'".'formulariodecontacto'."'".')">CONTACTARME</a>';
+                        if($pdff["pdf"] != null){
+                            if($pdff["tipo_recurso"] == "plan de estudio"){
+                                echo '<button class="botonuni2 pop" id="pdf-containerb">PLAN DE ESTUDIO '.($key +1).'</button>';   
+                            }else{
+                                echo '<button class="botonuni2 pop" id="pdf-containerb">DISEÑO CURRICULAR '.($key +1).'</button>';   
+                            }
                         }
                     }
+                    echo '</div></div>';
+                    foreach($pdf as $key => $pdff) {
+                        if($pdff["pdf"] != null){
+                            echo '<div id="pdf-container" popover class="pop2">
+                            <h1>HAGA CLIC FUERA DEL CUADRO PARA SALIR</h1>
+                            <embed class="pdf-viewer" src="'.arreglarpdf($pdff["pdf"]).'" type="application/pdf" />
+                        </div>';  
+                        }    
+                    }
+                
+                    
+              
+            }else{
+                echo '<p class="descripcionuni">Por el momento puede solicitar el material contactandose con el establecimiento</p>';
+                if($haycorreo == true){
+                    echo '<a class="botonuni" onclick="redirigircentro('."'".'formulariodecontacto'."'".')">CONTACTARME</a>';
                 }
-            }  
+               echo'</div>';
+        
+               }  
             
        }else{
-        echo '<p class="descripcionuni">Por el momento puede solicitar el plan de estudios contactandose con el establecimiento</p>';
+        echo '<p class="descripcionuni">Por el momento puede solicitar el material contactandose con el establecimiento</p>';
         if($haycorreo == true){
             echo '<a class="botonuni" onclick="redirigircentro('."'".'formulariodecontacto'."'".')">CONTACTARME</a>';
         }
-       }
        echo'</div>';
+
+       }
 
 }
 ?>

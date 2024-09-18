@@ -33,6 +33,7 @@ if (isset($_GET['universidad'])) {
 }else{
     header("Location: index.php");
 }
+
 function buscartipocarrera(){
     include "./codigophp/conexionbs.php";
     $stmt =  $conn->prepare("SELECT DISTINCT tipo_carrera FROM carrera");

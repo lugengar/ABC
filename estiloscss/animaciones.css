@@ -79,6 +79,23 @@
         transform: rotate(0deg);
     }
 }
+@keyframes redes {
+    0% {
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(-10deg);
+    }
+    50%{
+        transform: rotate(10deg);
+    }
+    75%{
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
 @keyframes flecha {
     0% {
         transform: scale(1) translateY(0vh);
@@ -127,6 +144,20 @@
     animation: botones 5s both infinite;
 
 }
+.redsocial{
+    animation: redes 5s both infinite;
+
+}
+.redsocial2{
+    animation: redes 5s both infinite;
+
+}
+.redsocial2:hover{
+    animation: none;
+
+}
+
+
 /*
 .imagenuni:hover{
     background-size: contain;

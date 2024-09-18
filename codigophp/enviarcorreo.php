@@ -12,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $respuesta = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secretkey1&response=$captcha&remoteip=$ip");
     $atributos = json_decode($respuesta,true);
     if($atributos != null){
+
         if($atributos["success"]){
             // Configurar los detalles del correo
             $subject = "Nuevo mensaje de $name";
@@ -21,9 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Enviar el correo
             
             if (mail($recipient, $subject, $body, $headers)) {
-                echo '<script>
-                    window.location.href = "../universidad.php?universidad=' . $_POST['universidad'] . '&enviado=true#carreraelegida";
-                </script>';
+                header("Location: ../universidad.php?universidad=" . $_POST['universidad'] . '&enviado=true#carreraelegida');
+
             } else {
                 echo "Error al enviar el correo.";
             }

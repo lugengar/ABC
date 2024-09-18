@@ -4,21 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estiloscss/styles.css">
-    <link rel="stylesheet" href="estiloscss/animaciones.css">
+        <?php include "./codigophp/verificacion.php"; animaciones();?>
+   
     <link rel="icon" href="https://abc.gob.ar/core/themes/abc/favicon.ico" type="image/vnd.microsoft.icon">
     <title>Ofertas de Educación Superior Región 6</title>
     <meta name="description" content="Ofertas de Educación Superior Región 6">
 </head>
 <body>
     <?php
-   session_start();
-   session_destroy();
-   $admin = "AND habilitado = 0";
-   $admin2 = "AND e.habilitado = 0";
-   if(isset($_SESSION["id_usuario"])){
-       $admin = "";
-       $admin2 = "";
-   }
+
+        
+        mostrarocultos();
         //INSERTA EN EL CODIGO EL CODIGO PARA MOSTRAR LOS RESULTADOS DE LA BARRA DE BUSQUEDA
         include "./codigophp/buscar_universidades.php";
 
@@ -66,7 +62,7 @@
             <div class="botones" id="botones">
                 <button class="boton pop" >
                     <div class="imagenboton" style="background-image: url(imagenes/iconos/ubicacion.svg);"></div>
-                    <h1>Buscar universidad en el mapa</h1>
+                    <h1>Buscar establecimiento en el mapa</h1>
                 </button>
 
                 <!-- BOTON BUSCAR POR DISTRITO 
@@ -82,7 +78,7 @@
                     <h1>Filtrar por tipo de establecimiento</h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('carrera')"><div class="imagenboton" style=" background-image: url(imagenes/iconos/sombrero.svg);"></div>
-                    <h1>Filtrar establecimiento por carrera</h1>
+                    <h1>Filtrado por tipo de carrera</h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('nombre')">
                     <div class="imagenboton" style=" background-image: url(imagenes/iconos/letrasabc.svg);"></div>
@@ -92,7 +88,7 @@
             <form class="barradebusqueda <?php if($tipo == "nombre" || $haytipo == false){echo 'activo';} ?>" id="nombre" method="GET" action="./index.php#identificador2">
                <p class="barratexto">Nombre del establecimiento <img src="imagenes/iconos/lupa.svg" class="imglupa" alt=""></p>
             <div style="gap:2vh;">
-                <input type="text" name="busqueda" maxlength ="20" placeholder="Nombre" required>
+                <input type="text" name="busqueda" maxlength ="35" placeholder="Nombre" required>
                 <input type="hidden" name="tipo"  value="nombre" required>
                 <input type="submit" value="Buscar">
                 </div>
@@ -134,7 +130,7 @@
                     <option value="">Ninguno</option>
                     <?php
                         //ESCRIBE LAS CARRERAS PARA LA BARRA DE BUSQUEDA
-                        buscarcarreras();
+                        buscartipocarrera();
                     ?>
                 </select>
                 <input type="hidden" name="tipo" value="carrera" required>
@@ -161,7 +157,7 @@
             <div class="logodte"></div>
 
             <div class="textofooter">
-                <h1>&copy; 2024 Escuela Secundaria Técnica N1 Vicente Lopez. Todos los derechos reservados.</h1>
+                <h1>&copy; 2024 Escuela Secundaria Técnica N°1 Vicente López. Todos los derechos reservados.</h1>
             </div>
             <div class="redesociales">
       

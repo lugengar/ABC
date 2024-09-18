@@ -1,269 +1,344 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Carga de Datos</title>
-    <link rel="stylesheet" href="formulario.css">
+    <link rel="stylesheet" href="../estiloscss/cargardatos.css">
+    <link rel="stylesheet" href="../estiloscss/animaciones.css">
+    <link rel="icon" href="https://abc.gob.ar/core/themes/abc/favicon.ico" type="image/vnd.microsoft.icon">
+
+    <title>Visualizador de Establecimientos</title>
 </head>
-<body>
-    <?php
-         include "../codigophp/conexionbs.php";
-         session_start();
-         $_SESSION["id_usuario"] = "a";
+<style>
+.universidad3 {
+    padding: 2vh;
+    border-radius: 1vh;
+    position: relative;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
+    overflow:hidden;
+}
+.imagenuni4{
+    width: 40vh;
+    height:auto;
+}
+/* Estilo del nombre del establecimiento */
+.universidad3 p {
+    font-size: 2.5vh;
+    margin-bottom: 1vh;
+    font-weight: bold;
+}
 
-        $distritos_result = mysqli_query($conn, "SELECT * FROM distrito");
-        $establecimientos_result = mysqli_query($conn, "SELECT * FROM establecimiento WHERE id_establecimiento != 0");
-        $carrera_result = mysqli_query($conn, "SELECT * FROM carrera");
-        $tipo_contacto_result = mysqli_query($conn, "SELECT DISTINCT tipo FROM contacto");
+/* Estilo de los elementos <details> */
+.universidad3 details {
+    margin-top: 1vh;
+    padding: 1vh;
+    background-color: #ffffff;
+    border: 0.1vh solid #ccc;
+    border-radius: 0.5vh;
+}
 
-        $distritos = mysqli_fetch_all($distritos_result, MYSQLI_ASSOC);
-        $establecimientos = mysqli_fetch_all($establecimientos_result, MYSQLI_ASSOC);
-        $carreras = mysqli_fetch_all($carrera_result, MYSQLI_ASSOC);
-        $tipos_contacto = mysqli_fetch_all($tipo_contacto_result, MYSQLI_ASSOC);
-    ?>
+/* Estilo de los elementos <summary> */
+.universidad3 summary {
+    font-size: 2vh;
+    cursor: pointer;
+}
 
-    <div class="form-container">
-        <h2>Formulario de Carga de Datos</h2>
-        <form action="process.php" method="post" id="dataForm" enctype="multipart/form-data">
-            <label for="accion">Seleccionar acción:</label>
-            <select id="accion" name="accion" onchange="mostrarFormulario()" required>
-                <option value="">--Selecciona una acción--</option>
-                <option value="agregar">Agregar</option>
-                <option value="eliminar">Eliminar</option>
-                <option value="modificar">Modificar</option>
-                <option value="visualizar">Visualizar</option>                  
-            </select>
+/* Lista de carreras */
+.universidad3 ul {
+    list-style-type: none;
+    margin: 1vh 0;
+    padding: 0;
+}
 
-            <label for="tabla">Seleccionar tabla:</label>
-            <select id="tabla" name="tabla" onchange="mostrarCampos()" required>
-                <option value="">--Selecciona una tabla--</option>
-                <option value="inicio">Inicio</option>
-                <option value="carrera">Carrera</option>
-                <option value="contacto">Contacto</option>
-                <option value="establecimiento">Establecimiento</option>
-                <option value="planestudio">Plan de Estudio</option>
-                <option value="imagenes">Imagenes</option>
-                <option value="distrito">Distritos</option>
-            </select>
+/* Elementos de la lista */
+.universidad3 li {
+    font-size: 1.8vh;
+    margin: 0.5vh 0;
+}
 
-            <div id="formFields"></div>
+/* Estilo para los elementos anidados en <details> */
+.universidad3 details details {
+    margin-top: 1vh;
+    padding-left: 2vh;
+    border-left: 0.2vh dashed #ccc;
+}
+/* Estilos de los botones */
+.btn {
+    display: inline-block;
+    margin-top: 1vh;
+    padding: 1vh 2vh;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 0.5vh;
+    font-size: 1.8vh;
+    cursor: pointer;
+}
 
-            <input type="submit" value="Enviar">
-        </form>
-    </div>
+/* Botón de editar */
+.btn.editar {
+    background-color: #78568e; /* Verde */
+}
+.btn.añadir {
+    background-color: #00adc1; /* Verde */
+}
 
-    <script>
-        function mostrarFormulario() {
-            mostrarCampos(); 
-        }
+.btn.ver {
+    background-color: #37799f; /* Verde */
+}
+/* Botón de eliminar */
+.btn.eliminar {
+    background-color: #e81f76; /* Rojo */
+}
 
-        function mostrarCampos() {
-            var accion = document.getElementById("accion").value;
-            var tabla = document.getElementById("tabla").value;
-            var formFields = document.getElementById("formFields");
-            formFields.innerHTML = ''; 
+/* Espaciado para las acciones */
+.actions {
+    margin-top: 1vh;
+    display: flex;
+    gap: 1vh;
+    flex-wrap: wrap; /* Permite que los botones se ajusten en pantallas pequeñas */
+}
+/* Estilos para el formulario de búsqueda */
 
+</style>
+<body><?php
+include "../codigophp/conexionbs.php";
+include "../claves.php";
+include "../codigophp/verificacion.php";
+esadmin();
+// Obtener el término de búsqueda si existe
+$search = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
 
-            if (accion === "agregar") {
-            if (tabla === "carrera") {
-                formFields.innerHTML = `
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                    <label for="descripcion">Descripción:</label>
-                    <input type="text" id="descripcion" name="descripcion" required>
-                    <label for="titulo">Título:</label>
-                    <input type="text" id="titulo" name="titulo" required>
-                    <label for="tipo_carrera">Tipo de Carrera:</label>
-                    <select id="tipo_carrera" name="tipo_carrera" required>
-                        <option value="" disabled selected>Seleccionar tipo</option>
-                        <option value="Tecnicatura">Técnica</option>
-                        <option value="Profesorado">Profesorado</option>
-                        <option value="Licenciatura">Licenciatura</option>
-                        <option value="Ingeniería">Ingeniería</option>
-                        <option value="Otro">Otro</option>
-                    </select>
-                `;
-                } else if (tabla === "contacto") {
-                    formFields.innerHTML = `
-                        <label for="descripcion">Descripción:</label>
-                        <input type="text" id="descripcion" name="descripcion" required>
-                        <label for="tipo">Tipo:</label>
-                        <select id="tipo" name="tipo" required>
-                            <option value="">--Selecciona un tipo--</option>
-                            <?php foreach ($tipos_contacto as $row) { ?>
-                                <option value="<?php echo $row['tipo']; ?>">
-                                    <?php echo $row['tipo']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                        <label for="contacto">Contacto:</label>
-                        <input type="text" id="contacto" name="contacto" required>
-                        <label for="fk_establecimiento">FK Establecimiento:</label>
-                        <select id="fk_establecimiento" name="fk_establecimiento" required>
-                            <option value="">--Selecciona un establecimiento--</option>
-                            <?php foreach ($establecimientos as $row) { ?>
-                                <option value="<?php echo $row['id_establecimiento']; ?>">
-                                    <?php echo $row['id_establecimiento'] . " - " . $row['nombre']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    `;
-                } else if (tabla === "establecimiento") {
-                    formFields.innerHTML = `
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                        <label for="ubicacion">Ubicación:</label>
-                        <input type="text" id="ubicacion" name="ubicacion" required>
-                        <label for="descripcion">Descripción:</label>
-                        <input type="text" id="descripcion" name="descripcion" required>
-                        <label for="tipo_establecimiento">Tipo de Establecimiento:</label>
-                        <select id="tipo_establecimiento" name="tipo_establecimiento" required>
-                            <option value="">--Selecciona un tipo--</option>
-                            <option value="Universidad">Universidad</option>
-                            <option value="Instituto">Instituto</option>
-                            <option value="Polo educativo">Polo educativo</option>
-                            <option value="Centro universitario">Centro universitario</option>
-                        </select>
-                        <label for="servicios">Servicios:</label>
-                        <input type="text" id="servicios" name="servicios" required>
-                        <label for="fk_distrito">FK Distrito:</label>
-                        <select id="fk_distrito" name="fk_distrito" required>
-                            <option value="">--Selecciona un distrito--</option>
-                            <?php foreach ($distritos as $row) { ?>
-                                <option value="<?php echo $row['id_distrito']; ?>">
-                                    <?php echo $row['id_distrito'] . " - " . $row['nombre']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                        <label for="imagen">Imagen (solo JPG):</label>
-                        <input type="file" id="imagen" name="imagen" accept=".jpg" >
-                        <label for="habilitado">¿Quiere que el establecimiento sea publico? (todos podran verlo):</label>
-                        <input type="checkbox" id="habilitado" name="habilitado">
-                    `;
-                } else if (tabla === "planestudio") {
-                    formFields.innerHTML = `
-                        <label for="pdf">PDF:</label>
-                        <input type="file" id="pdf" name="pdf" accept=".pdf" >
-                        <label for="fk_carrera">FK Carrera:</label>
-                        <select id="fk_carrera" name="fk_carrera" required>
-                            <option value="">--Selecciona una carrera--</option>
-                            <?php foreach ($carreras as $row) { ?>
-                                <option value="<?php echo $row['id_carrera']; ?>">
-                                    <?php echo $row['id_carrera'] . " - " . $row['nombre']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                        <label for="fk_establecimiento">FK Establecimiento:</label>
-                        <select id="fk_establecimiento" name="fk_establecimiento" required>
-                            <option value="">--Selecciona un establecimiento--</option>
-                            <?php foreach ($establecimientos as $row) { ?>
-                                <option value="<?php echo $row['id_establecimiento']; ?>">
-                                    <?php echo $row['id_establecimiento'] . " - " . $row['nombre']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    `;
-                }else if (tabla === "distrito") {
-                formFields.innerHTML = `
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                `;
-            }else if (tabla === "imagenes") {
-                formFields.innerHTML = `
-                    <label for="imagen">Cargar imagen:</label>
-                    <input type="file" id="imagen" name="imagen" accept="image/*" required>
-                    <br>
-                    <label for="fk_establecimiento">FK Establecimiento:</label>
-                    <select id="fk_establecimiento" name="fk_establecimiento" required>
-                        <option value="">--Selecciona un establecimiento--</option>
-                        <option value="0">
-                                0 - Carrusel del inicio
-                        </option>
-                        <?php foreach ($establecimientos as $row) { ?>
-                            <option value="<?php echo htmlspecialchars($row['id_establecimiento']); ?>">
-                                <?php echo htmlspecialchars($row['id_establecimiento']) . " - " . htmlspecialchars($row['nombre']); ?>
-                            </option>
-                        <?php } ?>
-                    </select>
-                `;
-            }
-            }
+// Modificar la consulta para incluir la búsqueda
+$establecimientos_query = "SELECT * FROM establecimiento WHERE id_establecimiento != 0";
+
+if (!empty($search)) {
+    // Filtrar por nombre del establecimiento
+    $establecimientos_query .= " AND nombre LIKE ?";
+}
+
+$establecimientos_stmt = mysqli_prepare($conn, $establecimientos_query);
+
+if (!empty($search)) {
+    $search_param = '%' . $search . '%';
+    mysqli_stmt_bind_param($establecimientos_stmt, 's', $search_param);
+}
+
+mysqli_stmt_execute($establecimientos_stmt);
+$establecimientos_result = mysqli_stmt_get_result($establecimientos_stmt);
+$establecimientos = mysqli_fetch_all($establecimientos_result, MYSQLI_ASSOC);
+
+// Consultas restantes
+$carrera_result = mysqli_query($conn, "SELECT * FROM carrera");
+$contacto_result = mysqli_query($conn, "SELECT * FROM contacto");
+$imagenes_result = mysqli_query($conn, "SELECT * FROM imagenes");
+$planes_estudio_result = mysqli_query($conn, "SELECT * FROM recursos");
+
+$carreras = mysqli_fetch_all($carrera_result, MYSQLI_ASSOC);
+$planes_estudio = mysqli_fetch_all($planes_estudio_result, MYSQLI_ASSOC);
+$contacto_result = mysqli_fetch_all($contacto_result, MYSQLI_ASSOC);
+$imagenes_result = mysqli_fetch_all($imagenes_result, MYSQLI_ASSOC);
+?>
 
 
-            else if (accion === "eliminar") {
-                if (tabla === "carrera") {
-                    formFields.innerHTML = `
-                        <label for="id_carrera">Carrera a eliminar:</label>
-                        <select id="id_carrera" name="id_carrera" required>
-                            <option value="">--Selecciona una carrera--</option>
-                            <?php foreach ($carreras as $row) { ?>
-                                <option value="<?php echo $row['id_carrera']; ?>">
-                                    <?php echo $row['nombre']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    `;
-                } else if (tabla === "contacto") {
-                    formFields.innerHTML = `
-                        <label for="id_contacto">Contacto a eliminar:</label>
-                        <select id="id_contacto" name="id_contacto" required>
-                            <option value="">--Selecciona un contacto--</option>
-                            <?php foreach ($tipos_contacto as $row) { ?>
-                                <option value="<?php echo $row['tipo']; ?>">
-                                    <?php echo $row['tipo']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    `;
-                } else if (tabla === "establecimiento") {
-                    formFields.innerHTML = `
-                        <label for="id_establecimiento">Establecimiento a eliminar:</label>
-                        <select id="id_establecimiento" name="id_establecimiento" required>
-                            <option value="">--Selecciona un establecimiento--</option>
-                            <?php foreach ($establecimientos as $row) { ?>
-                                <option value="<?php echo $row['id_establecimiento']; ?>">
-                                    <?php echo $row['nombre']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    `;
-                } else if (tabla === "planestudio") {
-                    formFields.innerHTML = `
-                        <label for="id_planestudio">Plan de estudio a eliminar:</label>
-                        <select id="id_planestudio" name="id_planestudio" required>
-                            <option value="">--Selecciona un plan de estudio--</option>
-                            <?php foreach ($carreras as $row) { ?>
-                                <option value="<?php echo $row['id_carrera']; ?>">
-                                    <?php echo $row['nombre']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    `;
-                }
-            }else if (accion === "modificar") {
 
-            }else if (accion === "visualizar") {
-                if (tabla === "establecimiento") {
-                    formFields.innerHTML = `
-                        <label for="id_establecimiento">Establecimiento a visualizar:</label>
-                        <select id="id_establecimiento" name="id_establecimiento" required>
-                            <option value="">--Selecciona un establecimiento--</option>
-                            <?php foreach ($establecimientos as $row) { ?>
-                                <option value="<?php echo $row['id_establecimiento']; ?>">
-                                    <?php 
-                                    $mensaje = "Privado";
-                                    if($row['habilitado'] == "0"){
-                                        $mensaje = "Publico";
+    <div class="container">
+    <header class="header" id="header">
+            <a href="../index.php" class="logo_pba_horizontal " ></a>
+            <a href="../index.php" class="boton_nose_que_estudiar">Inicio<div class="circulopregunta" style="background-image: url(../imagenes/iconos/casa.svg); background-size: 4vh;"></div></a>
+        </header>
+        <div class="botones">
+                <a class="boton" href="agregar.php">
+                    <div class="imagenboton" style="background-image: url(../imagenes/iconos/agregar.svg);  background-size: contain;"></div>
+                    <h1>Formulario agregar</h1>
+                </a>
+                <a class="boton" href="eliminar.php">
+                    <div class="imagenboton" style="background-image: url(../imagenes/iconos/borrar.svg); background-size: contain;"></div>
+                    <h1>Formulario eliminar</h1>
+                </a>
+                <a class="boton" href="modificar.php">
+                    <div class="imagenboton" style="background-image: url(../imagenes/iconos/modifcar1.svg); background-size: contain;"></div>
+                    <h1>Formulario modificar</h1>
+                </a>
+            
+        </div>
+        <form class="barradebusqueda activo"  method="GET" action="">
+               <p class="barratexto">Nombre del establecimiento <img src="imagenes/iconos/lupa.svg" class="imglupa" alt=""></p>
+            <div style="gap:2vh;">
+                <input type="text" name="busqueda" maxlength ="35" placeholder="Nombre" required>
+                <input type="submit" value="Buscar">
+                </div>
+            </form>
+            <div class="universidades">
+    <?php foreach ($establecimientos as $establecimiento) { ?>
+    <div class="universidad3" >
+   
+
+        <div class="establecimiento-content">
+
+            <div class="detalle-establecimiento">
+            <?php $texto = "Publicado";
+                if($establecimiento['habilitado'] == "1"){
+                    $texto = "No publicado";
+                }?>
+                <p><strong><?php echo $texto.' - '.$establecimiento['nombre']; ?>  </strong>
+            
+                
+          </p>
+
+                <div class="actions">
+                <?php
+                if($establecimiento['habilitado'] == "1"){
+                    echo '<a class="redsocial2" href="./prossmodificar.php?tabla=habilitado&id_establecimiento='.$establecimiento['id_establecimiento'].'&habilitado='.$establecimiento['habilitado'].'" style="background-image: url(../imagenes/iconos/candado2.svg); background-color: #e81f76;"> </a>';
+                }else{
+                    echo '<a class="redsocial2" href="./prossmodificar.php?tabla=habilitado&id_establecimiento='.$establecimiento['id_establecimiento'].'&habilitado='.$establecimiento['habilitado'].'" style="background-image: url(../imagenes/iconos/candado_desbloqueado.svg); background-color: #00adc1;"></a>';
+
+                }?>
+                <a href="../universidad.php?universidad=<?php echo $establecimiento['id_establecimiento']; ?>" class="btn ver" target="_blank">Visualizar establecimiento</a>
+
+                    <a href="modificar.php?tabla=establecimiento&id=<?php echo $establecimiento['id_establecimiento']; ?>" class="btn editar">Editar Establecimiento</a>
+
+                    <a href="eliminar.php?tabla=establecimiento&id=<?php echo $establecimiento['id_establecimiento']; ?>" class="btn eliminar">Eliminar Establecimiento</a>
+
+                </div>
+
+                <details>
+                    <summary>Carreras</summary>
+                    <ul>
+                        <?php 
+                                                
+                        $carreras_agregadas = [];
+
+                        foreach ($planes_estudio as $plan) {
+                            foreach ($carreras as $carrera) {
+                                if ($plan['fk_establecimiento'] == $establecimiento['id_establecimiento'] && $plan['fk_carrera'] == $carrera['id_carrera']) {
+                                    if (!isset($carreras_agregadas[$carrera['id_carrera']])) {
+                                        $carreras_agregadas[$carrera['id_carrera']] = [
+                                            'nombre' => $carrera['nombre'],
+                                            'id_carrera' => $carrera['id_carrera'],
+                                            'planes' => [],
+                                            'diseños' => []
+                                        ];
                                     }
-                                    echo $mensaje." - ".$row['nombre']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    `;
-                }
-            }
-        }
-    </script>
+
+                                    if ($plan['tipo_recurso'] === 'plan de estudio') {
+                                        $carreras_agregadas[$carrera['id_carrera']]['planes'][] = $plan;
+                                    } else if ($plan['tipo_recurso'] === 'diseño curricular') {
+                                        $carreras_agregadas[$carrera['id_carrera']]['diseños'][] = $plan;
+                                    }
+                                }
+                            }
+                        }
+
+                        foreach ($carreras_agregadas as $id_carrera => $data) {
+                            echo '<li><h1>' . $data['nombre'].'</h1>';
+
+                            echo '<div class="actions">';
+                            echo '<a href="agregar.php?tabla=recursos&id=' . $establecimiento["id_establecimiento"] . '&id2=' . $data["id_carrera"] . '" class="btn añadir">Añadir recurso</a>';
+                            //echo '<a href="prosseliminar.php?tabla=planestudio&id=' . $id_carrera . '" class="btn eliminar">Eliminar Carrera del establecimiento</a>';
+
+                            echo '</div>';
+
+                            if (!empty($data['planes'])) {
+                                echo '<details><summary>Plan de Estudio</summary><ul>';
+                                foreach ($data['planes'] as $plan) {
+                                    if($plan['pdf'] != ""){
+                                    echo '<li><h1>' . $plan['pdf'].'</h1>';
+                                    echo '<div class="actions">';
+                                    echo '<a href="../codigophp/verpdf.php?pdf=' . $plan['pdf'] . '" class="btn ver" target="_blank">Visualizar Plan</a>';
+
+                                    echo '<a href="modificar.php?tabla=recursos&id=' . $plan['id_recurso'] . '" class="btn editar">Editar Plan</a>';
+                                    echo '<a href="eliminar.php?tabla=recursos&id=' . $plan['id_recurso'] . '" class="btn eliminar">Eliminar Plan</a>';
+                                    echo '</div>';
+                                    echo '</li>';
+                                    }
+                                }
+                                echo '</ul></details>';
+                            }
+
+                            if (!empty($data['diseños'])) {
+                                echo '<details><summary>Diseño Curricular</summary><ul>';
+                                foreach ($data['diseños'] as $diseño) {
+                                    if($diseño['pdf'] != ""){
+                                    echo '<li><h1>' . $diseño['pdf'].'</h1>';
+                                    echo '<div class="actions">';
+                                    echo '<a href="../codigophp/verpdf.php?pdf=' . $diseño['pdf'] . '" class="btn ver" target="_blank">Visualizar Diseño</a>';
+
+                                    echo '<a href="modificar.php?tabla=recursos&id=' . $diseño['id_recurso'] . '" class="btn editar">Editar Diseño</a>';
+                                    echo '<a href="eliminar.php?tabla=recursos&id=' . $diseño['id_recurso'] . '" class="btn eliminar">Eliminar Diseño</a>';
+                                    echo '</div>';
+                                    echo '</li>';
+                                    }
+                                }
+                                echo '</ul></details>';
+                            }
+
+                            echo '</li>';
+                        }
+
+
+                        ?>
+                    </ul>
+                </details>
+                    <?php
+                        echo '<a href="agregar.php?tabla=recursos&id=' . $establecimiento['id_establecimiento'] .'&id2=" class="btn añadir">Añadir Carrera</a>';
+                    
+                    ?>
+                <details>
+
+                    <summary>Contactos</summary>
+                    <ul>
+                        <?php 
+                        foreach ($contacto_result as $contacto) {
+                            if ($contacto['fk_establecimiento'] == $establecimiento['id_establecimiento']) {
+                                echo '<li><h1>' .$contacto['tipo'].' - '. $contacto['contacto'].'</h1>';
+                                
+                                echo '<div class="actions">';
+                                if($contacto["tipo"] != "telefono" && $contacto["tipo"] != "correo"){
+                                echo '<a href="' . $contacto['contacto'] . '"target="_blank" class="btn ver">Visualizar Contacto</a>';
+
+                                }
+                                echo '<a href="modificar.php?tabla=contacto&id=id=' . $contacto['id_contacto'] . '" class="btn editar">Editar Contacto</a>';
+
+                                echo '<a href="eliminar.php?tabla=contacto&id=' . $contacto['id_contacto'] . '" class="btn eliminar">Eliminar Contacto del establecimiento</a>';
+
+                                echo '</div>';
+                            }
+                            
+                        }
+                        ?>
+                    </ul>
+                </details>
+                    <?php
+                        echo '<a href="agregar.php?tabla=contacto&id=' . $establecimiento['id_establecimiento'] .'" class="btn añadir">Añadir Contacto</a>';
+                    ?>
+                <details>
+
+                <summary>Imagenes</summary>
+                <ul>
+                    <?php 
+                    foreach ($imagenes_result as $imagen) {
+                        if ($imagen['fk_establecimiento'] == $establecimiento['id_establecimiento']) {
+                            echo '<li><h1>' .$imagen['url'].'</h1>';
+                            echo '<img class="imagenuni4" src="../imagenes/universidades/'.$imagen['url'].'">';
+                            echo '<div class="actions">';
+
+                            echo '<a href="eliminar.php?tabla=imagenes&id=' . $imagen['id_imagen'] . '" class="btn eliminar">Eliminar imagen del establecimiento</a>';
+
+                            echo '</div>';
+                        }
+                        
+                    }
+                    ?>
+                </ul>
+                </details>
+                <?php
+                        echo '<a href="agregar.php?tabla=imagenes&id=' . $establecimiento['id_establecimiento'] .'" class="btn añadir">Añadir Imagenes</a>';
+                    ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+    </div>
 </body>
 </html>

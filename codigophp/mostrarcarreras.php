@@ -5,7 +5,7 @@ include "./codigophp/conexionbs.php";
 $carreras= null;
 if(isset($_GET['universidad'])){
     $universidad = filter_var($_GET['universidad'], FILTER_SANITIZE_SPECIAL_CHARS);
-    $sql3 = "SELECT * FROM planestudio WHERE fk_establecimiento = ".$universidad;
+    $sql3 = "SELECT * FROM recursos WHERE fk_establecimiento = ".$universidad;
     $idcarreras = $conn->query($sql3);
     $carreras= [];
 

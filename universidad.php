@@ -2,13 +2,9 @@
 <html lang="en-es">
 <head>
 <?php
-session_start();
-$admin = "AND habilitado = 0";
-$admin2 = "AND e.habilitado = 0";
-if(isset($_SESSION["id_usuario"])){
-    $admin = "";
-    $admin2 = "";
-}
+ include "./claves.php";
+ include "./codigophp/verificacion.php";
+ mostrarocultos();
 
    // try {
         //OBTIENE TODOS LOS CODIGOS NECESARIOS PARA MOSTRAR LA INFORMACION DEL ESTABLECIMIENTO
@@ -31,9 +27,8 @@ if(isset($_SESSION["id_usuario"])){
                 }
             }
         }
-        if($row["habilitado"] == 1 && !isset($_SESSION["id_usuario"])){
-            header("Location: index.php");
-        }
+
+        estaoculta($row["habilitado"]);
     //} catch (Exception $e) {
         //EN CASO DE ENCONTRAR UN ERROR AL CARGAR TE ENVIA AL INDEX.PHP
      //   header("Location: index.php");
@@ -42,7 +37,7 @@ if(isset($_SESSION["id_usuario"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estiloscss/universidad.css">
-    <link rel="stylesheet" href="estiloscss/animaciones.css">
+    <?php animaciones();?>
     <link rel="icon" href="https://abc.gob.ar/core/themes/abc/favicon.ico" type="image/vnd.microsoft.icon">
     <?php 
     echo '<title>'.$row["nombre_universidad"].'</title>';
@@ -144,7 +139,7 @@ if(isset($_SESSION["id_usuario"])){
             </div>
              <div class="barradebusqueda volverarriba">
                 <img src="imagenes/iconos/flecha.svg" alt="" class="flecha">
-                <button onclick="redirigircentro('botones')" >Volver arriba</button>
+                <button onclick="redirigircentro('info')" >Volver arriba</button>
             </div>
         </main>
        
@@ -154,7 +149,7 @@ if(isset($_SESSION["id_usuario"])){
 
             <div class="logodte"></div>
             <div class="textofooter">
-                <h1>&copy; 2024 Escuela Secundaria Técnica N1 Vicente Lopez. Todos los derechos reservados.</h1>
+                <h1>&copy; 2024 Escuela Secundaria Técnica N°1 Vicente López. Todos los derechos reservados.</h1>
             </div>
             <div class="redesociales">
                 <a href="" class="redsocial" style="background-image: url(https://abc.gob.ar/sites/default/files/2021-03/icon-youtube_0.svg);"></a>

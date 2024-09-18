@@ -10,7 +10,7 @@ if (isset($_GET['carrera']) && isset($_GET['universidad'])) {
     $universidad = filter_var($_GET['universidad'], FILTER_SANITIZE_SPECIAL_CHARS);
 
     // Preparar la consulta usando una consulta preparada
-    $stmt = $conn->prepare("SELECT * FROM planestudio WHERE fk_carrera = ? AND fk_establecimiento = ?");
+    $stmt = $conn->prepare("SELECT * FROM recursos WHERE fk_carrera = ? AND fk_establecimiento = ?");
     
     $stmt->bind_param("ss", $busqueda, $universidad);
     $stmt->execute();
@@ -23,7 +23,7 @@ if (isset($_GET['carrera']) && isset($_GET['universidad'])) {
         $establecimientos = null;
         $sqll = "";
         // Usar una consulta preparada para obtener otros establecimientos
-        $stmt2 = $conn->prepare("SELECT fk_establecimiento FROM planestudio WHERE fk_carrera = ?");
+        $stmt2 = $conn->prepare("SELECT fk_establecimiento FROM recursos WHERE fk_carrera = ?");
         $stmt2->bind_param("s", $busqueda);
         $stmt2->execute();
         $otros = $stmt2->get_result();

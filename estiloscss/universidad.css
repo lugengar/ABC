@@ -53,7 +53,22 @@ input[type="submit"] {
     font-weight: 700;
     font-style: normal;
 }
-
+.botonuni2{
+    border-radius: 25vh;
+    box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.2); 
+    font-size: 2vh;
+    border: none;
+    border-radius: 1.5vh;
+    height: 8vh;
+    width: 18vh;
+    background-color: #e81f76;
+    color: white;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
 .container {
     left: 0;
     top: 0;
@@ -1021,7 +1036,9 @@ body.inactive .overlay {
     pointer-events: auto;
 }
 @media (max-width: 1000px){
-    
+    .botonuni2{
+        margin-top: 2vh;
+    }
     .barradebusqueda  input[type="submit"] {
         margin-left: 1vh;
     }

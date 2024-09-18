@@ -1,6 +1,7 @@
 <?php
 
 $result = null;
+$tipo = "";
 include "./codigophp/conexionbs.php";
 include "./codigophp/construccion.php";
 function buscarcarrera(){ //BUSCA CARRERAS/LICENCIATURAS CON EL TITULO NO TECNICO PARA MOSTRARLOS
@@ -37,6 +38,15 @@ function buscarcarreras(){ //BUSCA CARRERAS/LICENCIATURAS CON EL TITULO NO TECNI
     $stmt->execute();
     $result = $stmt->get_result();
     carreraslista($result);
+    $stmt->close();
+}
+function buscartipocarrera(){
+    global $conn;
+    global $stmt;
+    $stmt =  $conn->prepare("SELECT DISTINCT tipo_carrera FROM carrera");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    carreratipolista($result);
     $stmt->close();
 }
 function buscarestablecimientos(){
@@ -80,11 +90,42 @@ function etiqueta(){
     }
 }
 $carrera = null;
+function carrerasestablecimiento($id,$tipo){
+    global $conn;
+    global $stmt;
+    $sql3 = "SELECT * FROM recursos WHERE fk_establecimiento = ".$id;
+    $idcarreras = $conn->query($sql3);
+    $carreras= [];
+    if ($idcarreras->num_rows > 0) {
+
+        while ($row3 = $idcarreras->fetch_assoc()) {
+            array_push($carreras, $row3["fk_carrera"]);
+        }
+        $stmt = $conn->prepare("SELECT * FROM carrera WHERE tipo_carrera = ? AND id_carrera IN (".implode(", ", $carreras).")");
+        $stmt->bind_param("s", $tipo);
+        $stmt->execute();
+        $result4 = $stmt->get_result();
+        if($result4->num_rows > 0) {
+            return $result4;
+        }else{
+            return null;
+
+        }
+        $stmt->close();
+
+    }else{
+        return null;
+
+    }
+
+}
+
 
 function buscar(){ //BUSCA EN GENERAL POR LOS 4 MEDIOS DISTRITO, TECNICO,LICENCIATURA O NOMBRE
     global $conn;
     global $carrera;
     global $stmt;
+    global $tipo;
     global $admin;
     global $result;
 // Validar y limpiar el parámetro de búsqueda
@@ -114,8 +155,35 @@ ORDER BY
     $result = $stmt->get_result();
 }else if($tipo == "carrera"){ 
   
-    $sql2 = "SELECT * FROM planestudio WHERE fk_carrera = ".$busqueda;
-    $carrera = $busqueda;
+    $param = $busqueda;
+
+    // Preparar la consulta
+    $stmt = $conn->prepare("
+        SELECT DISTINCT e.id_establecimiento, e.nombre, e.descripcion, e.habilitado
+        FROM establecimiento e
+        INNER JOIN recursos r ON e.id_establecimiento = r.fk_establecimiento
+        INNER JOIN carrera c ON r.fk_carrera = c.id_carrera
+        WHERE c.tipo_carrera = ? AND e.id_establecimiento != 0
+        " . $admin . "
+        ORDER BY 
+            CASE 
+                WHEN e.tipo_establecimiento LIKE 'Instituto%' THEN 0
+                WHEN e.tipo_establecimiento LIKE 'Universidad%' THEN 1
+                ELSE 2
+            END,
+            e.tipo_establecimiento;
+    ");
+
+    // Enlazar el parámetro a la consulta
+    $stmt->bind_param("s", $param);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+}else if($tipo == "carrera2"){ 
+  
+    $sql2 = "SELECT * FROM recursos WHERE fk_carrera = ".$busqueda;
     $planestudio = $conn->query($sql2);
     $establecimientos = [];
     foreach($planestudio as $plan) {
@@ -201,7 +269,10 @@ if ($result != null){
     while ($row = $result->fetch_assoc()) {
         $sql2 = "SELECT * FROM imagenes WHERE fk_establecimiento = ".$row["id_establecimiento"];
         $imagenes = $conn->query($sql2);
-        universidad($row["id_establecimiento"], $row["nombre"], $row["descripcion"], $imagenes, $carrera); #$row["imagenes"]);
+        if($tipo == "carrera"){
+            $carrera = carrerasestablecimiento($row["id_establecimiento"],$busqueda);
+        }
+        universidad($row["id_establecimiento"], $row["nombre"], $row["descripcion"], $imagenes, $carrera, $row["habilitado"]); #$row["imagenes"]);
     }
 }
 }else{

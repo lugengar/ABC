@@ -1,0 +1,1485 @@
+/*IMPORTAR FUENTES DE TEXTO*/
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/*ESTILOS GLOBALES*/
+* {
+    font-size: 2vh;
+}
+
+input[type="submit"],
+a,
+button {
+    transition: transform 0.5s;
+}
+
+input[type="submit"]:hover,
+a:hover,
+button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.boton{
+    text-decoration: none;
+}
+h1,
+button,
+.botonuni,
+h2,
+h3 {
+    font-family: "Encode Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2vh;
+}
+
+p,
+a,
+label, details {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+input,
+select,
+option,
+textarea {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+input[type="submit"] {
+    font-family: "Encode Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.botonuni2{
+    border-radius: 25vh;
+    box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.2); 
+    font-size: 2vh;
+    border: none;
+    border-radius: 1.5vh;
+    height: 8vh;
+    width: 18vh;
+    background-color: #e81f76;
+    color: white;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+.container {
+    left: 0;
+    top: 0;
+    gap: 5vh;
+    position: absolute;
+    height: max-content;
+    width: 100%;
+    display: grid;
+    grid-template-areas:
+        "HEA HEA HEA"
+        "BOT BOT BOT"
+        "BAR BAR BAR"
+        "UNI UNI UNI";
+    grid-template-rows: 7vh max-content max-content auto;
+    grid-template-columns: auto auto auto;
+}
+[popover] {
+    transition: visibility 1s;
+    border: none;
+    border-radius: 0.5vh;
+    background-color: white;
+    /*
+    background: linear-gradient(90deg, rgba(232,31,118,1) 0%, rgba(0,174,192,1) 100%);
+ */
+}
+.error {
+    width: 90dvw;
+    height: max-content;
+
+    color: #00adc1;
+    font-size: 3vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imagen.errorimg {
+    background-image: url(../imagenes/otros/logo-pba-mobile.png);
+    background-position: center;
+    background-size: 90vh;
+    background-repeat: no-repeat;
+}
+
+.imagen.imagen.activo {
+    left: 0;
+    opacity: 1;
+
+}
+#volver{
+    background-size:6.5vh;
+}
+[popover]::backdrop {
+    backdrop-filter: blur(1vh);
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url(../imagenes/otros/logo-pba-desktop.png);
+    background-position: left;
+    background-size: 9%;
+    background-repeat: no-repeat;
+}
+
+[popover] h1 {
+    width: 80vw;
+    text-align: center;
+    color: #00adc1;
+    font-weight: 700;
+}
+
+[popover] :nth-child(2) {
+    width: 80vw;
+    height: 86vh;
+}
+
+/*ESTILOS DE LA BARRA DE BUSQUEDA Y PARA VOLVER HACIA ARRIBA*/
+
+.barratexto{
+    font-family: "Encode Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2.5vh;
+    color: white;
+    margin-right: 5vh;
+    margin-bottom: 0;
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+}
+.barratexto .imglupa{
+    float: right;
+    margin-left: 1vh;
+}
+.barradebusqueda {
+    
+    position: sticky;
+    z-index: 1000;
+    top: 7vh;
+    opacity: 0;
+    background-color: #00aec3;
+    grid-area: BAR;
+    display: flex;
+    pointer-events: none;
+    justify-content: center;
+    align-items: center;
+    gap: 1vh;
+    flex-wrap: wrap;
+    box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+    transition: opacity 0.5s;
+}
+.barradebusqueda.activo {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.volverarriba {
+    opacity: 1;
+    pointer-events: all;
+    grid-area: VOL;
+    z-index: 2000;
+    top: 7vh;
+}
+
+.barradebusqueda img {
+    height: 5vh;
+}
+
+.barradebusqueda input, .barradebusqueda textarea,
+.barradebusquedaselect {
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.2);
+}
+
+.barradebusqueda input[type="text"],
+.barradebusqueda select {
+    border: none;
+    border-radius: 1.5vh;
+    height: 5vh;
+    color: gray;
+    width: 0vh;
+    padding-left: 1vh;
+    transition: width 2s;
+
+}
+.barradebusqueda.activo input[type="text"],.barradebusqueda textarea,
+.barradebusqueda.activo select {
+    width: 30vh;
+}
+.universidad input,
+.universidad textarea {
+    border: none;
+    border-radius: 1.5vh;
+    height: 5vh;
+    color: gray;
+    width: 60vh;
+    padding-left: 1vh;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.2);
+    margin-bottom: 2vh;
+    border: rgba(128, 128, 128, 0.438) solid 0.1vh;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.universidad textarea {
+    resize: none;
+    height: 15vh;
+    margin-bottom: 5vh;
+
+}
+
+.universidad input[type="submit"] {
+    border: none;
+    border-radius: 1.5vh;
+    height: 5vh;
+    background-color: #e81f76;
+    color: white;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.barradebusqueda input[type="submit"],
+.barradebusqueda button {
+    border: none;
+    border-radius: 1.5vh;
+    height: 5vh;
+    background-color: #e81f76;
+    color: white;
+    padding-left: 2vh;
+    padding-right: 2vh;
+}
+
+/*ESTILOS DE LA BARRA DE NAVEGACION*/
+.header {
+
+    grid-area: HEA;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1000;
+    padding: 0.5vh;
+    box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-areas:
+        "LOG . BTN"
+    ;
+    grid-template-rows: auto;
+    grid-template-columns: 40vh auto 11vh;
+    padding-right: 1vh;
+}
+
+
+#header {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.boton_nose_que_estudiar {
+    display: block;
+    grid-area: BTN;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #00aec3;
+    text-decoration: none;
+    font-size: 2vh;
+    text-align: left;
+    position: relative;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.logo_pba_horizontal {
+    grid-area: LOG;
+    background-image: url(https://abc.gob.ar/core/themes/abc/logo-pba.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+/*ESTILOS DEL CARRUCEL DE IMAGENES INICIAL*/
+.carrusel {
+    background-image: url(../imagenes/otros/199.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    grid-area: IMG;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    background-color: white;
+}
+
+.circulos {
+    align-items: center;
+    grid-area: CIR;
+    display: flex;
+    justify-content: center;
+    gap: 2vh;
+}
+
+.circulo {
+    width: 2vh;
+    height: 2vh;
+    background-color: white;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+.imagen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 100%;
+    transition: left 0.5s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+
+}
+
+.imagen.activo {
+    left: 0;
+    opacity: 1;
+
+}
+
+.imagen.saliente {
+    left: -100%;
+}
+
+.circulo.activo {
+    background-color: #00adc1;
+    /* Color del circulo activo */
+}
+
+.texto1 {
+    pointer-events: none;
+    box-shadow: 0 1vh 2vh 0.5vh rgba(0, 0, 0, 0.2);
+    font-size: 5vh;
+    background-color: #e81f76;
+    color: black;
+    display: inline;
+    padding: 0.2vh 1vh;
+    color: white;
+}
+
+.texto2 {
+    pointer-events: none;
+    box-shadow: 0 1vh 2vh 0.5vh rgba(0, 0, 0, 0.2);
+    font-size: 5vh;
+    background-color: #00aec3;
+    color: black;
+    display: inline;
+    padding: 0.2vh 1vh;
+    color: white;
+    max-width: 4vh;
+}
+
+.filtro {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(to top, black, transparent);
+    display: grid;
+    grid-template-areas:
+        ". . ."
+        ". TEXT1 ."
+        ". TEXT2 ."
+        "CIR CIR CIR"
+    ;
+    gap: 1vh;
+    grid-template-rows: 1fr max-content max-content 10vh;
+    grid-template-columns: 5vh 50% 1fr;
+}
+
+.filtro :nth-child(1) {
+    grid-area: TEXT1;
+}
+
+.filtro :nth-child(2) {
+    grid-area: TEXT2;
+}
+
+.logo_pba_vertical {
+
+    width: 16vh;
+    height: 37vh;
+    background-color: white;
+    background-image: url(../imagenes/otros/logo-pba-desktop.png);
+    background-size: 14vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    right: 5vh;
+    bottom: 0;
+    border-radius: 3vh 3vh 0vh 0vh;
+    box-shadow: -2vh 2vh 2vh rgba(0, 0, 0, 0.2);
+}
+
+/*ESTILOS DEL CONTENIDO DEBAJO DEL CARRUCEL*/
+.identificador{
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    left: 0;
+}
+.casita_superior {
+    width: 6vh;
+    height: 6vh;
+    background-color: #e81f76;
+
+    background-image: url(../imagenes/iconos/casa.svg);
+    background-size: 4.5vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    right: 2vh;
+    top: 2vh;
+    border-radius: 25vh;
+    box-shadow: 0.5vh 0.5vh 1vh rgba(0, 0, 0, 0.2);
+}
+.informacion_superior {
+    width: 6vh;
+    height: 6vh;
+    background-color: #00adc1;
+
+    background-image: url(../imagenes/iconos/letra_i.svg);
+    background-size: 4vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    left: 2vh;
+    top: 2vh;
+    border-radius: 25vh;
+    box-shadow: 0.5vh 0.5vh 1vh rgba(0, 0, 0, 0.2);
+}
+.main {
+    grid-area: MAI;
+    background-color: white;
+    display: grid;
+    gap: 10vh;
+    padding-top: 5vh;
+    grid-template:
+        "INF INF INF"
+        "BOT BOT BOT"
+        "BAR BAR BAR"
+        "UNI UNI UNI"
+        "INFC INFC INFC"
+        "VOL VOL VOL"
+        ". . .";
+    grid-template-rows: max-content max-content minmax(10vh, max-content) auto max-content 10vh;
+    grid-template-columns: auto auto auto;
+}
+
+/*ESTILOS DE LAS UNIVERSIDADES*/
+.etiquetas{
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.barraseparadora{
+    border-top: #00adc1 solid 0.25vh;
+    height: 0.01vh;
+    width: 80%;
+}
+.etiqueta{
+    text-decoration: none;
+    background-color: #e81f76;
+    color: white;
+    font-size: 2vh;
+    width: max-content;
+    height: 3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../imagenes/iconos/equis.svg);
+    background-position: 0.8vh 1vh;
+    background-repeat: no-repeat;
+    background-size: 1vh;
+    border-radius: 25vh;
+    padding-left: 2.5vh;
+    padding-right: 1vh;
+}
+.lista {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5vh;
+    flex-wrap: wrap;
+}
+.lista2 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5vh;
+    flex-wrap: wrap;
+    max-width: 145vh;
+}
+
+
+
+.informacion {
+    grid-area: INF;
+}
+
+.informacioncarrera {
+    grid-area: INFC;
+}
+
+.universidades {
+    grid-area: UNI;
+}
+
+.universidad {
+    width: 80%;
+    height: max-content;
+    background-color: white;
+    border-radius: 2vh;
+    box-shadow: 0 0.5vh 2vh 0.5vh rgba(0, 0, 0, 0.2);
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    align-items: top;
+    flex-wrap: wrap;
+    overflow: hidden;
+    position: relative;
+}
+
+.carreras {
+    height: 45vh;
+}
+
+.horizontal {
+    justify-content: left;
+    align-items: none;
+    flex-wrap: nowrap;
+}
+
+.universidad .botonuni {
+    font-size: 2vh;
+    border: none;
+    border-radius: 1.5vh;
+    height: 5vh;
+    width: 18vh;
+    background-color: #e81f76;
+    color: white;
+    transform: translateY(-2.5vh);
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.universidad .botonuni:hover {
+    transform: translateY(-2.5vh) scale(1.1);
+}
+
+.universidad .imagenesuni {
+    width: 100%;
+    height: 22vh;
+    background-image: url(../imagenes/otros/coding.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.universidad .imageninfo {
+    width: 30dvw;
+    height: 20vh;
+    background-color: #00adc1;
+    background-size: 15vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background-size 0.5s;
+}
+
+.universidad .imageninfo2 {
+    width: 18dvw;
+    height: 100%;
+    background-color: #00adc1;
+    background-size: 15vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background-size 0.5s;
+}
+
+.universidad .imageninfo:hover {
+
+    background-size: 20vh;
+
+}
+
+.universidad .imageninfo2:hover {
+
+    background-size: 20vh;
+
+}
+
+.universidad .nombreuni {
+    padding-top: 1vh;
+    font-size: 2.5vh;
+    width: 100%;
+    height: max-content;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    text-align: center;
+    color: #00adc1;
+}
+
+.universidad .nombreuni2 {
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+
+    font-size: 3vh;
+    width: 100%;
+    height: max-content;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    color: white;
+    background-color: #00adc1;
+    ;
+    text-align: center;
+    transform: translateY(-3vh);
+}
+
+.universidad .barrauni {
+
+    border-top: #00adc1 solid 0.25vh;
+    height: 0.01vh;
+    width: 90%;
+    transform: translateY(2vh);
+
+}
+
+.universidad .barrauni3 {
+    transform: translateX(1dvw) translateY(2vh);
+    border-left: #00adc1 solid 0.25vh;
+    width: 5vh;
+    height: 90%;
+    padding-right: 1vh;
+
+}
+
+.universidad .barrauni2 {
+    transform: translateY(-2.5vh);
+    border-top: #00adc1 solid 0.25vh;
+    height: 0.01vh;
+    width: 40vh;
+
+}
+
+.universidad .descripcionuni {
+    width: 100%;
+    height: max-content;
+    overflow-y: auto;
+    padding-right: 2vh;
+    padding-left: 2vh;
+    text-align: start;
+    transform: translateY(-3vh);
+}
+
+
+/*ESTILOS DE LOS BOTONES DE COLORES*/
+.boton {
+    margin-top: 2vh;
+    width: 35vh;
+    height: 10vh;
+    border: none;
+    background-color: transparent;
+    border-radius: 50vh;
+    display: grid;
+    grid-template-areas:
+   
+        "BIMG . TEXTB";
+    grid-template-rows: 10vh;
+    grid-template-columns: 10vh 0.6vh auto;
+    transition: transform 0.5s;
+    justify-items: center;
+    align-items: center;
+}
+
+.boton h1 {
+    font-size: 2.5vh;
+    text-align: center;
+    grid-area: TEXTB;
+}
+
+.boton .imagenboton {
+    box-shadow: 0 1vh 2vh 0.5vh rgba(0, 0, 0, 0.2);
+    background-color: #00adc1;
+    width: 100%;
+    height: 100%;
+    grid-area: BIMG;
+    background-size: 8vh;
+    border-radius: 50vh;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.botones {
+
+    padding-bottom: 5vh;
+    grid-area: BOT;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4%;
+    flex-wrap: wrap;
+}
+
+.botones .boton {
+    color: #00adc1;
+}
+
+
+
+
+/*ESTILOS EL FOOTER*/
+.footer {
+    grid-area: FOO;
+    background: linear-gradient(to top, #eaeaea 75%, transparent);
+    display: grid;
+    grid-template:
+        ". . ."
+        "LOG . ."
+        "LOG . ."
+        "REDE LOG2 TEXT"
+        ". . .";
+    grid-template-rows: auto 40vh auto auto;
+    grid-template-columns: 20% auto auto;
+    position: relative;
+}
+
+.footer .imagenfooter {
+    background-image: url(../imagenes/otros/imagen_footer2.png);
+    background-repeat: repeat-x;
+    background-size: 150vh;
+    background-position: top;
+    height: 40vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    animation: footer 40s linear infinite;
+}
+.footer .logodte {
+    grid-area: LOG2;
+    background-image: url(../imagenes/iconos/dte_r6_logo.png);
+    background-repeat: no-repeat;
+    background-size: 13vh;
+    background-position: right center;
+}
+
+.footer .logo_pba_vertical2 {
+    grid-area: LOG;
+    background-image: url(../imagenes/otros/logo-pba-desktop.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10;
+
+}
+
+.footer .textofooter {
+    grid-area: TEXT;
+    display: flex;
+    gap: 1vh;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: start;
+    z-index: 10;
+    padding-left: 2vh;
+}
+
+.textofooter h1 {
+
+    text-align: center;
+    color: #e81f76;
+}
+
+.footer .redesociales {
+    grid-area: REDE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+    flex-wrap: wrap;
+}
+
+.universidad .redesociales {
+    width: 50vh;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+}
+ .redsocial {
+    width: 6vh;
+    height: 6vh;
+    border-radius: 50vh;
+    overflow: hidden;
+    background-size: 3vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.2);
+    background-color: white;
+    background-color: #e81f76;
+
+}
+
+.redsocial2 {
+    width: 6vh;
+    height: 6vh;
+    border-radius: 50vh;
+    overflow: hidden;
+    background-size: 3vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.2);
+    font-size: 2vh;
+    transition: width 0.5s;
+    color: transparent;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    align-items: center;
+}
+
+.universidad .redesociales .redsocial2:hover {
+    width: 20vh;
+    font-size: 2vh;
+    background-size: 0vh;
+    color: white;
+}
+
+.footer .redesociales .redsocial {
+    width: 3vh;
+    height: 3vh;
+    border-radius: 25vh;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.2);
+    background-color: white;
+    display: none;
+
+}
+
+.hidden {
+    opacity: 0%;
+    pointer-events: none;
+}
+
+.visible {
+    opacity: 100%;
+}
+
+.circulopregunta {
+    width: 5vh;
+    height: 5vh;
+    background-color: #00adc1;
+    border-radius: 50vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    position: absolute;
+    right: 0%;
+    top: 0.5vh;
+}
+
+#info {
+    width: auto;
+    height: auto;
+    grid-area: INFO;
+
+}
+
+#mapa {
+    width: auto;
+    height: auto;
+    grid-area: MAP;
+}
+
+#mapa .imageninfo {
+    height: 25dvw;
+}
+
+#redes {
+    width: auto;
+    height: auto;
+    grid-area: REDE;
+
+}
+#redes .descripcionuni{
+height: max-content;
+}
+#formulariodecontacto {
+    width: auto;
+    height: auto;
+    grid-area: INS;
+
+}
+
+#plan{
+    grid-area: PDF;
+    height: auto;
+    width: auto;
+}
+#carreraelegida{
+    grid-area: CAR;
+    height: auto;
+    width: auto;
+}
+#establecimiento{
+    grid-area: MAS;
+    height: auto;
+    width: auto;
+}
+.masarriba{
+    transform: translateY(-3dvh);
+}
+.lista3 {
+    display: grid;
+    gap: 3vh;
+    grid-template:
+        ". . . . . ." auto
+        ". INFO INFO INFO MAP ." minmax(40vh,max-content)
+        ". REDE REDE REDE MAP ." max-content
+        ". CAR CAR CAR PDF ." max-content
+        ". MAS MAS INS INS ." max-content
+        ". . . . . ." auto/
+        auto 22dvw 11dvw 11dvw 25dvw auto;
+}
+
+
+/*
+.lista3 #formulariodecontacto .imageninfo,
+.lista3 #formulariodecontacto .barrauni {
+    display: none;
+}
+*/
+
+
+.lista4 {
+    display: grid;
+    gap: 3vh;
+    grid-template:
+        ". . . . ." auto
+        ". INFO INFO MAP ." 40vh
+        ". REDE REDE MAP ." max-content
+        ". . . . ." auto/
+        auto 22dvw 22dvw 25dvw auto;
+}
+
+.lista5 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5vh;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+body.inactive * {
+    pointer-events: none;
+}
+
+body.inactive .pop2,
+body.inactive .overlay {
+    pointer-events: auto;
+}
+@media (max-width: 1000px){
+    .botonuni2{
+        margin-top: 2vh;
+    }
+    .barradebusqueda  input[type="submit"] {
+        margin-left: 1vh;
+    }
+    
+   
+    .barradebusqueda  input{
+        transition: none;
+
+    }
+    .barradebusqueda {
+        padding-bottom: 2vh;
+        gap: 0;
+        transition: none;
+    }
+    .barradebusqueda.volverarriba {
+        padding-bottom: 0;
+        gap: 0;
+        transition: none;
+    }
+}
+@media (max-width: 1400px) {
+    .lista4 {
+        display: grid;
+        gap: 3vh;
+        grid-template:
+            ". . . . ." auto
+            ". INFO INFO MAP ." 30vh
+            ". REDE REDE MAP ." 45vh
+            ". . . . ." auto/
+            auto 25dvw 25dvw 30dvw auto;
+    }
+  /*
+    .lista3 {
+        display: grid;
+        gap: 3vh;
+        grid-template:
+            ". . . . ." auto
+            ". INFO INFO MAP ." 30vh
+            ". REDE REDE MAP ." 45vh
+            ". CAR PDF INS ." max-content
+            ". . . . ." auto/
+            auto 25dvw 25dvw 30dvw auto;
+    }
+*/
+    .universidad .imageninfo2 {
+        display: none;
+    }
+
+    .universidad .barrauni3 {
+        display: none;
+    }
+
+    .lista5 {
+        overflow-y: auto;
+
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0vh;
+        flex-wrap: wrap;
+        width: 100%;
+        height: max-content;
+    }
+
+    .lista5 .descripcionuni {
+        height: 20vh;
+        overflow-y: auto;
+
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3000;
+    display: none;
+    backdrop-filter: blur(1vh);
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url(../imagenes/otros/logo-pba-desktop.png);
+    background-position: left;
+    background-size: 9%;
+    background-repeat: no-repeat;
+}
+
+.pop2 {
+    pointer-events: auto;
+    display: none;
+    z-index: 3100;
+}
+.pop2  :nth-child(1)  {
+    pointer-events: auto;
+}
+.pop2  :nth-child(2)  {
+    pointer-events: auto;
+}
+
+/*ESTILOS PARA LA VERSION DE MOBILES*/
+@media (max-width: 768px) {
+    .masarriba{
+        transform: translateY(-0.5dvh);
+    }
+   
+    #mapa,
+    #formulariodecontacto {
+        width: 100%;
+    }
+
+    .universidad .imageninfo2 {
+        display: flex;
+    }
+
+    .universidad .barrauni3 {
+        display: flex;
+    }
+
+    input[type="submit"]:hover,
+    a:hover,
+    button:hover {
+        cursor: pointer;
+        transform: scale(1);
+    }
+    
+    
+
+    .lista3 #redes .imageninfo2,
+    .lista3 #redes .barrauni3 {
+        display: flex;
+    }
+
+    .lista3 #formulariodecontacto .imageninfo,
+    .lista3 #formulariodecontacto .barrauni {
+        display: flex;
+    }
+
+    .lista3 #redes .lista5 {
+        width: auto;
+    }
+
+    .universidad .imageninfo2 {
+        width: 100%;
+        height: 20vh;
+        background-color: #00adc1;
+        background-size: 15vh;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: background-size 0.5s;
+    }
+
+    .horizontal {
+        justify-content: center;
+        align-items: top;
+        flex-wrap: wrap;
+    }
+
+    .universidad .barrauni3 {
+
+        border-top: #00adc1 solid 0.25vh;
+        height: 0.01vh;
+        width: 90%;
+        transform: translateY(2vh);
+
+    }
+
+    .lista3 {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 5vh;
+        flex-wrap: wrap;
+    }
+
+    .lista4 {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 5vh;
+        flex-wrap: wrap;
+    }
+
+    .lista5 {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 5vh;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .boton {
+        margin-top: 8vh;
+        width: 100%;
+        height: 12vh;
+        border: none;
+        border-radius: 0vh;
+        display: grid;
+        grid-template-areas:
+       
+            ". BIMG . TEXTB .";
+        grid-template-rows: 12vh;
+        grid-template-columns: 4vh 12vh 0.6vh auto 4vh;
+        transition: transform 0.5s;
+        justify-items: center;
+        align-items: center;
+    }
+   
+    .botones{
+        gap: 0%;
+    }
+  
+ 
+.boton .imagenboton{
+    background-color: transparent;
+
+}
+.boton :nth-child(2){
+    color: white;
+    
+}
+.boton{
+    background-color: #00adc1;
+}
+
+
+.boton .imagenboton {
+    grid-area: BIMG;
+    background-size: 10vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: none;
+
+}
+
+    .universidad .botonuni {
+        font-size: 2vh;
+        border: none;
+        border-radius: 1.5vh;
+        height: 5vh;
+        width: 18vh;
+        background-color: #e81f76;
+        color: white;
+        transform: translateY(-2.5vh);
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        margin-top: 3vh;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    .universidad input,
+    .universidad textarea {
+        border: none;
+        border-radius: 1.5vh;
+        height: 5vh;
+        color: gray;
+        width: 45vh;
+        padding-left: 1vh;
+        box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.2);
+        margin-bottom: 2vh;
+        border: rgba(128, 128, 128, 0.438) solid 0.1vh;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    #info {
+        width: auto;
+    }
+    .barradebusqueda  input[type="submit"] {
+        margin-left: 1vh;
+    }
+    .barratexto{
+        margin-right: 0;
+        margin-right: 1fr;
+        margin-left: 1fr;
+    
+        }
+  
+    .barradebusqueda  input,.barradebusqueda textarea{
+        transition: none;
+
+    }
+    .barradebusqueda {
+        padding-bottom: 2vh;
+        gap: 0;
+        transition: none;
+    }
+    .footer .imagenfooter {
+        animation: footer 180s linear infinite;
+    }
+    #volver{
+        background-size:8vh;
+    }
+    .filtro {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: linear-gradient(to top, black, transparent);
+        display: grid;
+        grid-template-areas:
+            ". . ."
+            ". TEXT1 ."
+            ". TEXT2 ."
+            "CIR CIR CIR"
+        ;
+        gap: 1vh;
+        grid-template-rows: 1fr max-content max-content 20vh;
+        grid-template-columns: 2vh auto 2vh;
+    }
+
+    .filtro .texto1,
+    .texto2 {
+        font-size: 3vh;
+        text-align: center;
+    }
+
+    .logo_pba_vertical {
+        height: 12vh;
+        width: 100%;
+        background-color: white;
+        background-image: url(../imagenes/otros/logo-pba-mobile.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: absolute;
+        border-radius: 0%;
+        bottom: 0vh;
+        top: 5vh;
+        left: 0;
+        box-shadow: -2vh 2vh 2vh rgba(0, 0, 0, 0.2);
+    }
+
+    .universidad {
+        width: 100%;
+        height: max-content;
+        background-color: white;
+        border-radius: 0;
+        box-shadow: 0 0.5vh 2vh 0.5vh rgba(0, 0, 0, 0.2);
+    }
+    #plan{
+        grid-area: PDF;
+        height: auto;
+        width:100%;
+    }
+    #carreraelegida{
+        grid-area: CAR;
+        height: auto;
+        width:100%;
+    }
+    #establecimiento{
+        grid-area: MAS;
+        height: auto;
+        width:100%;
+    }
+    .circulo {
+        width: 2vh;
+        height: 2vh;
+    }
+
+    
+       
+
+    .footer {
+        grid-area: FOO;
+        background: linear-gradient(to top, #eaeaea 65%, transparent);
+        display: grid;
+        grid-template:
+            "."
+            "LOG"
+            "REDE"
+            "LOG2"
+            "TEXT"
+            ".";
+        grid-template-rows: auto 40vh 0vh 3vh 4vh;
+        grid-template-columns: auto;
+        position: relative;
+        gap: 2vh;
+    }
+    .footer .logodte {
+        grid-area: LOG2;
+        background-image: url(../imagenes/iconos/dteregion6.svg);
+        background-repeat: no-repeat;
+        background-size: 8vh;
+        background-position: center;
+    }
+    .footer .textofooter {
+        grid-area: TEXT;
+        display: flex;
+        gap: 1vh;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        padding-left: 0;
+    }
+    
+    .textofooter ul,
+    .textofooter p {
+        width: 20vh;
+    }
+    .header {
+        grid-area: HEA;
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 1000;
+        padding: 0.5vh;
+        box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+        display: grid;
+        grid-template-areas:
+            "LOG . BTN"
+        ;
+        grid-template-rows: auto;
+        grid-template-columns: 30vh auto 11vh;
+        padding-right: 1vh;
+    }
+    [popover] :nth-child(2) {
+        width: 80vw;
+        height: 60vh;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 3000;
+        display: none;
+        backdrop-filter: blur(1vh);
+        background-color: rgba(0, 0, 0, 0.8);
+        background-image: url(../imagenes/otros/logo-pba-mobile.png);
+        background-position: top;
+        background-size: 50vh;
+        background-repeat: no-repeat;
+    }
+}
+
+/*CONFETTI*/
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.confetti {
+    width: 10px;
+    height: 20px;
+    background-color: red;
+    position: absolute;
+    opacity: 0;
+    animation: confettiFall linear infinite;
+
+}
+
