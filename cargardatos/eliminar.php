@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Eliminación de Datos</title>
     <link rel="stylesheet" href="formulario.css">
+    <link rel="icon" href="https://abc.gob.ar/core/themes/abc/favicon.ico" type="image/vnd.microsoft.icon">
 </head>
 <body>
     <?php

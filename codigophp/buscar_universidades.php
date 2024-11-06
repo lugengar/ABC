@@ -181,7 +181,7 @@ ORDER BY
     $stmt->execute();
     $result = $stmt->get_result();
     
-}else if($tipo == "carrera2"){ 
+}/*else if($tipo == "carrera2"){ 
   
     $sql2 = "SELECT * FROM recursos WHERE fk_carrera = ".$busqueda;
     $planestudio = $conn->query($sql2);
@@ -208,7 +208,7 @@ ORDER BY
         $stmt->execute();
         $result = $stmt->get_result();
     }
-}else if($tipo == "establecimiento"){ 
+}*/else if($tipo == "establecimiento"){ 
   
     $stmt = $conn->prepare("SELECT * FROM establecimiento WHERE tipo_establecimiento LIKE ? AND id_establecimiento != 0 ".$admin." ORDER BY nombre");
         $stmt->bind_param("s", $param);

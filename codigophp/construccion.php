@@ -254,7 +254,7 @@ function info_universidad($info,$ubicacion,$servicios,$distrito,$nombre,$contact
                         echo '<a class="redsocial2 " style="background-image: url(imagenes/iconos/'.$contacto["tipo"].'.svg);" href="mailto:inscripcion@'.$contacto["contacto"].'" >Enviar correo</a>';
                         $correo = $contacto["contacto"];
                     }else if($contacto["tipo"] == "telefono"){
-                        echo '<a class="redsocial2 " style="background-image: url(imagenes/iconos/'.$contacto["tipo"].'.svg);" href="tel:'.arreglar_telefono($contacto["contacto"]).'" >Llamar por telefono</a>';
+                        echo '<a class="redsocial2 " style="background-image: url(imagenes/iconos/'.$contacto["tipo"].'.svg);" href="tel:'.($contacto["contacto"]).'" >Llamar por telefono</a>';
                     }else{
                         echo '<a class="redsocial " style="background-image: url(imagenes/iconos/'.$contacto["tipo"].'.svg);" href="'.arreglar_url($contacto["contacto"]).'" target="_blank" ></a>';
                     }
