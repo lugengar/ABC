@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../estiloscss/cargardatos.css">
-    <link rel="stylesheet" href="../estiloscss/animaciones.css">
+    <?php include "../claves.php";include "../codigophp/verificacion.php"; animaciones();?>
     <link rel="icon" href="https://abc.gob.ar/core/themes/abc/favicon.ico" type="image/vnd.microsoft.icon">
 
     <title>Visualizador de Establecimientos</title>
@@ -102,8 +102,7 @@
 </style>
 <body><?php
 include "../codigophp/conexionbs.php";
-include "../claves.php";
-include "../codigophp/verificacion.php";
+
 esadmin();
 // Obtener el término de búsqueda si existe
 $search = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
