@@ -100,6 +100,8 @@ if (isset($_GET['id']) && isset($_GET['tipo'])) {
                 <label for="habilitado">¿Quiere que el establecimiento sea público? (todos podrán verlo):</label>
                 <input type="checkbox" id="habilitado" name="habilitado" ' . ($data['habilitado'] ? 'checked' : '') . '>
             ';
+        $stmt2->close();
+
         } elseif ($tipo == "carrera") {
             include "../codigophp/construccion.php";
 
@@ -129,6 +131,8 @@ if (isset($_GET['id']) && isset($_GET['tipo'])) {
             echo '
                 </select>
             ';
+        $stmt2->close();
+
         } elseif ($tipo == "contacto") {
             include "../codigophp/construccion.php";
 
@@ -177,6 +181,8 @@ if (isset($_GET['id']) && isset($_GET['tipo'])) {
             echo '
                 </select>
             ';
+        $stmt2->close();
+
         } elseif ($tipo == "recursos") {
             include "../codigophp/construccion.php";
 
@@ -241,6 +247,8 @@ if (isset($_GET['id']) && isset($_GET['tipo'])) {
 
             echo '
                 </select>';
+        $stmt2->close();
+
         } elseif ($tipo == "imagenes") {
         include "../codigophp/construccion.php";
     
@@ -269,6 +277,7 @@ if (isset($_GET['id']) && isset($_GET['tipo'])) {
         echo '
             </select>
         ';
+        $stmt2->close();
     }elseif ($tipo == "distrito") {
 
     
@@ -279,6 +288,7 @@ if (isset($_GET['id']) && isset($_GET['tipo'])) {
     } else {
         echo 'No se encontraron datos.';
     }
+    $stmt->close();
 }
 } else {
     echo 'ID o tipo no proporcionado.';
