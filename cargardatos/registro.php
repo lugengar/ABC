@@ -10,7 +10,7 @@
 <body>
     <div class="container">
     <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+       /* if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Datos de conexión a la base de datos
             include "../codigophp/conexionbs.php";
 
@@ -45,7 +45,7 @@
         }
 
         mysqli_close($conn);
-        }
+        }*/
     ?>
 
         <!-- Formulario de registro -->

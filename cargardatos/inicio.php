@@ -143,7 +143,7 @@ $imagenes_result = mysqli_fetch_all($imagenes_result, MYSQLI_ASSOC);
     <div class="container">
     <header class="header" id="header">
             <a href="../index.php" class="logo_pba_horizontal " ></a>
-            <a href="../index.php" class="boton_nose_que_estudiar">Inicio<div class="circulopregunta" style="background-image: url(../imagenes/iconos/casa.svg); background-size: 4vh;"></div></a>
+            <a href="./cerrar_sesion.php" class="boton_nose_que_estudiar">Cerrar sesión<div class="circulopregunta" style="background-image: url(../imagenes/iconos/equis.svg); background-size: 2.5vh;"></div></a>
         </header>
         <div class="botones">
                 <a class="boton" href="agregar.php">
