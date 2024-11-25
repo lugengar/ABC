@@ -155,7 +155,7 @@ var customIcon = L.icon({
     popupAnchor: [0, -25]  
 });
 var usuario = L.icon({
-    iconUrl: '../imagenes/otros/alerta.svg',  
+    iconUrl: '../imagenes/iconos/user.svg',  
     iconSize: [25, 25],  
     iconAnchor: [12, 25],  
     popupAnchor: [0, -25]  
