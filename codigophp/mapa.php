@@ -192,7 +192,6 @@ function zoomOut() {
     map.zoomOut();
 }
 function obtenerUbicacion() {
-    console.log("a")
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var lat = position.coords.latitude;
