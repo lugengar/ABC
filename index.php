@@ -84,7 +84,7 @@
                     <h1>Filtrar por tipo de establecimiento</h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('carrera')"><div class="imagenboton" style=" background-image: url(imagenes/iconos/sombrero.svg);"></div>
-                    <h1>Filtrado por tipo de carrera</h1>
+                    <h1><?php if($filtrocarrera == "nombrecarrera"){echo 'Buscar por nombre de la carrera';}else{echo'Filtrado por tipo de carrera';} ?></h1>
                 </button>
                 <button class="boton" onclick="barradebusqueda('nombre')">
                     <div class="imagenboton" style=" background-image: url(imagenes/iconos/letrasabc.svg);"></div>
@@ -130,15 +130,19 @@
                 </div>
             </form>
             <form class="barradebusqueda <?php if($tipo == "carrera"){echo 'activo';} ?>" id="carrera" method="GET" action="./index.php#identificador2">
-            <p class="barratexto">Elija una carrera <img src="imagenes/iconos/lupa.svg" class="imglupa" alt=""></p>
+            <p class="barratexto"><?php if($filtrocarrera == "nombrecarrera"){echo 'Nombre de la carrera';}else{echo'Elija un tipo de carrera';} ?><img src="imagenes/iconos/lupa.svg" class="imglupa" alt=""></p>
             <div style="gap:2vh;">
-                <select name="busqueda" id="" required>
-                    <option value="">Ninguno</option>
+               
                     <?php
-                        //ESCRIBE LAS CARRERAS PARA LA BARRA DE BUSQUEDA
-                        buscartipocarrera();
+                        if($filtrocarrera == "nombrecarrera"){
+                            echo '<input type="text" name="busqueda" maxlength ="35" placeholder="Nombre de la carrera" required>';
+                        }else{
+                            echo ' <select name="busqueda" id="" required><option value="">Ninguno</option>';
+                            buscartipocarrera();
+                            echo ' </select>';
+                        }
                     ?>
-                </select>
+           
                 <input type="hidden" name="tipo" value="carrera" required>
                 <input type="submit" name="" value="Buscar">
                 </div>

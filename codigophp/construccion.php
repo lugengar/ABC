@@ -307,17 +307,7 @@ function carrusel($nombre,$tipo,$imagenes,$esinicio){ // CREA EL CARRUSEL DE IMA
         $dirreccion = $direccionimagen;
     }
     if($imagenes->num_rows > 0){
-        echo '<div class="imagenes">';
-        foreach($imagenes as $key => $imagen) {
-            if($key == 0){
-                echo '<div class="imagen activo" style="background-image: url('.$dirreccion."".$imagen["url"].');"></div>';
-            }else{
-                echo '<div class="imagen" style="background-image: url('.$dirreccion."".$imagen["url"].');"></div>';
-            }
-            
-        }
-
-        echo '</div>
+        echo '
         <div class="filtro" id="carrusel">
         <div class="contenidotexto">
                 <h1 class="texto1">'.$tipo.'</h1>
@@ -336,6 +326,19 @@ function carrusel($nombre,$tipo,$imagenes,$esinicio){ // CREA EL CARRUSEL DE IMA
             }
             echo'</div>';
         }
+        echo'</div>';
+
+        echo '<div class="imagenes">';
+        foreach($imagenes as $key => $imagen) {
+            if($key == 0){
+                echo '<div class="imagen activo" style="background-image: url('.$dirreccion."".$imagen["url"].');"></div>';
+            }else{
+                echo '<div class="imagen" style="background-image: url('.$dirreccion."".$imagen["url"].');"></div>';
+            }
+            
+        }
+
+        echo'</div>';
     }else{
         echo '<div class="imagenes">';
         echo'<h1 class=" imagen activo errorimg"></h1>';

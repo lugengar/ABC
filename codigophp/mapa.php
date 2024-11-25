@@ -105,6 +105,14 @@ WHERE
     background-image: url(../imagenes/otros/signomenos.svg);
     background-color: #e81f76;
 }
+#miubicacion{
+    height: 6vh;
+    width: 12vh;
+    bottom: -95vh;
+    right: 0vh;
+    color: white;
+    background-color: #e81f76;
+}
 .botonuni {
     font-size: 2vh;
     border: none;
@@ -125,6 +133,7 @@ WHERE
 <div class="controles">
     <button id="zoomIn"onclick="zoomIn()"></button>
     <button id="zoomOut" onclick="zoomOut()"></button>
+    <button id="miubicacion" onclick="obtenerUbicacion()">Ver mi ubicación</button>
 </div>
 
 <div id="map"></div>
@@ -146,7 +155,7 @@ var customIcon = L.icon({
     popupAnchor: [0, -25]  
 });
 var usuario = L.icon({
-    iconUrl: '../imagenes/iconos/instagram.svg',  
+    iconUrl: '../imagenes/otros/alerta.svg',  
     iconSize: [25, 25],  
     iconAnchor: [12, 25],  
     popupAnchor: [0, -25]  
@@ -156,7 +165,6 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 }).addTo(map);
 
 var bounds = L.latLngBounds();
-
 lugares.forEach(function(lugar) {
     if (lugar.address) {
         var marker = L.marker(lugar.address, {icon: customIcon}).addTo(map)
@@ -164,14 +172,17 @@ lugares.forEach(function(lugar) {
         bounds.extend(lugar.address);
     }
 });
-
+function cargarlugares(){
+    
+    if (bounds.isValid()) {
+        map.fitBounds(bounds);
+    }
+}
 function redirectTo(url) {
     window.parent.location.href = url;
 }
 
-if (bounds.isValid()) {
-    map.fitBounds(bounds);
-}
+
 
 function zoomIn() {
     map.zoomIn();
@@ -180,7 +191,8 @@ function zoomIn() {
 function zoomOut() {
     map.zoomOut();
 }
-/*function obtenerUbicacion() {
+function obtenerUbicacion() {
+    console.log("a")
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var lat = position.coords.latitude;
@@ -189,14 +201,16 @@ function zoomOut() {
             console.log("Latitud: " + lat + ", Longitud: " + lon);
 
             var marker = L.marker([lat,lon], {icon: usuario}).addTo(map);
+           
         }, function(error) {
             console.error("Error obteniendo la ubicación: ", error.message);
         });
     } else {
         console.error("La geolocalización no es soportada por este navegador.");
     }
+    cargarlugares()
 }
-obtenerUbicacion()*/
+cargarlugares()
 </script>
 
 </body>

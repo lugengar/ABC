@@ -922,9 +922,10 @@ body.inactive .overlay {
 .pop2  :nth-child(2)  {
     pointer-events: auto;
 }
+
 /*ESTILOS PARA LA VERSION DE MOBILES*/
 @media (max-width: 768px) {
-
+   
     .boton {
         margin-top: 2vh;
         width: 100%;
@@ -1185,6 +1186,11 @@ body.inactive .overlay {
     #tipoestablecimiento{
         background-size:7vh;
     }
+    .filtro:hover ~ .imagenes .activo{
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: black;
+    }
 }
 
 /*CONFETTI*/
@@ -1206,5 +1212,12 @@ body.inactive .overlay {
     position: absolute;
     opacity: 0;
     animation: confettiFall linear infinite;
+
+}
+.filtro{
+    z-index: 2;
+}
+.botonsuperior{
+    z-index: 3;
 
 }

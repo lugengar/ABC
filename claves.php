@@ -4,4 +4,5 @@
     $secretkey2 = "INGRESAR LA SEGUNDA CLAVE DE CAPTCHA";
 //ANIMACIONES EN EL SITIO
     $animaciones = true;
+    $filtrocarrera = "nombrecarrera"; // cambiar el filtro a "tipocarrera" o "nombrecarrera"
 ?>

@@ -96,7 +96,7 @@ function etiqueta(){
     $sql3 = "SELECT DISTINCT c.id_carrera, c.nombre
              FROM recursos r
              INNER JOIN carrera c ON r.fk_carrera = c.id_carrera
-             WHERE r.fk_establecimiento = ? AND c.tipo_carrera = ?
+             WHERE r.fk_establecimiento = ? AND c.nombre LIKE ?
              ORDER BY c.nombre";
     $stmt = $conn->prepare($sql3);
     $stmt->bind_param("is", $id, $tipo);
@@ -127,12 +127,13 @@ function buscar() {
             ");
             $stmt->bind_param("s", $param);
         } else if($tipo == "carrera"){
+            $param = "%$busqueda%";
             $stmt = $conn->prepare("
                 SELECT DISTINCT e.id_establecimiento, e.nombre, e.descripcion, e.habilitado
                 FROM establecimiento e
                 INNER JOIN recursos r ON e.id_establecimiento = r.fk_establecimiento
                 INNER JOIN carrera c ON r.fk_carrera = c.id_carrera
-                WHERE c.tipo_carrera = ? AND e.id_establecimiento != 0 $admin
+                WHERE c.nombre LIKE ? AND e.id_establecimiento != 0 $admin
                 ORDER BY
                     CASE 
                         WHEN e.tipo_establecimiento LIKE 'Instituto%' THEN 0
@@ -140,7 +141,7 @@ function buscar() {
                         ELSE 2
                     END, e.tipo_establecimiento
             ");
-            $stmt->bind_param("s", $busqueda);
+            $stmt->bind_param("s", $param);
         } else if($tipo == "establecimiento"){
             $stmt = $conn->prepare("
                 SELECT * FROM establecimiento
@@ -203,7 +204,7 @@ function buscar() {
 
             $carreras = null;
             if ($tipo == "carrera") {
-                $carreras = carrerasEstablecimiento($row["id_establecimiento"], $busqueda);
+                $carreras = carrerasEstablecimiento($row["id_establecimiento"],  "%$busqueda%");
             }
 
             universidad($row["id_establecimiento"], $row["nombre"], $row["descripcion"], $imagenes, $carreras, $row["habilitado"]);

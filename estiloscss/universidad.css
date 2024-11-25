@@ -1516,6 +1516,11 @@ body.inactive .overlay {
         background-size: 50vh;
         background-repeat: no-repeat;
     }
+    .filtro:hover ~ .imagenes .activo{
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: black;
+    }
 }
 
 /*CONFETTI*/
@@ -1540,3 +1545,10 @@ body.inactive .overlay {
 
 }
 
+.filtro{
+    z-index: 2;
+}
+.botonsuperior{
+    z-index: 3;
+
+}
