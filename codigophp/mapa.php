@@ -111,7 +111,7 @@ WHERE
     bottom: -95vh;
     right: 0vh;
     color: white;
-    background-color: #e81f76;
+    background-color: #00adc1;
 }
 .botonuni {
     font-size: 2vh;
